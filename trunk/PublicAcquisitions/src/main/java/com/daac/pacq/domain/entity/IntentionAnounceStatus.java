@@ -37,8 +37,10 @@ public class IntentionAnounceStatus {
     @JoinColumn(name="REF_INTENTION_STATUS_ID")
     private IntentionStatus intentionStatus;
     
-    @Column(name = "INTENTION_ANOUNCE_ID")
-    private Integer refIntentionAnounceId;
+
+//    @Column(name = "INTENTION_ANOUNCE_ID")
+//    private Integer refIntentionAnounceId;    
+
 
 	public Integer getId() {
 		return id;
@@ -72,15 +74,6 @@ public class IntentionAnounceStatus {
 	public void setIntentionStatus(IntentionStatus intentionStatus) {
 		this.intentionStatus = intentionStatus;
 	}
-
-	public Integer getRefIntentionAnounceId() {
-		return refIntentionAnounceId;
-	}
-
-	public void setRefIntentionAnounceId(Integer refIntentionAnounceId) {
-		this.refIntentionAnounceId = refIntentionAnounceId;
-	}
-
     
 	
     

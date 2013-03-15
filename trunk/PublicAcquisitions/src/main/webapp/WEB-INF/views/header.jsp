@@ -14,7 +14,7 @@
 </a>
 <div id="user-info-container">
 	<span style="float: right">
-	    <a href="?lang=ro">Ro</a>
+	    <a href="?lang=md">Md</a>
 	    | 
 	    <a href="?lang=ru">Ru</a>
 	    |

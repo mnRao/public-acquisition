@@ -6,9 +6,9 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	
+
 	var w = screen.width*0.98;
-	//alert("JQuery");
+	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
 	$("#list").jqGrid({
 		jsonReader : {
@@ -27,7 +27,7 @@ $(document).ready(function(){
 	   	       		'fkBudgetPeriodId',
 	   	          	'purchaseQuarter',
 	   	       		'fkStateOrgId',
-		   			'refTenderTypeId',
+		   			'TenderTypeName',
 		   			'plannedSum',
 		   			'bulletinPublishDate',
 		   			'bulletinNumber',
@@ -38,11 +38,13 @@ $(document).ready(function(){
 	   		{name:'fkBudgetPeriodId',		index:'fkBudgetPeriodId', 		width:500},
 	   		{name:'purchaseQuarter',		index:'purchaseQuarter', 		width:500},
 	   		{name:'fkStateOrgId',			index:'fkStateOrgId', 			width:500},
-	   		{name:'refTenderTypeId',		index:'refTenderTypeId', 		width:500},
+	   		{name:'tenderType.'+curLangRef,	index:'tenderType.'+curLangRef,	width:500},
 	   		{name:'plannedSum',				index:'plannedSum', 			width:500},
 	   		{name:'bulletinPublishDate',	index:'bulletinPublishDate', 	width:500},
 	   		{name:'bulletinNumber',			index:'bulletinNumber', 		width:500},
-	   		{name:'fkCurrentStatusId',		index:'fkCurrentStatusId', 		width:500}
+	   		{name:'currentStatus.intentionStatus.'+curLangRef,		
+	   										index:'currentStatus.intentionStatus.'+curLangRef, 		
+	   																		width:500}
 	   	],
 	   	rowNum:10,
 	   	rowList:[10,20,30],

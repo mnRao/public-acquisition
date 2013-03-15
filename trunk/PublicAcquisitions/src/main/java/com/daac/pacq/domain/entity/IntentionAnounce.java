@@ -1,15 +1,21 @@
 package com.daac.pacq.domain.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.daac.pacq.domain.ref.TenderType;
 import com.daac.pacq.helpers.CustomDateSerializer;
 
 @Entity
@@ -26,9 +32,10 @@ public class IntentionAnounce {
     
     @Column(name = "PURCHASE_QUARTER")
     private String  		purchaseQuarter;
-
-    @Column(name = "REF_TENDER_TYPE_ID")
-    private Integer 		refTenderTypeId;
+    
+    @OneToOne
+    @JoinColumn(name="REF_TENDER_TYPE_ID")
+    private TenderType tenderType;
     
     @Column(name = "REF_POSITION_TYPE_ID")
     private Integer 		refPositinTypeId;
@@ -60,8 +67,19 @@ public class IntentionAnounce {
     @Column(name = "FK_BUDGET_PERIOD_ID")
     private Integer 		fkBudgetPeriodId;
     
-    @Column(name = "FK_CURRENT_STATUS_ID")
-    private Integer 		fkCurrentStatusId;
+    
+//    @Column(name = "FK_CURRENT_STATUS_ID")
+//    private Integer 		fkCurrentStatusId;
+    
+    @OneToOne
+    @JoinColumn(name="FK_CURRENT_STATUS_ID")
+    private IntentionAnounceStatus currentStatus;
+    
+    
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name="INTENTION_ANOUNCE_ID", nullable=false)
+    private List<IntentionAnounceStatus> 		intentionAnounceStatus;
+    
     
     @Column(name = "FK_STATE_ORG_ID")
     private Integer 		fkStateOrgId;
@@ -99,12 +117,13 @@ public class IntentionAnounce {
 		this.purchaseQuarter = purchaseQuarter;
 	}
 
-	public Integer getRefTenderTypeId() {
-		return refTenderTypeId;
+
+	public TenderType getTenderType() {
+		return tenderType;
 	}
 
-	public void setRefTenderTypeId(Integer refTenderTypeId) {
-		this.refTenderTypeId = refTenderTypeId;
+	public void setTenderType(TenderType tenderType) {
+		this.tenderType = tenderType;
 	}
 
 	public Integer getRefPositinTypeId() {
@@ -188,17 +207,26 @@ public class IntentionAnounce {
 		this.fkBudgetPeriodId = fkBudgetPeriodId;
 	}
 
-	public Integer getFkCurrentStatusId() {
-		return fkCurrentStatusId;
+	public IntentionAnounceStatus getCurrentStatus() {
+		return currentStatus;
 	}
 
-	public void setFkCurrentStatusId(Integer fkCurrentStatusId) {
-		this.fkCurrentStatusId = fkCurrentStatusId;
+	public void setCurrentStatus(IntentionAnounceStatus currentStatus) {
+		this.currentStatus = currentStatus;
+	}
+
+	public List<IntentionAnounceStatus> getIntentionAnounceStatus() {
+		return intentionAnounceStatus;
+	}
+
+	public void setIntentionAnounceStatus(
+			List<IntentionAnounceStatus> intentionAnounceStatus) {
+		this.intentionAnounceStatus = intentionAnounceStatus;
 	}
 
 	public Integer getFkStateOrgId() {
 		return fkStateOrgId;
-	}
+	} 
 
 	public void setFkStateOrgId(Integer fkStateOrgId) {
 		this.fkStateOrgId = fkStateOrgId;
