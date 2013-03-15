@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xmlns:mvc="http://www.springframework.org/schema/mvc"
+				xmlns:context="http://www.springframework.org/schema/context"
+				xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- DispatcherServlet Context: определяет настройки одного сервлета; бины, которые доступны только ему -->
+	 
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д)-->
+	<mvc:annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!--Всю статику (изображения, css-файлы, javascript) положим в папку webapp/resources и замаппим их на урл вида /resources/** -->	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- Отображение видов на jsp-файлы, лежащие в папке /WEB-INF/views -->
+<!-- 	<bean  id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<property name="prefix" value="/WEB-INF/views/" /> -->
+<!-- 		<property name="suffix" value=".jsp" /> -->
+<!-- 	</bean> -->
+
+	<!--Enable Apache Tiles configuration and handler -->
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	    <property name="definitions">
+	        <list>
+	            <value>/WEB-INF/tiles.xml</value>
+	        </list>
+	    </property>
+	</bean>
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <property name="viewClass">
+        <value>
+            org.springframework.web.servlet.view.tiles2.TilesView
+        </value>
+    </property>
+	</bean>
+
+	<!--Cookies and Session Locale Resolvers -->
+    <bean id="session_localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+
+    	<property name="cookieName" value="clientlanguage"/>
+	    <!-- in seconds. If set to -1, the cookie is not persisted (deleted when browser shuts down) -->
+	    <property name="cookieMaxAge" value="100000"/>
+	</bean>
+
+    <!-- Message text files. This is set UTF-8 to display Arabic UTF correctly. -->    
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages" />
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+    
+    <mvc:interceptors>  
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+              <property name="paramName" value="lang"></property>
+        </bean>
+	</mvc:interceptors>
+	
+	<!-- Файл с настройками контроллеров -->
+	<import resource="controllers.xml"/>
+	
+</beans>
