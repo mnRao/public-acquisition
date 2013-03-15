@@ -33,7 +33,7 @@ $(document).ready(function(){
 		   			'bulletinNumber',
 		   			'fkCurrentStatusId'],
 	   	colModel:[
-	   		{name:'id',						index:'id', 					width:200},
+	   		{name:'id',						index:'id', 					width:200, hidden: true},
 	   		{name:'regNumber',				index:'regNumber', 				width:500},
 	   		{name:'fkBudgetPeriodId',		index:'fkBudgetPeriodId', 		width:500},
 	   		{name:'purchaseQuarter',		index:'purchaseQuarter', 		width:500},
