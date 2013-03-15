@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC 
+		"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" 
+		"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">       
+<tiles-definitions>
+
+    <definition name="baseLayout" template="/WEB-INF/views/index.jsp">
+        <put-attribute name="title" 	value="Public Acquisitions" />
+        <put-attribute name="header" 	value="/WEB-INF/views/header.jsp" />
+        <put-attribute name="body" 		value="" />
+        <put-attribute name="footer" 	value="/WEB-INF/views/footer.jsp" />
+    </definition>
+
+    <definition name="index"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/proceduri.jsp" />
+    </definition>
+
+    <definition name="proceduri"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/proceduri.jsp" />
+    </definition>
+    
+    <definition name="intentii"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/intentii.jsp" />
+    </definition>    
+
+
+
+
+
+
+
+
+
+
+    <definition name="index2" template="/WEB-INF/views/index2.jsp">
+        <put-attribute name="title" 	value="Public Acquisitions" />
+        <put-attribute name="header" 	value="/WEB-INF/views/header.jsp" />
+        <put-attribute name="body" 		value="" />
+        <put-attribute name="footer" 	value="/WEB-INF/views/footer.jsp" />
+    </definition>
+ 
+</tiles-definitions>
