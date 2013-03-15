@@ -84,21 +84,30 @@ public class JSONController {
 	    	return  intentionAnounceStatusService.list();
 	    }		
 	   
+	   @RequestMapping(value="/intentionAnounceStatusItem",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody IntentionAnounceStatus intentionAnounceStatusItem(WebRequest request) { 
+		   System.out.println("JSONController - INTENTION ANOUNCE STATUS ITEM");
+	    	System.out.println(request.toString());
+
+	    	return  intentionAnounceStatusService.get(286210);
+	    }		   
+	   
+	   
 	   @RequestMapping(value="/intentionAnounceList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody FlexGridListWrapper<IntentionAnounce> intentionAnounceList(WebRequest request) { 
 		   System.out.println("JSONController - INTENTION ANOUNCE LIST");
 	    	System.out.println(request.toString());
-	    	
 	    	List<IntentionAnounce> result = intentionAnounceService.list(); 
-	    	
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	
-	    	FlexGridListWrapper<IntentionAnounce> jdw = 
-	    			 new FlexGridListWrapper<IntentionAnounce>(1, 
-	    					 result.size(),
-	    					 result);  
-	    	 
+	    	FlexGridListWrapper<IntentionAnounce> jdw = new FlexGridListWrapper<IntentionAnounce>(1, result.size(), result);  
 	    	 return jdw;  
 	    }	
 	   
+	   @RequestMapping(value="/intentionAnounceItem",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody IntentionAnounce intentionAnounceItem(WebRequest request) { 
+		   System.out.println("JSONController - INTENTION ANOUNCE ITEM");
+	    	System.out.println(request.toString());
+	    	IntentionAnounce result = intentionAnounceService.get(312750); 
+	    	 return result;  
+	    }		   
 }

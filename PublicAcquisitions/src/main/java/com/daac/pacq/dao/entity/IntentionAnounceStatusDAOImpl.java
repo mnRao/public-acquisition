@@ -26,7 +26,7 @@ public class IntentionAnounceStatusDAOImpl implements IntentionAnounceStatusDAO 
 	 */
 	@Override
 	public IntentionAnounceStatus get(Integer id) {
-		IntentionAnounceStatus result = (IntentionAnounceStatus)sessionFactory.getCurrentSession().load(IntentionAnounceStatus.class, id);
+		IntentionAnounceStatus result = (IntentionAnounceStatus)sessionFactory.getCurrentSession().get(IntentionAnounceStatus.class, id);
 		return result;
 	}
 
