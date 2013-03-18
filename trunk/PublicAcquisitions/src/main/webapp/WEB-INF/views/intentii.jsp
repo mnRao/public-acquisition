@@ -35,7 +35,7 @@ $(document).ready(function(){
 	   	colModel:[
 	   		{name:'id',						index:'id', 					width:200, hidden: true},
 	   		{name:'regNumber',				index:'regNumber', 				width:500},
-	   		{name:'fkBudgetPeriodId',		index:'fkBudgetPeriodId', 		width:500},
+	   		{name:'budgetPeriod.year',		index:'budgetPeriod.year', 		width:500},
 	   		{name:'purchaseQuarter',		index:'purchaseQuarter', 		width:500},
 	   		{name:'stateOrg.orgName',		index:'stateOrg.orgName', 		width:500},
 	   		{name:'tenderType.'+curLangRef,	index:'tenderType.'+curLangRef,	width:500},

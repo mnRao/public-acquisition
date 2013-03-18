@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.daac.pacq.domain.ref.OrgLegalForm;
 import com.daac.pacq.domain.ref.TenderType;
 import com.daac.pacq.helpers.CustomDateSerializer;
 
@@ -65,9 +64,12 @@ public class IntentionAnounce {
     @Column(name = "STATE_ORG_COMMENT")
     private String  		stateOrgComment;
     
-    @Column(name = "FK_BUDGET_PERIOD_ID")
-    private Integer 		fkBudgetPeriodId;
+//    @Column(name = "FK_BUDGET_PERIOD_ID")
+//    private Integer 		fkBudgetPeriodId;
     
+    @OneToOne
+    @JoinColumn(name="FK_BUDGET_PERIOD_ID")
+    private BudgetPeriod 	budgetPeriod;    
     
 //    @Column(name = "FK_CURRENT_STATUS_ID")
 //    private Integer 		fkCurrentStatusId;
@@ -205,16 +207,26 @@ public class IntentionAnounce {
 		this.stateOrgComment = stateOrgComment;
 	}
 
-	public Integer getFkBudgetPeriodId() {
-		return fkBudgetPeriodId;
-	}
+//	public Integer getFkBudgetPeriodId() {
+//		return fkBudgetPeriodId;
+//	}
+//
+//	public void setFkBudgetPeriodId(Integer fkBudgetPeriodId) {
+//		this.fkBudgetPeriodId = fkBudgetPeriodId;
+//	}
 
-	public void setFkBudgetPeriodId(Integer fkBudgetPeriodId) {
-		this.fkBudgetPeriodId = fkBudgetPeriodId;
-	}
-
+	
+	
 	public IntentionAnounceStatus getCurrentStatus() {
 		return currentStatus;
+	}
+
+	public BudgetPeriod getBudgetPeriod() {
+		return budgetPeriod;
+	}
+
+	public void setBudgetPeriod(BudgetPeriod budgetPeriod) {
+		this.budgetPeriod = budgetPeriod;
 	}
 
 	public void setCurrentStatus(IntentionAnounceStatus currentStatus) {
