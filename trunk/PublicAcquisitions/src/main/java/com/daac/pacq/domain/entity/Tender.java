@@ -11,6 +11,9 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.daac.pacq.domain.ref.TenderStatus;
+import com.daac.pacq.domain.ref.TenderType;
+
 
 @Entity
 @Table(name = "TENDER")
@@ -21,8 +24,11 @@ public class Tender {
     @GeneratedValue 
     private Integer id;
     
-    @Column(name = "REF_CURRENT_STATUS_ID")
-    private Integer refCurrentStatusId;
+//    @Column(name = "REF_CURRENT_STATUS_ID")
+//    private Integer refCurrentStatusId;
+    @OneToOne
+    @JoinColumn(name="REF_CURRENT_STATUS_ID")
+    private TenderStatus tenderStatus;    
     
     @Column(name = "CURRENT_STATUS_DATE")
     private Date	refCurrentStatusDate;
@@ -30,8 +36,13 @@ public class Tender {
     @Column(name = "FK_CURRENT_STATUS_ID")
     private Integer fkCurrentStatusId;
     
-    @Column(name = "REF_TENDER_TYPE_ID")
-    private Integer refTenderTypeId;
+    
+//    @Column(name = "REF_TENDER_TYPE_ID")
+//    private Integer refTenderTypeId;
+    @OneToOne
+    @JoinColumn(name="REF_TENDER_TYPE_ID")
+    private TenderType tenderType;
+    
     
     @Column(name = "TENDER_OPEN_DATE")
     private Date	refTendeOpenDate;
@@ -80,12 +91,22 @@ public class Tender {
 		this.id = id;
 	}
 
-	public Integer getRefCurrentStatusId() {
-		return refCurrentStatusId;
+//	public Integer getRefCurrentStatusId() {
+//		return refCurrentStatusId;
+//	}
+//
+//	public void setRefCurrentStatusId(Integer refCurrentStatusId) {
+//		this.refCurrentStatusId = refCurrentStatusId;
+//	}
+
+	
+	
+	public TenderStatus getTenderStatus() {
+		return tenderStatus;
 	}
 
-	public void setRefCurrentStatusId(Integer refCurrentStatusId) {
-		this.refCurrentStatusId = refCurrentStatusId;
+	public void setTenderStatus(TenderStatus tenderStatus) {
+		this.tenderStatus = tenderStatus;
 	}
 
 	public Date getRefCurrentStatusDate() {
@@ -104,12 +125,20 @@ public class Tender {
 		this.fkCurrentStatusId = fkCurrentStatusId;
 	}
 
-	public Integer getRefTenderTypeId() {
-		return refTenderTypeId;
+//	public Integer getRefTenderTypeId() {
+//		return refTenderTypeId;
+//	}
+//
+//	public void setRefTenderTypeId(Integer refTenderTypeId) {
+//		this.refTenderTypeId = refTenderTypeId;
+//	}
+	
+	public TenderType getTenderType() {
+		return tenderType;
 	}
 
-	public void setRefTenderTypeId(Integer refTenderTypeId) {
-		this.refTenderTypeId = refTenderTypeId;
+	public void setTenderType(TenderType tenderType) {
+		this.tenderType = tenderType;
 	}
 
 	public Date getRefTendeOpenDate() {

@@ -23,7 +23,7 @@ $(document).ready(function(){
 		datatype: "json",
 		mtype: 'POST',
 	   	colNames:[	'#',
-					'Registration Nr.',
+	   	         '<spring:message code="label.procedureRegNumber"/>',
 	   	       		'fkBudgetPeriodId',
 	   	          	'purchaseQuarter',
 	   	       		'fkStateOrgId',

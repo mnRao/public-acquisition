@@ -6,6 +6,8 @@
 <hibernate-configuration>
 	<session-factory>
 		<mapping class="com.daac.pacq.domain.ref.TenderType" />
+		<mapping class="com.daac.pacq.domain.ref.TenderStatus" />
+		
 		<mapping class="com.daac.pacq.domain.ref.PositionType" />
 		<mapping class="com.daac.pacq.domain.ref.IntentionStatus" />
 		<mapping class="com.daac.pacq.domain.ref.OrgLegalForm" />
