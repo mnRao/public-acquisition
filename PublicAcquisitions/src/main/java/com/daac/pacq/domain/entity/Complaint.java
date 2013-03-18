@@ -70,6 +70,7 @@ public class Complaint {
 		this.refCurrentStatusId = refCurrentStatusId;
 	}
 
+	@JsonSerialize (using = CustomDateSerializer.class)
 	public Date getCurrentStatusDate() {
 		return currentStatusDate;
 	}
@@ -102,6 +103,7 @@ public class Complaint {
 		this.text = text;
 	}
 
+	@JsonSerialize (using = CustomDateSerializer.class)
 	public Date getComplaintDate() {
 		return complaintDate;
 	}

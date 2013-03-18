@@ -14,6 +14,8 @@ import com.daac.pacq.domain.entity.Complaint;
 import com.daac.pacq.domain.entity.Contract;
 import com.daac.pacq.domain.entity.IntentionAnounce;
 import com.daac.pacq.domain.entity.IntentionAnounceStatus;
+import com.daac.pacq.domain.entity.NotAllowedEconomicOperator;
+import com.daac.pacq.domain.entity.QualifiedEconomicOperator;
 import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
 import com.daac.pacq.domain.ref.TenderType;
@@ -22,6 +24,8 @@ import com.daac.pacq.service.entity.ComplaintService;
 import com.daac.pacq.service.entity.ContractService;
 import com.daac.pacq.service.entity.IntentionAnounceService;
 import com.daac.pacq.service.entity.IntentionAnounceStatusService;
+import com.daac.pacq.service.entity.NotAllowedEconomicOperatorService;
+import com.daac.pacq.service.entity.QualifiedEconomicOperatorService;
 import com.daac.pacq.service.ref.IntentionStatusService;
 import com.daac.pacq.service.ref.PositionTypeService;
 import com.daac.pacq.service.ref.TenderTypeService;
@@ -51,6 +55,12 @@ public class JSONController {
 	
 	@Autowired
 	private ComplaintService сomplaintService;	
+	
+	@Autowired
+	private  NotAllowedEconomicOperatorService notAllowedEconomicOperatorService;
+	
+	@Autowired
+	private  QualifiedEconomicOperatorService qualifiedEconomicOperatorService; 
 	
 	
 	   @RequestMapping(value="/ping",  method = { RequestMethod.GET, RequestMethod.POST })
@@ -140,5 +150,25 @@ public class JSONController {
 	    	System.out.println("RECORDS RCVD = " + result.size());
 	    	FlexGridListWrapper<Complaint> jdw = new FlexGridListWrapper<Complaint>(1, result.size(), result);  
 	    	return jdw;  
-	    }		
+	    }	
+	   
+	   @RequestMapping(value="/whiteList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody FlexGridListWrapper<QualifiedEconomicOperator> whiteList(WebRequest request) { 
+		   System.out.println("JSONController - WHITE LIST");
+	    	System.out.println(request.toString());
+	    	List<QualifiedEconomicOperator> result = qualifiedEconomicOperatorService.list(); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	FlexGridListWrapper<QualifiedEconomicOperator> jdw = new FlexGridListWrapper<QualifiedEconomicOperator>(1, result.size(), result);  
+	    	return jdw;  
+	    }	
+	   
+	   @RequestMapping(value="/blackList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody FlexGridListWrapper<NotAllowedEconomicOperator> blackList(WebRequest request) { 
+		   System.out.println("JSONController - BLACK LIST");
+	    	System.out.println(request.toString());
+	    	List<NotAllowedEconomicOperator> result = notAllowedEconomicOperatorService.list(); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	FlexGridListWrapper<NotAllowedEconomicOperator> jdw = new FlexGridListWrapper<NotAllowedEconomicOperator>(1, result.size(), result);  
+	    	return jdw;  
+	    }		   
 }

@@ -17,6 +17,9 @@
 		<mapping class="com.daac.pacq.domain.entity.Tender" />
 		<mapping class="com.daac.pacq.domain.entity.IntentionAnounceStatus" />
 		<mapping class="com.daac.pacq.domain.entity.IntentionAnounce" />
+		<mapping class="com.daac.pacq.domain.entity.QualifiedEconomicOperator" />
+		<mapping class="com.daac.pacq.domain.entity.NotAllowedEconomicOperator" />
+		
 		
 		
 		<mapping class="com.daac.pacq.domain.entity.Contract" />
