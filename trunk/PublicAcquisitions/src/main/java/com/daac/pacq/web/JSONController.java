@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.daac.pacq.domain.entity.Complaint;
 import com.daac.pacq.domain.entity.Contract;
 import com.daac.pacq.domain.entity.IntentionAnounce;
 import com.daac.pacq.domain.entity.IntentionAnounceStatus;
@@ -17,6 +18,7 @@ import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
 import com.daac.pacq.domain.ref.TenderType;
 import com.daac.pacq.helpers.FlexGridListWrapper;
+import com.daac.pacq.service.entity.ComplaintService;
 import com.daac.pacq.service.entity.ContractService;
 import com.daac.pacq.service.entity.IntentionAnounceService;
 import com.daac.pacq.service.entity.IntentionAnounceStatusService;
@@ -46,6 +48,10 @@ public class JSONController {
 	
 	@Autowired
 	private ContractService contractService;
+	
+	@Autowired
+	private ComplaintService сomplaintService;	
+	
 	
 	   @RequestMapping(value="/ping",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody String test(WebRequest request) {    
@@ -115,6 +121,7 @@ public class JSONController {
 	    	 return result;  
 	    }
 	   
+	   
 	   @RequestMapping(value="/contractList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody FlexGridListWrapper<Contract> contractList(WebRequest request) { 
 		   System.out.println("JSONController - CONTRACT LIST");
@@ -124,4 +131,14 @@ public class JSONController {
 	    	FlexGridListWrapper<Contract> jdw = new FlexGridListWrapper<Contract>(1, result.size(), result);  
 	    	 return jdw;  
 	    }	
+	   
+	   @RequestMapping(value="/complaintList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody FlexGridListWrapper<Complaint> complaintList(WebRequest request) { 
+		   System.out.println("JSONController - COMPLAINT LIST");
+	    	System.out.println(request.toString());
+	    	List<Complaint> result = сomplaintService.list(); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	FlexGridListWrapper<Complaint> jdw = new FlexGridListWrapper<Complaint>(1, result.size(), result);  
+	    	return jdw;  
+	    }		
 }
