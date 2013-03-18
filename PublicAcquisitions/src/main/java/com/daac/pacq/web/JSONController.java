@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.daac.pacq.domain.entity.Contract;
 import com.daac.pacq.domain.entity.IntentionAnounce;
 import com.daac.pacq.domain.entity.IntentionAnounceStatus;
 import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
 import com.daac.pacq.domain.ref.TenderType;
 import com.daac.pacq.helpers.FlexGridListWrapper;
+import com.daac.pacq.service.entity.ContractService;
 import com.daac.pacq.service.entity.IntentionAnounceService;
 import com.daac.pacq.service.entity.IntentionAnounceStatusService;
 import com.daac.pacq.service.ref.IntentionStatusService;
@@ -42,6 +44,8 @@ public class JSONController {
 	@Autowired
 	private IntentionAnounceService intentionAnounceService;
 	
+	@Autowired
+	private ContractService contractService;
 	
 	   @RequestMapping(value="/ping",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody String test(WebRequest request) {    
@@ -109,5 +113,15 @@ public class JSONController {
 	    	System.out.println(request.toString());
 	    	IntentionAnounce result = intentionAnounceService.get(312750); 
 	    	 return result;  
-	    }		   
+	    }
+	   
+	   @RequestMapping(value="/contractList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody FlexGridListWrapper<Contract> contractList(WebRequest request) { 
+		   System.out.println("JSONController - CONTRACT LIST");
+	    	System.out.println(request.toString());
+	    	List<Contract> result = contractService.list(); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	FlexGridListWrapper<Contract> jdw = new FlexGridListWrapper<Contract>(1, result.size(), result);  
+	    	 return jdw;  
+	    }	
 }
