@@ -37,7 +37,7 @@ $(document).ready(function(){
 	   		{name:'regNumber',				index:'regNumber', 				width:500},
 	   		{name:'fkBudgetPeriodId',		index:'fkBudgetPeriodId', 		width:500},
 	   		{name:'purchaseQuarter',		index:'purchaseQuarter', 		width:500},
-	   		{name:'fkStateOrgId',			index:'fkStateOrgId', 			width:500},
+	   		{name:'stateOrg.orgName',		index:'stateOrg.orgName', 		width:500},
 	   		{name:'tenderType.'+curLangRef,	index:'tenderType.'+curLangRef,	width:500},
 	   		{name:'plannedSum',				index:'plannedSum', 			width:500},
 	   		{name:'bulletinPublishDate',	index:'bulletinPublishDate', 	width:500},
