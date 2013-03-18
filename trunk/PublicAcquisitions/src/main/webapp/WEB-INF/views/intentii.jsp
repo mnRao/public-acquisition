@@ -52,7 +52,7 @@ $(document).ready(function(){
 	   	sortname: 'id',
 	    viewrecords: true,
 	    sortorder: "desc",
-	    caption:'',
+	    caption:'<spring:message code="label.module_name.intentii"/>',
 	    width: w,
 	    height: 300
 	});

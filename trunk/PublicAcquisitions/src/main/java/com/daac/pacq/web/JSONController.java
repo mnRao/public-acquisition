@@ -16,6 +16,7 @@ import com.daac.pacq.domain.entity.IntentionAnounce;
 import com.daac.pacq.domain.entity.IntentionAnounceStatus;
 import com.daac.pacq.domain.entity.NotAllowedEconomicOperator;
 import com.daac.pacq.domain.entity.QualifiedEconomicOperator;
+import com.daac.pacq.domain.entity.Tender;
 import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
 import com.daac.pacq.domain.ref.TenderType;
@@ -26,6 +27,7 @@ import com.daac.pacq.service.entity.IntentionAnounceService;
 import com.daac.pacq.service.entity.IntentionAnounceStatusService;
 import com.daac.pacq.service.entity.NotAllowedEconomicOperatorService;
 import com.daac.pacq.service.entity.QualifiedEconomicOperatorService;
+import com.daac.pacq.service.entity.TenderService;
 import com.daac.pacq.service.ref.IntentionStatusService;
 import com.daac.pacq.service.ref.PositionTypeService;
 import com.daac.pacq.service.ref.TenderTypeService;
@@ -46,6 +48,9 @@ public class JSONController {
 	
 	@Autowired
 	private IntentionAnounceStatusService intentionAnounceStatusService;
+	
+	@Autowired
+	private TenderService 	tenderService;
 	
 	@Autowired
 	private IntentionAnounceService intentionAnounceService;
@@ -96,6 +101,8 @@ public class JSONController {
 	    	return  intentionStatusService.list();
 	    }	  	 
 	   
+   
+	   
 	   @RequestMapping(value="/intentionAnounceStatusList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody List<IntentionAnounceStatus> intentionAnounceStatusList(WebRequest request) { 
 		   System.out.println("JSONController - INTENTION ANOUNCE STATUS LIST");
@@ -112,6 +119,16 @@ public class JSONController {
 	    	return  intentionAnounceStatusService.get(286210);
 	    }		   
 	   
+	   
+	   @RequestMapping(value="/tenderList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody FlexGridListWrapper<Tender> tenderList(WebRequest request) { 
+		   System.out.println("JSONController - TENDER LIST");
+	    	System.out.println(request.toString());
+	    	List<Tender> result = tenderService.list(); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	FlexGridListWrapper<Tender> jdw = new FlexGridListWrapper<Tender>(1, result.size(), result);  
+	    	 return jdw;  
+	    }		
 	   
 	   @RequestMapping(value="/intentionAnounceList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody FlexGridListWrapper<IntentionAnounce> intentionAnounceList(WebRequest request) { 

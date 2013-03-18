@@ -27,12 +27,12 @@
 	</div>
 </div>
 <div id="menu-container">
-	<a href="proceduri">	<spring:message code="lable.module_name.proceduri"/></a>
-	<a href="intentii">		<spring:message code="lable.module_name.intentii"/></a>
-	<a href="contracte">			<spring:message code="lable.module_name.contracte"/></a>
-	<a href="contestatii">			<spring:message code="lable.module_name.contestatii"/></a>
-	<a href="whiteList">			<spring:message code="lable.module_name.whiteList"/></a>
-    <a href="blackList">			<spring:message code="lable.module_name.blackList"/></a>
+	<a href="proceduri">			<spring:message code="label.module_name.proceduri"/></a>
+	<a href="intentii">				<spring:message code="label.module_name.intentii"/></a>
+	<a href="contracte">			<spring:message code="label.module_name.contracte"/></a>
+	<a href="contestatii">			<spring:message code="label.module_name.contestatii"/></a>
+	<a href="whiteList">			<spring:message code="label.module_name.whiteList"/></a>
+    <a href="blackList">			<spring:message code="label.module_name.blackList"/></a>
           <div id='help'>
           	<a href='#'>
               	<img src='resources/images/help_icon.gif'/>

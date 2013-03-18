@@ -6,7 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -37,8 +39,13 @@ public class Tender {
     @Column(name = "REG_NUMBER")
     private String	regNumber;
     
-    @Column(name = "FK_STATE_ORG_ID")
-    private Integer fkStateOrgId;
+//    @Column(name = "FK_STATE_ORG_ID")
+//    private Integer fkStateOrgId;
+    
+    @OneToOne
+    @JoinColumn(name="FK_STATE_ORG_ID")
+    private StateOrg stateOrg;
+    
     
     @Column(name = "FK_CURRENT_DATA_ID")
     private Integer fkCurrentDataId;
@@ -121,14 +128,22 @@ public class Tender {
 		this.regNumber = regNumber;
 	}
 
-	public Integer getFkStateOrgId() {
-		return fkStateOrgId;
+//	public Integer getFkStateOrgId() {
+//		return fkStateOrgId;
+//	}
+//
+//	public void setFkStateOrgId(Integer fkStateOrgId) {
+//		this.fkStateOrgId = fkStateOrgId;
+//	}
+
+	public StateOrg getStateOrg() {
+		return stateOrg;
 	}
 
-	public void setFkStateOrgId(Integer fkStateOrgId) {
-		this.fkStateOrgId = fkStateOrgId;
+	public void setStateOrg(StateOrg stateOrg) {
+		this.stateOrg = stateOrg;
 	}
-
+	
 	public Integer getFkCurrentDataId() {
 		return fkCurrentDataId;
 	}
