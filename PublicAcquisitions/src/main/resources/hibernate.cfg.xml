@@ -16,6 +16,7 @@
 		<mapping class="com.daac.pacq.domain.entity.IntentionAnounceStatus" />
 		<mapping class="com.daac.pacq.domain.entity.IntentionAnounce" />
 		<mapping class="com.daac.pacq.domain.entity.StateOrg" />
+		<mapping class="com.daac.pacq.domain.entity.Contract" />
 		
 	</session-factory>
 </hibernate-configuration>
