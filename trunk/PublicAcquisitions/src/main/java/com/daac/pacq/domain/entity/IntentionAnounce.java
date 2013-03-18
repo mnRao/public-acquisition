@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.daac.pacq.domain.ref.OrgLegalForm;
 import com.daac.pacq.domain.ref.TenderType;
 import com.daac.pacq.helpers.CustomDateSerializer;
 
@@ -81,8 +82,13 @@ public class IntentionAnounce {
     private List<IntentionAnounceStatus> 		intentionAnounceStatus;
     
     
-    @Column(name = "FK_STATE_ORG_ID")
-    private Integer 		fkStateOrgId;
+//    @Column(name = "FK_STATE_ORG_ID")
+//    private Integer 		fkStateOrgId;
+    
+    @OneToOne
+    @JoinColumn(name="FK_STATE_ORG_ID")
+    private StateOrg stateOrg;
+    
     
     @Column(name = "PUBLISH_DATE")
     private Date 			publishDate;
@@ -224,17 +230,27 @@ public class IntentionAnounce {
 		this.intentionAnounceStatus = intentionAnounceStatus;
 	}
 
-	public Integer getFkStateOrgId() {
-		return fkStateOrgId;
-	} 
+//	public Integer getFkStateOrgId() {
+//		return fkStateOrgId;
+//	} 
+//
+//	public void setFkStateOrgId(Integer fkStateOrgId) {
+//		this.fkStateOrgId = fkStateOrgId;
+//	}
 
-	public void setFkStateOrgId(Integer fkStateOrgId) {
-		this.fkStateOrgId = fkStateOrgId;
-	}
-
+	
+	
 	@JsonSerialize (using = CustomDateSerializer.class)
 	public Date getPublishDate() {
 		return publishDate;
+	}
+
+	public StateOrg getStateOrg() {
+		return stateOrg;
+	}
+
+	public void setStateOrg(StateOrg stateOrg) {
+		this.stateOrg = stateOrg;
 	}
 
 	public void setPublishDate(Date publishDate) {

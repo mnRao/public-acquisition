@@ -8,12 +8,14 @@
 		<mapping class="com.daac.pacq.domain.ref.TenderType" />
 		<mapping class="com.daac.pacq.domain.ref.PositionType" />
 		<mapping class="com.daac.pacq.domain.ref.IntentionStatus" />
+		<mapping class="com.daac.pacq.domain.ref.OrgLegalForm" />
 		
 		
 		
 		<mapping class="com.daac.pacq.domain.entity.Tender" />
 		<mapping class="com.daac.pacq.domain.entity.IntentionAnounceStatus" />
 		<mapping class="com.daac.pacq.domain.entity.IntentionAnounce" />
+		<mapping class="com.daac.pacq.domain.entity.StateOrg" />
 		
 	</session-factory>
 </hibernate-configuration>
