@@ -10,6 +10,9 @@
 		<mapping class="com.daac.pacq.domain.ref.IntentionStatus" />
 		<mapping class="com.daac.pacq.domain.ref.OrgLegalForm" />
 		<mapping class="com.daac.pacq.domain.ref.Bank" />
+		<mapping class="com.daac.pacq.domain.ref.ContractType" />
+		<mapping class="com.daac.pacq.domain.ref.Status" />
+		<mapping class="com.daac.pacq.domain.ref.Goods" />
 		
 		<mapping class="com.daac.pacq.domain.entity.BudgetPeriod" />
 		<mapping class="com.daac.pacq.domain.entity.StateOrg" />
@@ -19,6 +22,7 @@
 		<mapping class="com.daac.pacq.domain.entity.IntentionAnounce" />
 		<mapping class="com.daac.pacq.domain.entity.QualifiedEconomicOperator" />
 		<mapping class="com.daac.pacq.domain.entity.NotAllowedEconomicOperator" />
+		<mapping class="com.daac.pacq.domain.entity.TenderShort" />
 		
 		
 		

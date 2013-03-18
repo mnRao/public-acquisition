@@ -6,7 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.daac.pacq.domain.ref.ContractType;
+import com.daac.pacq.domain.ref.Goods;
+import com.daac.pacq.domain.ref.Status;
+import com.daac.pacq.helpers.CustomDateSerializer;
 
 
 
@@ -19,20 +28,32 @@ public class Contract {
     @GeneratedValue 
     private Integer id;
     
-    @Column(name = "REF_CURRENT_STATUS_ID") 
-    private Integer currentStatusId;
+//    @Column(name = "REF_CURRENT_STATUS_ID") 
+//    private Integer currentStatusId;
 
+    @OneToOne
+    @JoinColumn(name="REF_CURRENT_STATUS_ID")
+    private Status status;
+    
     @Column(name = "CURRENT_STATUS_DATE") 
     private Date currentStatusDate;
     
     @Column(name = "FK_CURRENT_STATUS_ID") 
     private Integer fkCurrentStatusId;
     
-    @Column(name = "FK_TENDER_ID") 
-    private Integer fkTenderId;
+//    @Column(name = "FK_TENDER_ID") 
+//    private Integer fkTenderId;
     
-    @Column(name = "REF_CONTR_TYPE_ID") 
-    private Integer contrTypeId;    
+    @OneToOne
+    @JoinColumn(name="FK_TENDER_ID")
+    private TenderShort tender;
+    
+//    @Column(name = "REF_CONTR_TYPE_ID") 
+//    private Integer contrTypeId;    
+    
+    @OneToOne
+    @JoinColumn(name="REF_CONTR_TYPE_ID")
+    private ContractType contractType;
 
     @Column(name = "FK_BASE_CONTRACT_ID") 
     private Integer fkBaseContractId;  
@@ -76,8 +97,12 @@ public class Contract {
     @Column(name = "INDIVIDUAL_CONTRACTS_QUANTITY") 
     private Integer individualContractsQuantity;
     
-    @Column(name = "FK_REF_GOODS") 
-    private Integer fkRefGoods;
+//    @Column(name = "FK_REF_GOODS") 
+//    private Integer fkRefGoods;
+    
+    @OneToOne
+    @JoinColumn(name="FK_REF_GOODS")
+    private Goods goods;
     
     @Column(name = "NOTE") 
     private String note;
@@ -87,6 +112,8 @@ public class Contract {
     
     @Column(name = "FK_TENDER_DOC_DECIPHERING_IND") 
     private Integer fkTenderDocDecipheringId;
+    
+    
 
 	public Integer getId() {
 		return id;
@@ -96,14 +123,15 @@ public class Contract {
 		this.id = id;
 	}
 
-	public Integer getCurrentStatusId() {
-		return currentStatusId;
-	}
+//	public Integer getCurrentStatusId() {
+//		return currentStatusId;
+//	}
+//
+//	public void setCurrentStatusId(Integer currentStatusId) {
+//		this.currentStatusId = currentStatusId;
+//	}
 
-	public void setCurrentStatusId(Integer currentStatusId) {
-		this.currentStatusId = currentStatusId;
-	}
-
+	@JsonSerialize (using = CustomDateSerializer.class)
 	public Date getCurrentStatusDate() {
 		return currentStatusDate;
 	}
@@ -120,21 +148,21 @@ public class Contract {
 		this.fkCurrentStatusId = fkCurrentStatusId;
 	}
 
-	public Integer getFkTenderId() {
-		return fkTenderId;
-	}
+//	public Integer getFkTenderId() {
+//		return fkTenderId;
+//	}
+//
+//	public void setFkTenderId(Integer fkTenderId) {
+//		this.fkTenderId = fkTenderId;
+//	}
 
-	public void setFkTenderId(Integer fkTenderId) {
-		this.fkTenderId = fkTenderId;
-	}
-
-	public Integer getContrTypeId() {
-		return contrTypeId;
-	}
-
-	public void setContrTypeId(Integer contrTypeId) {
-		this.contrTypeId = contrTypeId;
-	}
+//	public Integer getContrTypeId() {
+//		return contrTypeId;
+//	}
+//
+//	public void setContrTypeId(Integer contrTypeId) {
+//		this.contrTypeId = contrTypeId;
+//	}
 
 	public Integer getFkBaseContractId() {
 		return fkBaseContractId;
@@ -152,6 +180,7 @@ public class Contract {
 		this.contract_Number = contract_Number;
 	}
 
+	@JsonSerialize (using = CustomDateSerializer.class)
 	public Date getContractDate() {
 		return contractDate;
 	}
@@ -192,6 +221,7 @@ public class Contract {
 		this.fkDecisionId = fkDecisionId;
 	}
 
+	@JsonSerialize (using = CustomDateSerializer.class)
 	public Date getRegisterDate() {
 		return registerDate;
 	}
@@ -200,6 +230,7 @@ public class Contract {
 		this.registerDate = registerDate;
 	}
 
+	@JsonSerialize (using = CustomDateSerializer.class)
 	public Date getFinalDate() {
 		return finalDate;
 	}
@@ -248,13 +279,13 @@ public class Contract {
 		this.individualContractsQuantity = individualContractsQuantity;
 	}
 
-	public Integer getFkRefGoods() {
-		return fkRefGoods;
-	}
-
-	public void setFkRefGoods(Integer fkRefGoods) {
-		this.fkRefGoods = fkRefGoods;
-	}
+//	public Integer getFkRefGoods() {
+//		return fkRefGoods;
+//	}
+//
+//	public void setFkRefGoods(Integer fkRefGoods) {
+//		this.fkRefGoods = fkRefGoods;
+//	}
 
 	public String getNote() {
 		return note;
@@ -278,6 +309,38 @@ public class Contract {
 
 	public void setFkTenderDocDecipheringId(Integer fkTenderDocDecipheringId) {
 		this.fkTenderDocDecipheringId = fkTenderDocDecipheringId;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public TenderShort getTender() {
+		return tender;
+	}
+
+	public void setTender(TenderShort tender) {
+		this.tender = tender;
+	}
+
+	public ContractType getContractType() {
+		return contractType;
+	}
+
+	public void setContractType(ContractType contractType) {
+		this.contractType = contractType;
+	}
+
+	public Goods getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
 
    
