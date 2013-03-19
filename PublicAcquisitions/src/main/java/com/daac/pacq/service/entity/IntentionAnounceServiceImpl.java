@@ -1,6 +1,7 @@
 package com.daac.pacq.service.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,4 +34,11 @@ public class IntentionAnounceServiceImpl implements IntentionAnounceService {
 		return dao.filter(filterString);
 	}
  
+	@Transactional
+	public List<IntentionAnounce> search(Map<String, String[]> filtersMap){
+		System.out.println("IntentionAnounceServiceImpl - search");
+		return dao.search(filtersMap);
+	}
+
+	
 }

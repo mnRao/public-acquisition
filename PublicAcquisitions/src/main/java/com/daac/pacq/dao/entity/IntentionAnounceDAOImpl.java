@@ -4,8 +4,11 @@
 package com.daac.pacq.dao.entity;
 
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -50,4 +53,19 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 		return sessionFactory.getCurrentSession().createQuery("from IntentionAnounce").list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<IntentionAnounce> 		search(Map<String, String[]> filtersMap){
+		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(IntentionAnounce.class);
+		crit.setMaxResults(100);
+		
+		crit.add( Restrictions.like("tenderType", "%AA%") );
+		
+		 List<IntentionAnounce>  result = crit.list();
+		
+		
+		
+		return result;
+	}
+	
 }

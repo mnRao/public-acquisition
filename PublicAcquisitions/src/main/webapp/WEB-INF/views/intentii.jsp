@@ -3,12 +3,24 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page language="java" pageEncoding="utf-8"%>
-
 <script type="text/javascript">
 $(document).ready(function(){
 
 	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
+	
+	function getItemTranslation(item){
+		if (curLangRef == "mdValue") {
+			return item.mdValue;
+		} 
+		if (curLangRef == "ruValue") {
+			return item.ruValue;
+		} 
+		if (curLangRef == "enValue") {
+			return item.enValue;
+		}
+		return item.mdValue;
+	} 
 	
 	$("#list").jqGrid({
 		jsonReader : {
@@ -49,43 +61,47 @@ $(document).ready(function(){
 	   	rowNum:10,
 	   	rowList:[10,20,30],
 	   	pager: '#pager',
+	   	toppager: true,
 	   	sortname: 'id',
+	   	sortorder: 'asc',
 	    viewrecords: true,
-	    sortorder: "desc",
+	    search: true,	    
 	    caption:'<spring:message code="label.module_name.intentii"/>',
 	    width: w,
-	    height: 300
+	    height: 300,
+	    postData: 	{ filters:{	
+	    	fIntentionStatus:		function() { return $('#pIntentionStatus').val(); }, 
+	    	fTenderType: 			function() { return $('#pTenderType').val(); },
+	    	fStateOrg: 				function() { return $('#pStateOrg').val(); },
+	    	fForWhoPurchase: 		function() { return $('#pForWhoPurchase').val(); }
+				}
+			}
 	});
 	
-	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+//	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
 	
-	  $( "#pBulletinDataFrom" ).datepicker({
-	      showOn: "button",
-	      buttonImage: "resources/images/calendar.gif",
-	      buttonImageOnly: true
-	    });
-	  
-	  $( "#pBulletinDataTo" ).datepicker({
-	      showOn: "button",
-	      buttonImage: "resources/images/calendar.gif",
-	      buttonImageOnly: true
-	    });
+ /* ------------------ FILTERS FUNCTION ----------------- */	  
+ 	
+	$("#resetFilter").click(function(){
+		$("#pIntentionStatus").val("");
+		$("#pTenderType").val("");
+		$("#pStateOrg").val("");
+		$("#pForWhoPurchase").val("");
+		
+		$("#list").trigger("reloadGrid");
+	});
 	
-	  $( "#pApproveDataFrom" ).datepicker({
-	      showOn: "button",
-	      buttonImage: "resources/images/calendar.gif",
-	      buttonImageOnly: true
-	    });
-	  
-	  $( "#pApproveDataTo" ).datepicker({
-	      showOn: "button",
-	      buttonImage: "resources/images/calendar.gif",
-	      buttonImageOnly: true
-	    });
+	$("#submitFilter").click(function(){
+		$("#list").trigger("reloadGrid");
+	});
+	
+	
+	
+	
+
 	  
 	  
-		 $("#pTenderType").autocomplete(
-			       {
+		 $("#pTenderType").autocomplete({
 			           source : function(request, response) {
 			               $.ajax({
 			                   url : "json/tenderTypeList",
@@ -98,8 +114,37 @@ $(document).ready(function(){
 			                   success : function(data) {
 			                       response($.map(data , function(item) {
 			                           return {
-			                               		label : item.mdValue,
-			                               		value : item.mdValue
+			                               		label : getItemTranslation(item),
+			                               		value : getItemTranslation(item)
+			                           			};
+			                       			}));
+			                   }
+			               });
+			           },
+			           minLength : 0
+		}).focus(function(e) {
+		   	    if(!e.isTrigger) {
+		   	    	$(this).autocomplete("search", "");
+		   	    }
+		   	    e.stopPropagation();
+		       });			
+			
+		 
+		 $("#pIntentionStatus").autocomplete({
+			       source : function(request, response) {
+			              $.ajax({
+			                   url : "json/intentionStatusList",
+			                   dataType : "json",
+			                   data : {
+			                	   style: "full",
+			                        maxRows: 12,
+			                	   term : request.term
+			                   },
+			                   success : function(data) {
+			                       response($.map(data , function(item) {
+			                           return {
+			                               		label : getItemTranslation(item),
+			                               		value : getItemTranslation(item)
 			                           			};
 			                       			}));
 			                   }
@@ -111,16 +156,38 @@ $(document).ready(function(){
 			    	    	$(this).autocomplete("search", "");
 			    	    }
 			    	    e.stopPropagation();
-			       });			
-			  
+			       });	
+		 
+		 
+		  $( "#pBulletinDataFrom" ).datepicker({
+		      showOn: "button",
+		      buttonImage: "resources/images/calendar.gif",
+		      buttonImageOnly: true
+		    });
+		  
+		  $( "#pBulletinDataTo" ).datepicker({
+		      showOn: "button",
+		      buttonImage: "resources/images/calendar.gif",
+		      buttonImageOnly: true
+		    });
 		
-	  
+		  $( "#pApproveDataFrom" ).datepicker({
+		      showOn: "button",
+		      buttonImage: "resources/images/calendar.gif",
+		      buttonImageOnly: true
+		    });
+		  
+		  $( "#pApproveDataTo" ).datepicker({
+		      showOn: "button",
+		      buttonImage: "resources/images/calendar.gif",
+		      buttonImageOnly: true
+		    });		 
+		 
 }); 
-
 </script>
 <html>
 <center>
-		
+
 <div id="filtrationPanel" align="left">
 	<form action="">
 	<fieldset>
@@ -138,11 +205,10 @@ $(document).ready(function(){
 		<label for="pApproveDataTo">	pana la:</label>					<input id="pApproveDataTo" type="text" />
 		<br>	
 		<label for="pGoodsDescription">	Obiectul de achizitie:</label>		<input id="pGoodsDescription" type="text" />
-		<br>
 		 <div class="form-buttons">
-		  	<input name="submitFilter" 	type="button" value="Apply Filter" />
-		  	<input name="resetFilter" 	type="button" value="Reset Filter" />
-		 </div>
+		  	<input id="submitFilter" 	type="button" value="Apply Filter" />
+		  	<input id="resetFilter" 	type="button" value="Reset Filter" />
+		 </div>		
 	</fieldset>					
 	</form>
 </div>
