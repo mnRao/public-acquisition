@@ -59,7 +59,7 @@ public class Contract {
     private Integer fkBaseContractId;  
     
     @Column(name = "CONTRACT_NUMBER") 
-    private String contract_Number;  
+    private String contractNumber;  
     
     @Column(name = "CONTRACT_DATE") 
     private Date contractDate;  
@@ -67,8 +67,12 @@ public class Contract {
     @Column(name = "AMOUNT") 
     private Float amount;  
 
-    @Column(name = "FK_PARTICIPANT_ID") 
-    private Integer fkParticipantId;
+//    @Column(name = "FK_PARTICIPANT_ID") 
+//    private Integer fkParticipantId;
+    
+    @OneToOne
+    @JoinColumn(name="FK_PARTICIPANT_ID")
+    private Participant participant;    
     
     @Column(name = "FK_OFFER_ID") 
     private Integer fkOfferId;
@@ -172,12 +176,12 @@ public class Contract {
 		this.fkBaseContractId = fkBaseContractId;
 	}
 
-	public String getContract_Number() {
-		return contract_Number;
+	public String getContractNumber() {
+		return contractNumber;
 	}
 
-	public void setContract_Number(String contract_Number) {
-		this.contract_Number = contract_Number;
+	public void setContractNumber(String contractNumber) {
+		this.contractNumber = contractNumber;
 	}
 
 	@JsonSerialize (using = CustomDateSerializer.class)
@@ -197,18 +201,26 @@ public class Contract {
 		this.amount = amount;
 	}
 
-	public Integer getFkParticipantId() {
-		return fkParticipantId;
+//	public Integer getFkParticipantId() {
+//		return fkParticipantId;
+//	}
+//
+//	public void setFkParticipantId(Integer fkParticipantId) {
+//		this.fkParticipantId = fkParticipantId;
+//	}
+
+	public Participant getParticipant() {
+		return participant;
 	}
 
-	public void setFkParticipantId(Integer fkParticipantId) {
-		this.fkParticipantId = fkParticipantId;
+	public void setParticipant(Participant participant) {
+		this.participant = participant;
 	}
 
 	public Integer getFkOfferId() {
 		return fkOfferId;
 	}
-
+	
 	public void setFkOfferId(Integer fkOfferId) {
 		this.fkOfferId = fkOfferId;
 	}
