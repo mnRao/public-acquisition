@@ -11,8 +11,11 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import com.daac.pacq.domain.ref.TenderStatus;
 import com.daac.pacq.domain.ref.TenderType;
+import com.daac.pacq.helpers.CustomDateSerializer;
 
 
 @Entity
@@ -30,6 +33,7 @@ public class Tender {
     @JoinColumn(name="REF_CURRENT_STATUS_ID")
     private TenderStatus tenderStatus;    
     
+    @JsonSerialize (using = CustomDateSerializer.class)
     @Column(name = "CURRENT_STATUS_DATE")
     private Date	refCurrentStatusDate;
     
@@ -43,7 +47,7 @@ public class Tender {
     @JoinColumn(name="REF_TENDER_TYPE_ID")
     private TenderType tenderType;
     
-    
+    @JsonSerialize (using = CustomDateSerializer.class)
     @Column(name = "TENDER_OPEN_DATE")
     private Date	refTendeOpenDate;
     
@@ -58,8 +62,12 @@ public class Tender {
     private StateOrg stateOrg;
     
     
-    @Column(name = "FK_CURRENT_DATA_ID")
-    private Integer fkCurrentDataId;
+//    @Column(name = "FK_CURRENT_DATA_ID")
+//    private Integer fkCurrentDataId;
+    
+    @OneToOne
+    @JoinColumn(name="FK_CURRENT_DATA_ID")
+    private TenderData tenderData;
     
     @Column(name = "FK_RESPONSIBLE_ID")
     private Integer fkResponsibleId;
@@ -173,13 +181,13 @@ public class Tender {
 		this.stateOrg = stateOrg;
 	}
 	
-	public Integer getFkCurrentDataId() {
-		return fkCurrentDataId;
-	}
-
-	public void setFkCurrentDataId(Integer fkCurrentDataId) {
-		this.fkCurrentDataId = fkCurrentDataId;
-	}
+//	public Integer getFkCurrentDataId() {
+//		return fkCurrentDataId;
+//	}
+//
+//	public void setFkCurrentDataId(Integer fkCurrentDataId) {
+//		this.fkCurrentDataId = fkCurrentDataId;
+//	}
 
 	public Integer getFkResponsibleId() {
 		return fkResponsibleId;
@@ -235,6 +243,14 @@ public class Tender {
 
 	public void setFkDataIdAtApprov(Integer fkDataIdAtApprov) {
 		this.fkDataIdAtApprov = fkDataIdAtApprov;
+	}
+
+	public TenderData getTenderData() {
+		return tenderData;
+	}
+
+	public void setTenderData(TenderData tenderData) {
+		this.tenderData = tenderData;
 	}
 
 	

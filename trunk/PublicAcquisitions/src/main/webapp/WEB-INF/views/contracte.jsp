@@ -65,5 +65,7 @@ $(document).ready(function(){
 <tr><td/></tr>
 </table>	
 
+<div id="pager"></div>
+
 </center>
 </html>

@@ -5,10 +5,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.daac.pacq.domain.ref.OrgLegalForm;
 import com.daac.pacq.helpers.CustomDateSerializer;
 
 
@@ -23,6 +26,7 @@ public abstract class AbstractEconomicOperator {
     @Column(name = "DECISION_NUMB")
     private String decisionNumb;
     
+    @JsonSerialize (using = CustomDateSerializer.class)
     @Column(name = "DECISION_DATE")
     private Date 	decisionDate;
 
@@ -32,8 +36,12 @@ public abstract class AbstractEconomicOperator {
     @Column(name = "CODE")
     private String code;    
     
-    @Column(name = "REF_LEGAL_FORM_ID")
-    private Integer refLegalFormId;
+//    @Column(name = "REF_LEGAL_FORM_ID")
+//    private Integer refLegalFormId;
+    
+    @OneToOne
+    @JoinColumn(name="REF_LEGAL_FORM_ID", nullable=true)
+    private OrgLegalForm orgLegalForm;  
 
     @Column(name = "NAME")
     private String name;    
@@ -56,6 +64,7 @@ public abstract class AbstractEconomicOperator {
     @Column(name = "STATUS")
     private Integer status;
     
+    @JsonSerialize (using = CustomDateSerializer.class)
     @Column(name = "STATUS_SET_DATE")
     private Date 	statusSetDate;
 
@@ -103,13 +112,13 @@ public abstract class AbstractEconomicOperator {
 		this.code = code;
 	}
 
-	public Integer getRefLegalFormId() {
-		return refLegalFormId;
-	}
-
-	public void setRefLegalFormId(Integer refLegalFormId) {
-		this.refLegalFormId = refLegalFormId;
-	}
+//	public Integer getRefLegalFormId() {
+//		return refLegalFormId;
+//	}
+//
+//	public void setRefLegalFormId(Integer refLegalFormId) {
+//		this.refLegalFormId = refLegalFormId;
+//	}
 
 	public String getName() {
 		return name;
@@ -182,6 +191,14 @@ public abstract class AbstractEconomicOperator {
 
 	public void setStatusSetUser(String statusSetUser) {
 		this.statusSetUser = statusSetUser;
+	}
+
+	public OrgLegalForm getOrgLegalForm() {
+		return orgLegalForm;
+	}
+
+	public void setOrgLegalForm(OrgLegalForm orgLegalForm) {
+		this.orgLegalForm = orgLegalForm;
 	}
 
     
