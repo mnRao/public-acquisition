@@ -58,50 +58,93 @@ $(document).ready(function(){
 	});
 	
 	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+	
+	  $( "#pBulletinDataFrom" ).datepicker({
+	      showOn: "button",
+	      buttonImage: "resources/images/calendar.gif",
+	      buttonImageOnly: true
+	    });
+	  
+	  $( "#pBulletinDataTo" ).datepicker({
+	      showOn: "button",
+	      buttonImage: "resources/images/calendar.gif",
+	      buttonImageOnly: true
+	    });
+	
+	  $( "#pApproveDataFrom" ).datepicker({
+	      showOn: "button",
+	      buttonImage: "resources/images/calendar.gif",
+	      buttonImageOnly: true
+	    });
+	  
+	  $( "#pApproveDataTo" ).datepicker({
+	      showOn: "button",
+	      buttonImage: "resources/images/calendar.gif",
+	      buttonImageOnly: true
+	    });
+	  
+	  
+		 $("#pTenderType").autocomplete(
+			       {
+			           source : function(request, response) {
+			               $.ajax({
+			                   url : "json/tenderTypeList",
+			                   dataType : "json",
+			                   data : {
+			                	   style: "full",
+			                        maxRows: 12,
+			                	   term : request.term
+			                   },
+			                   success : function(data) {
+			                       response($.map(data , function(item) {
+			                           return {
+			                               		label : item.mdValue,
+			                               		value : item.mdValue
+			                           			};
+			                       			}));
+			                   }
+			               });
+			           },
+			           minLength : 0
+			       }).focus(function(e) {
+			    	    if(!e.isTrigger) {
+			    	    	$(this).autocomplete("search", "");
+			    	    }
+			    	    e.stopPropagation();
+			       });			
+			  
+		
+	  
 }); 
 
 </script>
 <html>
 <center>
 		
-<div id="filtrationPanel" style="padding: .2em .2em .2em .2em;">
-	<table id="prm" 
-		style="width: 98%; background-color: #DBD5D6; border: solid; border-width: 1px; border-color: #000000" >
-		<tr>
-			<td align="right">Tipul suportului:</td>
-			<td><input type="text" id="pSupportType" class="ui-widget"></td>
-			<td>&nbsp;</td>
-			<td align="right">Region:</td>
-			<td><input type="text" id="pRegionName" class="ui-widget" ></td>
-			<td>&nbsp;</td>
-			<td align="right">Localitate:</td>
-			<td colspan="2">
-				<input type="text" id="pLocalityName"  class="ui-widget" >
-				</td>
-<!-- 						<td>&nbsp;</td> -->
-			<td align="right">&nbsp;</td>
-			<td><input id="btApplyFilter" type="button" value="Filtreaza"></td>
-		</tr>
-		<tr>
-			<td align="right">Iluminare:</td>
-			<td><input type="checkbox" id="pLight" ></td>						
-			<td>&nbsp;</td>
-			<td align="right">Adresa:</td>
-			<td><input type="text" id="pAddresString" class="ui-widget"></td>
-			<td>&nbsp;</td>
-			<td align="right">Pret:</td>
-			<td>
-				<input type="text" id="pPriceFrom" class="ui-widget" >
-				<input type="text" id="pPriceTo"   class="ui-widget" >
-			</td>
-			<td>&nbsp;
-				
-			</td>
-			<td align="right">&nbsp;</td>
-			<td><input id="btResetFilter" type="button" value="Curata filtru"></td>
-		</tr>	
-
-	</table> 
+<div id="filtrationPanel" align="left">
+	<form action="">
+	<fieldset>
+		<label for="pIntentionStatus">	Statut:</label>						<input id="pIntentionStatus" type="text"/>
+		<label for="pTenderType">		Tipul procedurii:</label>			<input id="pTenderType" type="text" />
+		<br>
+		<label for="pStateOrg">			Autoritate contractanta:</label>	<input id="pStateOrg" type="text" />
+		<label for="pForWhoPurchase">	Destinatie achizitiei:</label>		<input id="pForWhoPurchase" type="text" />
+		<br>
+		<label for="pBulletinNumber">	Numarul bulletinului:</label>		<input id="pBulletinNumber" type="text" /> 
+		<br>
+		<label for="pBulletinDataFrom">	Data bulletinului de la:</label>	<input id="pBulletinDataFrom" type="text" />
+		<label for="pBulletinDataTo">	pana la:</label>					<input id="pBulletinDataTo" type="text" />
+		<label for="pApproveDataFrom">	Data aprobarii de la:</label>		<input id="pApproveDataFrom" type="text" />
+		<label for="pApproveDataTo">	pana la:</label>					<input id="pApproveDataTo" type="text" />
+		<br>	
+		<label for="pGoodsDescription">	Obiectul de achizitie:</label>		<input id="pGoodsDescription" type="text" />
+		<br>
+		 <div class="form-buttons">
+		  	<input name="submitFilter" 	type="button" value="Apply Filter" />
+		  	<input name="resetFilter" 	type="button" value="Reset Filter" />
+		 </div>
+	</fieldset>					
+	</form>
 </div>
 <br>
 
@@ -114,3 +157,25 @@ $(document).ready(function(){
 <div id="pager"></div>
 </center>
 </html>
+
+
+<!-- 	<table id="prm"  -->
+<!-- 		style="width: 98%; background-color: #DBD5D6; border: solid; border-width: 1px; border-color: #000000" > -->
+<!-- 		<tr valign="middle"> -->
+<!-- 			<td align="right" style="width:120px;">Deschiderea de la:</td> -->
+<!-- 			<td style="width:100px;"><input type="text" id="pOpenFrom" style="width: 80px; text-align: center;" ></td> -->
+<!-- 			<td align="right" style="width: 5em; text-align: center;" >pina la:</td> -->
+<!-- 			<td style="width:100px;"><input type="text" id="pOpenTo" style="width: 80px; text-align: center;" ></td> -->
+			
+<!-- 			<td align="right">Statutul procedurii </td> -->
+<!-- 			<td><input type="text" id="pIntentionStatus" style="width: 98%;" ></td> -->
+			
+<!-- 			<td style="width:30px;"><input id="btApplyFilter" type="button" value="Filtreaza"></td> -->
+<!-- 		</tr> -->
+<!-- 		<tr valign="middle"> -->
+<!-- 			<td align="right">Bun sau serviciu:</td> -->
+<!-- 			<td colspan="5"><input type="text" id="pGoodsName" style="width: 99%;" ></td>						 -->
+<!-- 			<td><input id="btResetFilter" type="button" value="Curata filtru"></td> -->
+<!-- 		</tr>	 -->
+
+<!-- 	</table>  -->
