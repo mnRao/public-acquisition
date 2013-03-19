@@ -1,6 +1,7 @@
 package com.daac.pacq.web;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,8 +134,20 @@ public class JSONController {
 	   @RequestMapping(value="/intentionAnounceList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody FlexGridListWrapper<IntentionAnounce> intentionAnounceList(WebRequest request) { 
 		   System.out.println("JSONController - INTENTION ANOUNCE LIST");
-	    	System.out.println(request.toString());
-	    	List<IntentionAnounce> result = intentionAnounceService.list(); 
+		   System.out.println(request.toString());
+		   System.out.println(request.getParameterMap().toString());
+		   
+		   Iterator<String> userFiltersIter = request.getParameterNames();
+		   while ( userFiltersIter.hasNext() ){
+			   String paramName = userFiltersIter.next();
+			      System.out.println(paramName + " = " + request.getParameter(paramName) );
+			    }
+
+		   
+		   
+	    	List<IntentionAnounce> result = intentionAnounceService.search(request.getParameterMap());
+	    	
+	    	
 	    	System.out.println("RECORDS RCVD = " + result.size());
 	    	FlexGridListWrapper<IntentionAnounce> jdw = new FlexGridListWrapper<IntentionAnounce>(1, result.size(), result);  
 	    	 return jdw;  

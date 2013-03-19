@@ -1,3 +1,8 @@
+.ui-button { margin-left: -1px; }
+.ui-button-icon-only .ui-button-text { padding: 0.35em; } 
+#.ui-autocomplete-input { margin: 12px 0px 0 0px; padding: 0.48em 0 0.47em 0.45em; width: 65% }
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,

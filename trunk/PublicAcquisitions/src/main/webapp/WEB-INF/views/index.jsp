@@ -21,6 +21,11 @@
   
 	<link rel="stylesheet" href="resources/css/style.css" type="text/css" />
 	
+	<script type="text/javascript">
+
+	
+	</script>
+	
 </head>
 
 <body>
