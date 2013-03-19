@@ -27,7 +27,7 @@ $(document).ready(function(){
 	   	       		'fkBudgetPeriodId',
 	   	          	'purchaseQuarter',
 	   	       		'fkStateOrgId',
-		   			'TenderTypeName',
+	   	       	 '<spring:message code="label.tenderType"/>',
 		   			'plannedSum',
 		   			'bulletinPublishDate',
 		   			'bulletinNumber',
