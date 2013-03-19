@@ -21,6 +21,10 @@ public class TenderShort {
     @OneToOne
     @JoinColumn(name="FK_STATE_ORG_ID")
     private StateOrg stateOrg;
+    
+    @OneToOne
+    @JoinColumn(name="FK_CURRENT_DATA_ID")
+    private TenderDataShort tenderData;
 
 	public Integer getId() {
 		return id;
@@ -36,6 +40,14 @@ public class TenderShort {
 
 	public void setStateOrg(StateOrg stateOrg) {
 		this.stateOrg = stateOrg;
+	}
+
+	public TenderDataShort getTenderData() {
+		return tenderData;
+	}
+
+	public void setTenderData(TenderDataShort tenderData) {
+		this.tenderData = tenderData;
 	}
 
     

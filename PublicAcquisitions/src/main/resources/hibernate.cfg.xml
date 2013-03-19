@@ -25,10 +25,10 @@
 		<mapping class="com.daac.pacq.domain.entity.QualifiedEconomicOperator" />
 		<mapping class="com.daac.pacq.domain.entity.NotAllowedEconomicOperator" />
 		<mapping class="com.daac.pacq.domain.entity.TenderShort" />
-		
-		
-		
+		<mapping class="com.daac.pacq.domain.entity.TenderDataShort" />
 		<mapping class="com.daac.pacq.domain.entity.Contract" />
+		<mapping class="com.daac.pacq.domain.entity.Participant" />
+		
 		
 	</session-factory>
 </hibernate-configuration>
