@@ -22,6 +22,17 @@ $(document).ready(function(){
 		return item.mdValue;
 	} 
 	
+	function getKendoComboBoxSelectedValue(item){
+		if (item != undefined) {
+			if (item.dataItem()  != undefined ) {
+				if (item.dataItem().id != undefined ) {
+					return item.dataItem().id;		
+				}
+			}
+		}
+		return "";
+	}
+	
 	$("#list").jqGrid({
 		jsonReader : {
 		      root:"rows",
@@ -70,13 +81,20 @@ $(document).ready(function(){
 	    width: w,
 	    height: 300,
 	    postData: 	{ filters:{	
-	    	fIntentionStatus:		function() { return $('#pIntentionStatus').val(); }, 
-	    	fTenderType: 			function() { return $('#pTenderType').val(); },
+	    	fIntentionStatus:		function() { return getKendoComboBoxSelectedValue($('#pIntentionStatus').data("kendoComboBox"));}, 
+	    	fTenderType: 			function() { return getKendoComboBoxSelectedValue($('#pTenderType').data("kendoComboBox"));}, 
 	    	fStateOrg: 				function() { return $('#pStateOrg').val(); },
-	    	fForWhoPurchase: 		function() { return $('#pForWhoPurchase').val(); }
+	    	fForWhoPurchase: 		function() { return $('#pForWhoPurchase').val();},
+	    	fBulletinNumber:		function() { return $('#pBulletinNumber').val(); }, 
+	    	fBulletinDataFrom:		function() { return $('#pBulletinDataFrom').val(); }, 
+	    	fBulletinDataTo:		function() { return $('#pBulletinDataTo').val(); }, 
+	    	fApproveDataFrom:		function() { return $('#pApproveDataFrom').val(); }, 
+	    	fApproveDataTo:			function() { return $('#pApproveDataTo').val(); }, 
+	    	fGoodsDescription:		function() { return $('#pGoodsDescription').val();} 
 				}
 			}
 	});
+	
 	
 //	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
 	
@@ -94,118 +112,186 @@ $(document).ready(function(){
 	$("#submitFilter").click(function(){
 		$("#list").trigger("reloadGrid");
 	});
-	
-	
-	
-	
+		 
+		  //$( "#pBulletinDataFrom" ).datepicker({showOn: "button",buttonImage: "resources/images/calendar.gif",buttonImageOnly: true});
+		  //$( "#pBulletinDataTo" ).datepicker({showOn: "button",buttonImage: "resources/images/calendar.gif",buttonImageOnly: true});
+		  //$( "#pApproveDataFrom" ).datepicker({showOn: "button",buttonImage: "resources/images/calendar.gif",buttonImageOnly: true});
+		  //$( "#pApproveDataTo" ).datepicker({showOn: "button",buttonImage: "resources/images/calendar.gif",buttonImageOnly: true});		 
+		  
+          $("#pIntentionStatus").width(200).kendoComboBox({
+              index: -1,
+              placeholder: "-- // --",
+              dataTextField: curLangRef,
+              dataValueField: "Id",
+              filter: "contains",
+              dataSource: {
+                  type: "json",
+                  serverFiltering: true,
+                  serverPaging: true,
+                  pageSize: 20,
+                  transport: {
+                      read: "json/intentionStatusList"
+                  }
+              }
+          });
+		  
+          $("#pTenderType").width(300).kendoComboBox({
+              index: -1,
+              placeholder: "-- // --",
+              dataTextField: curLangRef,
+              dataValueField: "Id",
+              filter: "contains",
+              dataSource: {
+                  type: "json",
+                  serverFiltering: true,
+                  serverPaging: true,
+                  pageSize: 20,
+                  transport: {
+                      read: "json/tenderTypeList"
+                  }
+              }
+          });
+          
+      	$("#zz").click(function(){
+      		
+    	});      
+		 
 
-	  
-	  
-		 $("#pTenderType").autocomplete({
-			           source : function(request, response) {
-			               $.ajax({
-			                   url : "json/tenderTypeList",
-			                   dataType : "json",
-			                   data : {
-			                	   style: "full",
-			                        maxRows: 12,
-			                	   term : request.term
-			                   },
-			                   success : function(data) {
-			                       response($.map(data , function(item) {
-			                           return {
-			                               		label : getItemTranslation(item),
-			                               		value : getItemTranslation(item)
-			                           			};
-			                       			}));
-			                   }
-			               });
-			           },
-			           minLength : 0
-		}).focus(function(e) {
-		   	    if(!e.isTrigger) {
-		   	    	$(this).autocomplete("search", "");
-		   	    }
-		   	    e.stopPropagation();
-		       });			
-			
-		 
-		 $("#pIntentionStatus").autocomplete({
-			       source : function(request, response) {
-			              $.ajax({
-			                   url : "json/intentionStatusList",
-			                   dataType : "json",
-			                   data : {
-			                	   style: "full",
-			                        maxRows: 12,
-			                	   term : request.term
-			                   },
-			                   success : function(data) {
-			                       response($.map(data , function(item) {
-			                           return {
-			                               		label : getItemTranslation(item),
-			                               		value : getItemTranslation(item)
-			                           			};
-			                       			}));
-			                   }
-			               });
-			           },
-			           minLength : 0
-			       }).focus(function(e) {
-			    	    if(!e.isTrigger) {
-			    	    	$(this).autocomplete("search", "");
-			    	    }
-			    	    e.stopPropagation();
-			       });	
-		 
-		 
-		  $( "#pBulletinDataFrom" ).datepicker({
-		      showOn: "button",
-		      buttonImage: "resources/images/calendar.gif",
-		      buttonImageOnly: true
-		    });
-		  
-		  $( "#pBulletinDataTo" ).datepicker({
-		      showOn: "button",
-		      buttonImage: "resources/images/calendar.gif",
-		      buttonImageOnly: true
-		    });
-		
-		  $( "#pApproveDataFrom" ).datepicker({
-		      showOn: "button",
-		      buttonImage: "resources/images/calendar.gif",
-		      buttonImageOnly: true
-		    });
-		  
-		  $( "#pApproveDataTo" ).datepicker({
-		      showOn: "button",
-		      buttonImage: "resources/images/calendar.gif",
-		      buttonImageOnly: true
-		    });		 
-		 
+   	 //$("#pBulletinDataFrom").kendoDatePicker();
+	 //$("#pBulletinDataTo").kendoDatePicker();
+	// $("#pApproveDataFrom").kendoDatePicker();
+	 //$("#pApproveDataTo").kendoDatePicker();
+        
+            function startBulletinDataFromChange() {
+                var startDate = startBulletinDataFrom.value(),
+                endDate = endBulletinDataTo.value();
+
+                if (startDate) {
+                    startDate = new Date(startDate);
+                    startDate.setDate(startDate.getDate());
+                    endBulletinDataTo.min(startDate);
+                } else if (endDate) {
+                	startBulletinDataFrom.max(new Date(endDate));
+                } else {
+                    endDate = new Date();
+                    startBulletinDataFrom.max(endDate);
+                    endBulletinDataTo.min(endDate);
+                }
+            }
+
+            function endBulletinDataToChange() {
+                var endDate = endBulletinDataTo.value(),
+                startDate = startBulletinDataFrom.value();
+
+                if (endDate) {
+                    endDate = new Date(endDate);
+                    endDate.setDate(endDate.getDate());
+                    startBulletinDataFrom.max(endDate);
+                } else if (startDate) {
+                	endBulletinDataTo.min(new Date(startDate));
+                } else {
+                    endDate = new Date();
+                    startBulletinDataFrom.max(endDate);
+                    endBulletinDataTo.min(endDate);
+                }
+            }
+
+            var startBulletinDataFrom = $("#pBulletinDataFrom").kendoDatePicker({
+                change: startBulletinDataFromChange,
+                format: "dd.MM.yyyy"
+            }).data("kendoDatePicker");
+
+            var endBulletinDataTo = $("#pBulletinDataTo").kendoDatePicker({
+                change: endBulletinDataToChange,
+                format: "dd.MM.yyyy"
+            }).data("kendoDatePicker");
+
+            startBulletinDataFrom.max(endBulletinDataTo.value());
+            endBulletinDataTo.min(startBulletinDataFrom.value());
+        
+      	
+            function startApproveDataFromChange() {
+                var startDate = startApproveDataFrom.value(),
+                endDate = endApproveDataTo.value();
+
+                if (startDate) {
+                    startDate = new Date(startDate);
+                    startDate.setDate(startDate.getDate());
+                    endApproveDataTo.min(startDate);
+                } else if (endDate) {
+                	startApproveDataFrom.max(new Date(endDate));
+                } else {
+                    endDate = new Date();
+                    startApproveDataFrom.max(endDate);
+                    endApproveDataTo.min(endDate);
+                }
+            }
+
+            function endApproveDataToChange() {
+                var endDate = endApproveDataTo.value(),
+                startDate = startApproveDataFrom.value();
+
+                if (endDate) {
+                    endDate = new Date(endDate);
+                    endDate.setDate(endDate.getDate());
+                    startApproveDataFrom.max(endDate);
+                } else if (startDate) {
+                	endApproveDataTo.min(new Date(startDate));
+                } else {
+                    endDate = new Date();
+                    startApproveDataFrom.max(endDate);
+                    endApproveDataTo.min(endDate);
+                }
+            }
+
+            var startApproveDataFrom = $("#pApproveDataFrom").kendoDatePicker({
+                change: startApproveDataFromChange,
+                format: "dd.MM.yyyy"
+            }).data("kendoDatePicker");
+
+            var endApproveDataTo = $("#pApproveDataTo").kendoDatePicker({
+                change: endApproveDataToChange,
+                format: "dd.MM.yyyy"
+            }).data("kendoDatePicker");
+
+            startApproveDataFrom.max(endApproveDataTo.value());
+            endApproveDataTo.min(startApproveDataFrom.value());
+      	
 }); 
 </script>
 <html>
 <center>
-
+<!-- <button id="zz" style="visibility: hidden;"> ZZ </button> -->
 <div id="filtrationPanel" align="left">
-	<form action="">
+	<form action="" style="width: 90%;">
 	<fieldset>
-		<label for="pIntentionStatus">	Statut:</label>						<input id="pIntentionStatus" type="text"/>
-		<label for="pTenderType">		Tipul procedurii:</label>			<input id="pTenderType" type="text" />
+		<label for="pIntentionStatus" 	style="display:inline-block; width: 150px; text-align: right;">Statut:</label>
+			<input id="pIntentionStatus"/>
+		<label for="pTenderType" 		style="display:inline-block; width: 275px; text-align: right;">Tipul procedurii:</label>			
+			<input id="pTenderType" 	/>
+
 		<br>
-		<label for="pStateOrg">			Autoritate contractanta:</label>	<input id="pStateOrg" type="text" />
-		<label for="pForWhoPurchase">	Destinatie achizitiei:</label>		<input id="pForWhoPurchase" type="text" />
+		<label for="pStateOrg" 			style="display:inline-block; width: 150px; text-align: right;">Autoritate contractanta:</label>	
+			<input id="pStateOrg" type="text" class="k-widget" style="width: 350px;" />
+		<label for="pForWhoPurchase" 	style="display:inline-block; width: 126px; text-align: right;">	Destinatie achizitiei:</label>		
+			<input id="pForWhoPurchase" type="text" class="k-widget" style="width: 300px;" />
 		<br>
-		<label for="pBulletinNumber">	Numarul bulletinului:</label>		<input id="pBulletinNumber" type="text" /> 
-		<br>
-		<label for="pBulletinDataFrom">	Data bulletinului de la:</label>	<input id="pBulletinDataFrom" type="text" />
-		<label for="pBulletinDataTo">	pana la:</label>					<input id="pBulletinDataTo" type="text" />
-		<label for="pApproveDataFrom">	Data aprobarii de la:</label>		<input id="pApproveDataFrom" type="text" />
-		<label for="pApproveDataTo">	pana la:</label>					<input id="pApproveDataTo" type="text" />
+		<label for="pBulletinDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Data bulletinului de la:</label>	
+			<input id="pBulletinDataFrom" />
+		<label for="pBulletinDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	pana la:</label>
+			<input id="pBulletinDataTo" />
+		<label for="pBulletinNumber" 	style="display:inline-block; width: 120px; text-align: right;">	Numarul bulletinului:</label>		
+			<input id="pBulletinNumber" type="text" class="k-widget" /> 			
+		<br>        		
+		<label for="pApproveDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Data aprobarii de la:</label>		
+			<input id="pApproveDataFrom" type="text" />
+		<label for="pApproveDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	pana la:</label>					
+			<input id="pApproveDataTo" type="text" />
 		<br>	
-		<label for="pGoodsDescription">	Obiectul de achizitie:</label>		<input id="pGoodsDescription" type="text" />
-		 <div class="form-buttons">
+		<label for="pGoodsDescription" 	style="display:inline-block; width: 150px; text-align: right;">	Obiectul de achizitie:</label>		
+			<input id="pGoodsDescription" type="text" class="k-widget" style="width: 350px;" />
+		 <div class="form-buttons" style="display: inline-block;">
+		 	<label style="display:inline-block; width: 250px; text-align: right;"></label>		
 		  	<input id="submitFilter" 	type="button" value="Apply Filter" />
 		  	<input id="resetFilter" 	type="button" value="Reset Filter" />
 		 </div>		
@@ -245,3 +331,68 @@ $(document).ready(function(){
 <!-- 		</tr>	 -->
 
 <!-- 	</table>  -->
+
+<!-- 		 $("#pIntentionStatus").autocomplete({ -->
+<!-- 			       source : function(request, response) { -->
+<!-- 			              $.ajax({ -->
+<!-- 			                   url : "json/intentionStatusList", -->
+<!-- 			                   dataType : "json", -->
+<!-- 			                   data : { -->
+<!-- 			                	   style: "full", -->
+<!-- 			                        maxRows: 12, -->
+<!-- 			                	   term : request.term -->
+<!-- 			                   }, -->
+<!-- 			                   success : function(data) { -->
+<!-- 			                       response($.map(data , function(item) { -->
+<!-- 			                           return { -->
+<!-- 			                               		label : getItemTranslation(item), -->
+<!-- 			                               		value : getItemTranslation(item) -->
+<!-- 			                           			}; -->
+<!-- 			                       			})); -->
+<!-- 			                   } -->
+<!-- 			               }); -->
+<!-- 			           }, -->
+<!-- 			           minLength : 0 -->
+<!-- 			       }).focus(function(e) { -->
+<!-- 			    	    if(!e.isTrigger) { -->
+<!-- 			    	    	$(this).autocomplete("search", ""); -->
+<!-- 			    	    } -->
+<!-- 			    	    e.stopPropagation(); -->
+<!-- 			       });	 -->
+	
+	
+
+	  
+	  
+<!-- 		 $("#pTenderType").autocomplete({ -->
+<!-- 			           source : function(request, response) { -->
+<!-- 			               $.ajax({ -->
+<!-- 			                   url : "json/tenderTypeList", -->
+<!-- 			                   dataType : "json", -->
+<!-- 			                   data : { -->
+<!-- 			                	   style: "full", -->
+<!-- 			                        maxRows: 12, -->
+<!-- 			                	   term : request.term -->
+<!-- 			                   }, -->
+<!-- 			                   success : function(data) { -->
+<!-- 			                       response($.map(data , function(item) { -->
+<!-- 			                           return { -->
+<!-- 			                               		label : getItemTranslation(item), -->
+<!-- 			                               		value : getItemTranslation(item) -->
+<!-- 			                           			}; -->
+<!-- 			                       			})); -->
+<!-- 			                   } -->
+<!-- 			               }); -->
+<!-- 			           }, -->
+<!-- 			           minLength : 0 -->
+<!-- 		}).focus(function(e) { -->
+<!-- 		   	    if(!e.isTrigger) { -->
+<!-- 		   	    	$(this).autocomplete("search", ""); -->
+<!-- 		   	    } -->
+<!-- 		   	    e.stopPropagation(); -->
+<!-- 		       });			 -->
+			
+		 
+
+
+		 

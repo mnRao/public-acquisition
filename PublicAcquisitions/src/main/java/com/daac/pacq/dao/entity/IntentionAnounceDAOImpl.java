@@ -57,14 +57,24 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 	@Override
 	public List<IntentionAnounce> 		search(Map<String, String[]> filtersMap){
 		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(IntentionAnounce.class);
-		crit.setMaxResults(100);
+
 		
-		crit.add( Restrictions.like("tenderType", "%AA%") );
+		crit.createCriteria("tenderType").add(Restrictions.eq("ruValue", "Licitaţie publică"));
+
+//		crit.setMaxResults(100);		
+//		crit.add( Restrictions.eq("tenderType.created", "Licitaţie publică") );
+//		List<Order> orders = session.createCriteria(Order.class)
+//			    .createCriteria("user")
+//			    	.add(eq("name", "fred"))
+//			    .list();
+//		session.createCriteria(DriversLicence.class)
+//		   .add(Expression.or(
+//		     Expression.eq("licenceClass.type", "Car"),
+//		     Expression.eq("licenceClass.type", "Motorbike")
+//		   )
+//		).list();
 		
-		 List<IntentionAnounce>  result = crit.list();
-		
-		
-		
+		List<IntentionAnounce>  result = crit.list();
 		return result;
 	}
 	
