@@ -11,7 +11,11 @@
 	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<title><spring:message code="label.title"/></title>
   
-  	<script src="resources/js/jquery-1.9.1.js"></script>
+<!--   	<script src="resources/js/jquery-1.9.1.js"></script> -->
+	<!-- jQuery JavaScript -->
+		<script src="resources/js/jquery.min.js"></script>
+
+  	
   	<script src="resources/js/jquery-ui-1.10.1.custom.js"></script>
   	<link 	href="resources/css/jquery-ui-1.10.1.custom.css" rel="stylesheet"  type="text/css" media="screen" />
   	
@@ -19,7 +23,19 @@
   	<script src="resources/js/grid.locale-en.js" 	type="text/javascript"></script>
 	<link 	href="resources/css/ui.jqgrid.css" 		rel="stylesheet" type="text/css" media="screen"  />	
   
+  
 	<link rel="stylesheet" href="resources/css/style.css" type="text/css" />
+	
+	
+	<!-- Common Kendo UI Web CSS -->
+	<link href="resources/styles/kendo.common.min.css" rel="stylesheet" />
+	<!-- Default Kendo UI Web theme CSS -->
+	<link href="resources/styles/kendo.default.min.css" rel="stylesheet" />
+	<!-- jQuery JavaScript -->
+	<!-- 	<script src="resources/js/jquery.min.js"></script> -->
+	<!-- Kendo UI Web combined JavaScript -->
+	<script src="resources/js/kendo.web.min.js"></script>
+	
 	
 	<script type="text/javascript">
 
