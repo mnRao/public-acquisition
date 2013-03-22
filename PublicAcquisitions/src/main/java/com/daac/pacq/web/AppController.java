@@ -60,13 +60,21 @@ public class AppController {
     	 return "blackList";    
     }    
     	     	 
+    @RequestMapping("/proceduricard")  
+    public String proceduricard(Map<String, Object> map, WebRequest request, Principal principal) {
+    	System.out.println("AppController - proceduricard ");    	
+    	 map.put("tenderId", request.getParameter("pid"));
+    	 return "proceduricard";    
+    }    
+    
     
     @RequestMapping("/index2") 
     public String index2(Map<String, Object> map, WebRequest request, Principal principal) {
     	System.out.println("AppController - index2 ");
     	 return "index2";
     } 
-       	    
+
+    
     
 	
 }

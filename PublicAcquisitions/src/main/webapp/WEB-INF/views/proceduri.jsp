@@ -31,7 +31,7 @@ $(document).ready(function(){
 	   	      	 '<spring:message code="label.goodsDescr"/>'],
 	   	colModel:[
 	   		{name:'id',								index:'id', 							width:200, hidden: true},
-	   		{name:'regNumber',						index:'regNumber', 						width:500},
+	   		{name:'regNumber',						index:'regNumber', 						width:500, formatter:cardLink  },
 	   		{name:'tenderType.'+curLangRef,			index:'tenderType.'+curLangRef,			width:500},
 	   		{name:'refTendeOpenDate',				index:'refTendeOpenDate', 				width:500},
 	   		{name:'stateOrg.orgName',				index:'stateOrg.orgName', 				width:500},
@@ -52,6 +52,11 @@ $(document).ready(function(){
 	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
 }); 
 
+
+	function cardLink(cellvalue, options, rowObject) {
+	   return '<a href="proceduricard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a>'	;
+	   };
+	   
 </script>
 <html>
 <center>

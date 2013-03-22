@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.daac.pacq.domain.ref.OrgLegalForm;
+import com.daac.pacq.domain.ref.PersonType;
 import com.daac.pacq.helpers.CustomDateSerializer;
 
 
@@ -30,8 +31,12 @@ public abstract class AbstractEconomicOperator {
     @Column(name = "DECISION_DATE")
     private Date 	decisionDate;
 
-    @Column(name = "JURISTIC_PERSON")
-    private Integer juristicPerson;
+//    @Column(name = "JURISTIC_PERSON")
+//    private Integer juristicPerson;
+  
+    @OneToOne
+    @JoinColumn(name="JURISTIC_PERSON", nullable=true)
+    private PersonType personType; 
     
     @Column(name = "CODE")
     private String code;    
@@ -96,13 +101,13 @@ public abstract class AbstractEconomicOperator {
 		this.decisionDate = decisionDate;
 	}
 
-	public Integer getJuristicPerson() {
-		return juristicPerson;
-	}
-
-	public void setJuristicPerson(Integer juristicPerson) {
-		this.juristicPerson = juristicPerson;
-	}
+//	public Integer getJuristicPerson() {
+//		return juristicPerson;
+//	}
+//
+//	public void setJuristicPerson(Integer juristicPerson) {
+//		this.juristicPerson = juristicPerson;
+//	}
 
 	public String getCode() {
 		return code;
@@ -201,7 +206,16 @@ public abstract class AbstractEconomicOperator {
 		this.orgLegalForm = orgLegalForm;
 	}
 
+	public PersonType getPersonType() {
+		return personType;
+	}
+
+	public void setPersonType(PersonType personType) {
+		this.personType = personType;
+	}
+
     
+	
 }
 
 
