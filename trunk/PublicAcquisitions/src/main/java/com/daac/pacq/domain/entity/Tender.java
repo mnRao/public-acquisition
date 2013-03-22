@@ -82,8 +82,12 @@ public class Tender {
     @Column(name = "COMPLAINT_COUNT")
     private Integer complaintCount;
     
-    @Column(name = "FK_OPEN_BULLETIN_ID")
-    private Integer fkOpenBulletinId;
+//    @Column(name = "FK_OPEN_BULLETIN_ID")
+//    private Integer fkOpenBulletinId;
+    
+    @OneToOne
+    @JoinColumn(name="FK_OPEN_BULLETIN_ID")
+    private Bulletin bulletin;
     
     @Column(name = "FK_ANNUL_BULLETIN_ID")
     private Integer fkAnnulBulletinId;
@@ -221,13 +225,13 @@ public class Tender {
 		this.complaintCount = complaintCount;
 	}
 
-	public Integer getFkOpenBulletinId() {
-		return fkOpenBulletinId;
-	}
-
-	public void setFkOpenBulletinId(Integer fkOpenBulletinId) {
-		this.fkOpenBulletinId = fkOpenBulletinId;
-	}
+//	public Integer getFkOpenBulletinId() {
+//		return fkOpenBulletinId;
+//	}
+//
+//	public void setFkOpenBulletinId(Integer fkOpenBulletinId) {
+//		this.fkOpenBulletinId = fkOpenBulletinId;
+//	}
 
 	public Integer getFkAnnulBulletinId() {
 		return fkAnnulBulletinId;
@@ -251,6 +255,14 @@ public class Tender {
 
 	public void setTenderData(TenderData tenderData) {
 		this.tenderData = tenderData;
+	}
+
+	public Bulletin getBulletin() {
+		return bulletin;
+	}
+
+	public void setBulletin(Bulletin bulletin) {
+		this.bulletin = bulletin;
 	}
 
 	

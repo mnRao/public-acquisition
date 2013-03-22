@@ -39,6 +39,9 @@
         <put-attribute name="body" 		value="/WEB-INF/views/blackList.jsp" />
     </definition>    
 
+    <definition name="proceduricard"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/proceduricard.jsp" />
+    </definition>
 
 
 

@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.daac.pacq.domain.entity.Tender;
 
@@ -26,7 +27,8 @@ public class TenderDAOImpl implements TenderDAO {
 	 */
 	@Override
 	public Tender get(Integer id) {
-		Tender result = (Tender)sessionFactory.getCurrentSession().load(Tender.class, id);
+		System.out.println("TenderDAOImpl.get() ---- id="+id);
+		Tender result = (Tender)sessionFactory.getCurrentSession().get(Tender.class, id);
 		return result;
 	}
 

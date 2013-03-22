@@ -37,7 +37,7 @@ $(document).ready(function(){
 	   		{name:'id',							index:'id', 							width:200, hidden: true},
 	   		{name:'decisionNumb',				index:'decisionNumb', 					width:500},
 	   		{name:'decisionDate',				index:'decisionDate',			 		width:500},
-	   		{name:'juristicPerson',				index:'juristicPerson',					width:500},
+	   		{name:'personType.'+curLangRef,		index:'personType.'+curLangRef,			width:500},
 	   		{name:'code',						index:'code',							width:500},
 	   		{name:'orgLegalForm.'+curLangRef,	index:'orgLegalForm.'+curLangRef,		width:500},
 	   		{name:'name',						index:'name',			 				width:500},

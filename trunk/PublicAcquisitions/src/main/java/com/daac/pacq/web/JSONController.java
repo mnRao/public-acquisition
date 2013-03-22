@@ -200,5 +200,16 @@ public class JSONController {
 	    	System.out.println("RECORDS RCVD = " + result.size());
 	    	FlexGridListWrapper<NotAllowedEconomicOperator> jdw = new FlexGridListWrapper<NotAllowedEconomicOperator>(1, result.size(), result);  
 	    	return jdw;  
-	    }		   
+	    }
+	   
+	   @RequestMapping(value="/tenderCard",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody Tender tenderCard(WebRequest request) { 
+		   System.out.println("JSONController - TENDER CARD for ID="+Integer.valueOf(request.getParameter("id")));
+	    	//System.out.println(request.toString());
+	    	Tender result = tenderService.get(Integer.valueOf(request.getParameter("id"))); 
+	    	//System.out.println("RECORDS RCVD = " + result.size());
+	    	//FlexGridListWrapper<Tender> jdw = new FlexGridListWrapper<Tender>(1, result.size(), result);  
+	    	 return result;  
+	    }	
+	   
 }

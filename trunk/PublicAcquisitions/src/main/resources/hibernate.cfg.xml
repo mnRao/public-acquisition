@@ -15,6 +15,9 @@
 		<mapping class="com.daac.pacq.domain.ref.ContractType" />
 		<mapping class="com.daac.pacq.domain.ref.Status" />
 		<mapping class="com.daac.pacq.domain.ref.Goods" />
+		<mapping class="com.daac.pacq.domain.ref.PersonType" />
+		<mapping class="com.daac.pacq.domain.ref.Language" />
+		<mapping class="com.daac.pacq.domain.ref.DeliveryTerms" />
 		
 		<mapping class="com.daac.pacq.domain.entity.BudgetPeriod" />
 		<mapping class="com.daac.pacq.domain.entity.StateOrg" />
@@ -29,6 +32,7 @@
 		<mapping class="com.daac.pacq.domain.entity.TenderDataShort" />
 		<mapping class="com.daac.pacq.domain.entity.Contract" />
 		<mapping class="com.daac.pacq.domain.entity.Participant" />
+		<mapping class="com.daac.pacq.domain.entity.Bulletin" />
 		
 		
 	</session-factory>

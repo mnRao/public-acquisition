@@ -1,5 +1,7 @@
 package com.daac.pacq.domain.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.daac.pacq.domain.ref.DeliveryTerms;
+import com.daac.pacq.domain.ref.Language;
 import com.daac.pacq.domain.ref.Status;
+import com.daac.pacq.helpers.CustomDateSerializer;
+import com.daac.pacq.helpers.CustomDateTimeSerializer;
 
 
 @Entity
@@ -30,6 +38,41 @@ public class TenderData {
     @JoinColumn(name="REF_CURRENT_STATUS_ID")
     private Status status;
     
+    @Column(name="FOR_WHO_PURCHASE")
+    private String forWhoPurchase;
+    
+//    @Column(name="REF_LANGUAGE_ID")
+//    private Integer refLanguageId;
+    
+    @OneToOne
+    @JoinColumn(name="REF_LANGUAGE_ID")
+    private Language language;
+    
+//  @Column(name="REF_DELIVERY_TERMS")
+//  private Integer refDeliveryTerms;
+  
+  @OneToOne
+  @JoinColumn(name="REF_DELIVERY_TERMS_ID")
+  private DeliveryTerms deliveryTerms;    
+    
+  @Column(name="PRES_OFFERS_PLACE")
+  private String pressOffersPlace;
+  
+  @Column(name="PRES_OFFERS_DATE")
+  private Date pressOffersDate;
+  
+  @Column(name="OPEN_DATE_TIME")
+  private Date openDateTime;
+  
+  @Column(name="DELIVERY_DATE")
+  private String deliveryDate;
+  
+  @Column(name="OFFER_ESTIMATE_BY_PRICE")
+  private Integer offerEstimateByPrice;
+  
+  @Column(name="FOR_RESIDENTS_ONLY_REASON")
+  private String forResidenceOnlyReason;
+  
 	public Integer getId() {
 		return id;
 	}
@@ -52,6 +95,80 @@ public class TenderData {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public String getForWhoPurchase() {
+		return forWhoPurchase;
+	}
+
+	public void setForWhoPurchase(String forWhoPurchase) {
+		this.forWhoPurchase = forWhoPurchase;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
+
+	public DeliveryTerms getDeliveryTerms() {
+		return deliveryTerms;
+	}
+
+	public void setDeliveryTerms(DeliveryTerms deliveryTerms) {
+		this.deliveryTerms = deliveryTerms;
+	}
+
+	public String getPressOffersPlace() {
+		return pressOffersPlace;
+	}
+
+	public void setPressOffersPlace(String pressOffersPlace) {
+		this.pressOffersPlace = pressOffersPlace;
+	}
+
+	@JsonSerialize (using = CustomDateTimeSerializer.class)
+	public Date getPressOffersDate() {
+		return pressOffersDate;
+	}
+
+	public void setPressOffersDate(Date pressOffersDate) {
+		this.pressOffersDate = pressOffersDate;
+	}
+
+	@JsonSerialize (using = CustomDateTimeSerializer.class)
+	public Date getOpenDateTime() {
+		return openDateTime;
+	}
+
+	public void setOpenDateTime(Date openDateTime) {
+		this.openDateTime = openDateTime;
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public Integer getOfferEstimateByPrice() {
+		return offerEstimateByPrice;
+	}
+
+	public void setOfferEstimateByPrice(Integer offerEstimateByPrice) {
+		this.offerEstimateByPrice = offerEstimateByPrice;
+	}
+
+	public String getForResidenceOnlyReason() {
+		return forResidenceOnlyReason;
+	}
+
+	public void setForResidenceOnlyReason(String forResidenceOnlyReason) {
+		this.forResidenceOnlyReason = forResidenceOnlyReason;
 	}
 
     

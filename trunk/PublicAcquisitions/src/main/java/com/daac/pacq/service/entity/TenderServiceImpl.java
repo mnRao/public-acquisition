@@ -17,7 +17,7 @@ public class TenderServiceImpl implements TenderService {
 	
 	@Transactional
 	public Tender		get(Integer id){
-		System.out.println("TenderServiceImpl - get");		
+		System.out.println("TenderServiceImpl - get ");		
 		return dao.get(id);
 	}
 	
