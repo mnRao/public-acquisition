@@ -18,6 +18,7 @@ import com.daac.pacq.domain.entity.IntentionAnounceStatus;
 import com.daac.pacq.domain.entity.NotAllowedEconomicOperator;
 import com.daac.pacq.domain.entity.QualifiedEconomicOperator;
 import com.daac.pacq.domain.entity.Tender;
+import com.daac.pacq.domain.entity.TenderPosition;
 import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
 import com.daac.pacq.domain.ref.TenderType;
@@ -28,6 +29,7 @@ import com.daac.pacq.service.entity.IntentionAnounceService;
 import com.daac.pacq.service.entity.IntentionAnounceStatusService;
 import com.daac.pacq.service.entity.NotAllowedEconomicOperatorService;
 import com.daac.pacq.service.entity.QualifiedEconomicOperatorService;
+import com.daac.pacq.service.entity.TenderPositionService;
 import com.daac.pacq.service.entity.TenderService;
 import com.daac.pacq.service.ref.IntentionStatusService;
 import com.daac.pacq.service.ref.PositionTypeService;
@@ -67,6 +69,9 @@ public class JSONController {
 	
 	@Autowired
 	private  QualifiedEconomicOperatorService qualifiedEconomicOperatorService; 
+	
+	@Autowired
+	private TenderPositionService 	tenderPositionService;
 	
 	
 	   @RequestMapping(value="/ping",  method = { RequestMethod.GET, RequestMethod.POST })
@@ -211,5 +216,16 @@ public class JSONController {
 	    	//FlexGridListWrapper<Tender> jdw = new FlexGridListWrapper<Tender>(1, result.size(), result);  
 	    	 return result;  
 	    }	
+	   
+	   
+	   @RequestMapping(value="/positionList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody FlexGridListWrapper<TenderPosition> positionList(WebRequest request) { 
+		   System.out.println("JSONController - TENDER POSITION LIST for TenderDataId="+request.getParameter("id"));
+	    	System.out.println(request.toString());
+	    	List<TenderPosition> result = tenderPositionService.list(Integer.valueOf(request.getParameter("id"))); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	FlexGridListWrapper<TenderPosition> jdw = new FlexGridListWrapper<TenderPosition>(1, result.size(), result);  
+	    	return jdw;  
+	    }
 	   
 }

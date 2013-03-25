@@ -11,6 +11,7 @@
 $(document).ready(function(){
 	
 	var pid = ${tenderId};
+	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';	
 	
 // 	$.ajax({
@@ -46,7 +47,49 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
   $("#deliveryTerms").val(card.tenderData.deliveryTerms.ruValue);
   $("#offerEstimateByPrice").val(card.tenderData.offerEstimateByPrice);		
   $("#forResidenceOnlyReason").val(card.tenderData.forResidenceOnlyReason);
+  
+  $("#list").jqGrid('setGridParam', { postData: { id:card.tenderData.id} , datatype: 'json'}).trigger('reloadGrid');
+ 
+  
 });
+
+
+$("#list").jqGrid({
+	jsonReader : {
+	      root:"rows",
+	      page: "page",
+	      total: "total",
+	      records: "records",
+	      repeatitems: false,
+	      id: "0"
+	   },	
+   	url:'json/positionList',
+	datatype: "local",
+	mtype: 'POST',
+	
+   	colNames:[	'#',
+   	      	 'goodsName',
+   	      	 'code',
+   	      	 'quantity',
+   	      	 'um'],
+   	colModel:[
+   		{name:'id',								index:'id', 							width:200, hidden: true},
+   		{name:'goodsName',						index:'goodsName', 						width:500},
+   		{name:'goods.code',						index:'goods.code',						width:500},
+   		{name:'quantity',						index:'quantity', 						width:500},
+   		{name:'unitMeasure.'+curLangRef,		index:'unitMeasure.'+curLangRef,		width:500}
+   	],
+   	rowNum:10,
+   	rowList:[10,20,30],
+   	//pager: '#pager',
+   	sortname: 'id',
+    viewrecords: true,
+    sortorder: "desc",
+    caption:'',
+    width: w,
+    height: 300
+});
+
 	
 
 });
@@ -76,31 +119,31 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 <table id="t1" border="1" width="98%">
 
 <tr>
-<td width="20%" align="right"><spring:message code="label.procedureRegNumber"/>
+<td width="20%" align="right" ><spring:message code="label.procedureRegNumber"/>
 </td>
-<td width="29%" align="center"> <input id="regNumber" type="text" style="width: 90%;">	
+<td width="29%" align="center"> <input id="regNumber" type="text" style="width: 90%;" readonly="readonly">	
 </td>
 <td width="20%" align="right"><spring:message code="label.currentStatus"/>
 </td>
-<td width="29%" align="center"> <input id="tenderStatus" type="text" style="width: 90%;">	
+<td width="29%" align="center"> <input id="tenderStatus" type="text" style="width: 90%;" readonly="readonly">	
 </td>
 </tr>
 
 <tr>
 <td width="20%" align="right"><spring:message code="label.bulletinNumber"/>
 </td>
-<td width="29%" align="center"> <input id="bulletinNumber" type="text" style="width: 90%;">	
+<td width="29%" align="center"> <input id="bulletinNumber" type="text" style="width: 90%;" readonly="readonly">	
 </td>
 <td width="20%" align="right"><spring:message code="label.bulletinDate"/>
 </td>
-<td width="29%" align="center"> <input id="bulletinDate" type="text" style="width: 90%;">	
+<td width="29%" align="center"> <input id="bulletinDate" type="text" style="width: 90%;" readonly="readonly">	
 </td>
 </tr>
 
 <tr>
 <td width="20%" align="right"><spring:message code="label.goodsDescr"/>
 </td>
-<td  align="center" colspan="3"> <input id="goodsDescr" type="text" style="width: 96%;">	
+<td  align="center" colspan="3"> <input id="goodsDescr" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
@@ -113,14 +156,14 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 <tr>
 <td width="20%" align="right"><spring:message code="label.pressOffersPlace"/>
 </td>
-<td  align="center" colspan="3"> <input id="pressOffersPlace" type="text" style="width: 96%;">	
+<td  align="center" colspan="3"> <input id="pressOffersPlace" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
 <tr>
 <td width="20%" align="right"><spring:message code="label.pressOffersDate"/>
 </td>
-<td width="29%" align="center"> <input id="pressOffersDate" type="text" style="width: 90%;">	
+<td width="29%" align="center"> <input id="pressOffersDate" type="text" style="width: 90%;" readonly="readonly">	
 </td>
 <td width="20%" align="right">
 </td>
@@ -131,11 +174,11 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 <tr>
 <td width="20%" align="right"><spring:message code="label.openDateTime"/>
 </td>
-<td width="29%" align="center"> <input id="openDateTime" type="text" style="width: 90%;">	
+<td width="29%" align="center"> <input id="openDateTime" type="text" style="width: 90%;" readonly="readonly">	
 </td>
 <td width="20%" align="right"><spring:message code="label.language"/>
 </td>
-<td width="29%" align="center"> <input id="language" type="text" style="width: 90%;">	
+<td width="29%" align="center"> <input id="language" type="text" style="width: 90%;" readonly="readonly">	
 </td>
 </tr>
 
@@ -150,21 +193,21 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 <tr>
 <td width="20%" align="right"><spring:message code="label.name"/>
 </td>
-<td width="80%" align="center"> <input id="name" type="text" style="width: 96%;">	
+<td width="80%" align="center"> <input id="name" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
 <tr>
 <td width="20%" align="right"><spring:message code="label.address"/>
 </td>
-<td width="80%" align="center"> <input id="address" type="text" style="width: 96%;">	
+<td width="80%" align="center"> <input id="address" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
 <tr>
 <td width="20%" align="right"><spring:message code="label.phone"/>
 </td>
-<td  width="80%" align="center"> <input id="phone" type="text" style="width: 96%;">	
+<td  width="80%" align="center"> <input id="phone" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
@@ -177,31 +220,38 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 <tr>
 <td width="20%" align="right"><spring:message code="label.deliveryDate"/>
 </td>
-<td width="80%" align="center"> <input id="deliveryDate" type="text" style="width: 96%;">	
+<td width="80%" align="center"> <input id="deliveryDate" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
 <tr>
 <td width="20%" align="right"><spring:message code="label.deliveryTerms"/>
 </td>
-<td width="80%" align="center"> <input id="deliveryTerms" type="text" style="width: 96%;">	
+<td width="80%" align="center"> <input id="deliveryTerms" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
 <tr>
 <td width="20%" align="right"><spring:message code="label.offerEstimateByPrice"/>
 </td>
-<td  width="80%" align="center"> <input id="offerEstimateByPrice" type="text" style="width: 96%;">	
+<td  width="80%" align="center"> <input id="offerEstimateByPrice" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
 <tr>
 <td width="20%" align="right"><spring:message code="label.forResidenceOnlyReason"/>
 </td>
-<td  width="80%" align="center"> <input id="forResidenceOnlyReason" type="text" style="width: 96%;">	
+<td  width="80%" align="center"> <input id="forResidenceOnlyReason" type="text" style="width: 96%;" readonly="readonly">	
 </td>
 </tr>
 
+</table>
+
+<br><hr width="90%"><br>
+
+<table id="list">
+<thead style="background-color: #7196B0"/>
+<tr><td/></tr>
 </table>
 
 </center>

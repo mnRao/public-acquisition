@@ -18,6 +18,7 @@
 		<mapping class="com.daac.pacq.domain.ref.PersonType" />
 		<mapping class="com.daac.pacq.domain.ref.Language" />
 		<mapping class="com.daac.pacq.domain.ref.DeliveryTerms" />
+		<mapping class="com.daac.pacq.domain.ref.UnitMeasure" />
 		
 		<mapping class="com.daac.pacq.domain.entity.BudgetPeriod" />
 		<mapping class="com.daac.pacq.domain.entity.StateOrg" />
@@ -33,6 +34,7 @@
 		<mapping class="com.daac.pacq.domain.entity.Contract" />
 		<mapping class="com.daac.pacq.domain.entity.Participant" />
 		<mapping class="com.daac.pacq.domain.entity.Bulletin" />
+		<mapping class="com.daac.pacq.domain.entity.TenderPosition" />
 		
 		
 	</session-factory>
