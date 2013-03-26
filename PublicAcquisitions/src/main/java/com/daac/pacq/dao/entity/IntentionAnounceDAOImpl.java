@@ -3,6 +3,7 @@
  */
 package com.daac.pacq.dao.entity;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -56,9 +57,36 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<IntentionAnounce> 		search(Map<String, String[]> filtersMap){
+		System.out.println("IntentionAnounceDAOImpl - search");
+		
 		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(IntentionAnounce.class);
 
+//		filters[fIntentionStatus]5
+//		filters[fBulletinDataTo]
+//		filters[fApproveDataTo]
+//		filters[fStateOrg]
+//		filters[fBulletinDataFrom]
+//		filters[fApproveDataFrom]
+//		filters[fTenderType]
+//		filters[fBulletinNumber]
+//		filters[fGoodsDescription]
+//		filters[fForWhoPurchase]
+//								
+//		sidx
+//		rows
+//		sord
+//		page
+//		nd
+//		_search
 		
+		
+		for (Map.Entry<String, String[]> entry : filtersMap.entrySet())
+		{
+		    System.out.println(entry.getKey() + "/" + entry.getValue()[0]);
+		    
+		}
+		
+		   
 		crit.createCriteria("tenderType").add(Restrictions.eq("ruValue", "Licitaţie publică"));
 
 //		crit.setMaxResults(100);		

@@ -36,6 +36,10 @@ import com.daac.pacq.service.ref.PositionTypeService;
 import com.daac.pacq.service.ref.TenderTypeService;
 
 
+/**
+ * @author Serghey.Golub
+ *
+ */
 @Controller 
 @RequestMapping("/json")
 public class JSONController {
@@ -136,7 +140,13 @@ public class JSONController {
 	    	 return jdw;  
 	    }		
 	   
-	   @RequestMapping(value="/intentionAnounceList",  method = { RequestMethod.GET, RequestMethod.POST })
+	   
+    /**
+     * Handle "json/intentionAnounceList" - for INTENTION ANOUNCE PAGINATED FILTERED LIST
+	 * @param request - Web request from jqGrid, what contains all pagination and filtration paramenters. 
+	 * @return JSON - serialised list of INTENTION ANOUNCE
+	 */
+	@RequestMapping(value="/intentionAnounceList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody FlexGridListWrapper<IntentionAnounce> intentionAnounceList(WebRequest request) { 
 		   System.out.println("JSONController - INTENTION ANOUNCE LIST");
 		   System.out.println(request.toString());
