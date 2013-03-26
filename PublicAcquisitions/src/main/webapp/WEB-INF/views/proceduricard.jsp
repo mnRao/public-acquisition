@@ -13,6 +13,7 @@ $(document).ready(function(){
 	var pid = ${tenderId};
 	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';	
+	var curLang = "${pageContext.response.locale}";	
 	
 // 	$.ajax({
 // 		  dataType: "json",
@@ -29,7 +30,17 @@ $(document).ready(function(){
 var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 //   $("#zzz").val(card.id);
   $("#regNumber").val(card.regNumber);
-  $("#tenderStatus").val(card.tenderStatus.ruValue);
+  //$("#tenderStatus").val(card.tenderStatus.ruValue);
+  switch (curLang)
+  {
+    case "ru": $("#tenderStatus").val(card.tenderStatus.ruValue);
+                      break;
+    case "ro": $("#tenderStatus").val(card.tenderStatus.roValue);
+                      break;
+    case "en": $("#tenderStatus").val(card.tenderStatus.enValue);
+                      break;
+    default: $("#tenderStatus").val(card.tenderStatus.ruValue);
+  }
   $("#bulletinNumber").val(card.bulletin.bulletinNumb);
   $("#bulletinDate").val(card.bulletin.publDate);		
   $("#goodsDescr").val(card.tenderData.goodsDescr);		
@@ -37,14 +48,32 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
   $("#pressOffersPlace").val(card.tenderData.pressOffersPlace);	
   $("#pressOffersDate").val(card.tenderData.pressOffersDate);
   $("#openDateTime").val(card.tenderData.openDateTime);		
-  $("#language").val(card.tenderData.language.ruValue);
+  //$("#language").val(card.tenderData.language.ruValue);
+  switch (curLang)  {
+    case "ru": $("#language").val(card.tenderData.language.ruValue);
+                      break;
+    case "ro": $("#language").val(card.tenderData.language.roValue);
+                      break;
+    case "en": $("#language").val(card.tenderData.language.enValue);
+                      break;
+    default: $("#language").val(card.tenderData.language.ruValue);
+  }
   
   $("#name").val(card.stateOrg.orgName);
   $("#address").val(card.stateOrg.address);		
   $("#phone").val(card.stateOrg.phone);
   
   $("#deliveryDate").val(card.tenderData.deliveryDate);	
-  $("#deliveryTerms").val(card.tenderData.deliveryTerms.ruValue);
+  //$("#deliveryTerms").val(card.tenderData.deliveryTerms.ruValue);
+  switch (curLang)  {
+	case "ru": $("#deliveryTerms").val(card.tenderData.deliveryTerms.ruValue);
+	                    break;
+	case "ro": $("#deliveryTerms").val(card.tenderData.deliveryTerms.roValue);
+	                    break;
+	case "en": $("#deliveryTerms").val(card.tenderData.deliveryTerms.enValue);
+	                    break;
+	default: $("#deliveryTerms").val(card.tenderData.deliveryTerms.ruValue);
+  }
   $("#offerEstimateByPrice").val(card.tenderData.offerEstimateByPrice);		
   $("#forResidenceOnlyReason").val(card.tenderData.forResidenceOnlyReason);
   
