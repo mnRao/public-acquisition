@@ -17,6 +17,7 @@ import com.daac.pacq.domain.entity.IntentionAnounce;
 import com.daac.pacq.domain.entity.IntentionAnounceStatus;
 import com.daac.pacq.domain.entity.NotAllowedEconomicOperator;
 import com.daac.pacq.domain.entity.QualifiedEconomicOperator;
+import com.daac.pacq.domain.entity.Question;
 import com.daac.pacq.domain.entity.Tender;
 import com.daac.pacq.domain.entity.TenderPosition;
 import com.daac.pacq.domain.ref.IntentionStatus;
@@ -29,6 +30,7 @@ import com.daac.pacq.service.entity.IntentionAnounceService;
 import com.daac.pacq.service.entity.IntentionAnounceStatusService;
 import com.daac.pacq.service.entity.NotAllowedEconomicOperatorService;
 import com.daac.pacq.service.entity.QualifiedEconomicOperatorService;
+import com.daac.pacq.service.entity.QuestionService;
 import com.daac.pacq.service.entity.TenderPositionService;
 import com.daac.pacq.service.entity.TenderService;
 import com.daac.pacq.service.ref.IntentionStatusService;
@@ -76,6 +78,9 @@ public class JSONController {
 	
 	@Autowired
 	private TenderPositionService 	tenderPositionService;
+	
+	@Autowired
+	private QuestionService			questionService;
 	
 	
 	   @RequestMapping(value="/ping",  method = { RequestMethod.GET, RequestMethod.POST })
@@ -235,6 +240,17 @@ public class JSONController {
 	    	List<TenderPosition> result = tenderPositionService.list(Integer.valueOf(request.getParameter("id"))); 
 	    	System.out.println("RECORDS RCVD = " + result.size());
 	    	FlexGridListWrapper<TenderPosition> jdw = new FlexGridListWrapper<TenderPosition>(1, result.size(), result);  
+	    	return jdw;  
+	    }
+	   
+	   @RequestMapping(value="/explicatiiList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody FlexGridListWrapper<Question> explicatiiList(WebRequest request) { 
+		   System.out.println("JSONController - TENDER EXPICATION LIST for TenderId="+request.getParameter("id"));
+	    	System.out.println(request.toString());
+	    	List<Question> result = questionService.list(Integer.valueOf(request.getParameter("id"))); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	FlexGridListWrapper<Question> jdw = new FlexGridListWrapper<Question>(1, result.size(), result); 
+	    	//List<Question> jdw = new Lis<Question>(1, result.size(), result);
 	    	return jdw;  
 	    }
 	   

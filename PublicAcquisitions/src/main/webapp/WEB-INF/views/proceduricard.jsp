@@ -77,6 +77,8 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
   $("#offerEstimateByPrice").val(card.tenderData.offerEstimateByPrice);		
   $("#forResidenceOnlyReason").val(card.tenderData.forResidenceOnlyReason);
   
+  $("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+card.bulletin.publDate+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
+  $("#explicatiiLink").html('<a href=explicatii?pid='+card.id+'><img src="resources/images/vopros-icon.gif" /></a>');
   $("#list").jqGrid('setGridParam', { postData: { id:card.tenderData.id} , datatype: 'json'}).trigger('reloadGrid');
  
   
@@ -97,10 +99,10 @@ $("#list").jqGrid({
 	mtype: 'POST',
 	
    	colNames:[	'#',
-   	      	 'goodsName',
-   	      	 'code',
-   	      	 'quantity',
-   	      	 'um'],
+   	      	 '<spring:message code="label.goodsName"/>',
+   	      	 '<spring:message code="label.codeCPV"/>',
+   	      	 '<spring:message code="label.quantity"/>',
+   	      	 '<spring:message code="label.um"/>'],
    	colModel:[
    		{name:'id',								index:'id', 							width:200, hidden: true},
    		{name:'goodsName',						index:'goodsName', 						width:500},
@@ -127,13 +129,12 @@ $("#list").jqGrid({
 <html>
 <center>
 
-
 <table id="t0" border="1" width="100%" height=14 cellspacing="0" cellpadding="0" style="background-color: #708EA7; ">
 
 <tr>
-<td width="93%" align="center">aaa
+<td width="93%" align="center" valign="middle"><div id="headerLine"></div>
 </td>
-<td width="2%" align="center"><img src="resources/images/vopros-icon.gif" />
+<td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div>
 </td>
 <td width="2%" align="center"><img src="resources/images/contracte-icon.gif" />
 </td>
@@ -144,6 +145,10 @@ $("#list").jqGrid({
 </tr>
 
 </table>
+
+<br>
+<spring:message code="label.commonInfo"/>
+<hr width="90%"><br>
 
 <table id="t1" border="1" width="98%">
 
@@ -276,6 +281,8 @@ $("#list").jqGrid({
 
 </table>
 
+<br>
+<spring:message code="label.commonInfo"/>
 <br><hr width="90%"><br>
 
 <table id="list">

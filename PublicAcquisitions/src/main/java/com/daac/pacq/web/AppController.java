@@ -67,6 +67,13 @@ public class AppController {
     	 return "proceduricard";    
     }      
     
+    @RequestMapping("/explicatii") 
+    public String explicatii(Map<String, Object> map, WebRequest request, Principal principal) {
+    	System.out.println("AppController - explicatii ");
+    	map.put("tenderId", request.getParameter("pid"));
+    	 return "explicatii";    
+    }    
+    
     @RequestMapping("/index2") 
     public String index2(Map<String, Object> map, WebRequest request, Principal principal) {
     	System.out.println("AppController - index2 ");
