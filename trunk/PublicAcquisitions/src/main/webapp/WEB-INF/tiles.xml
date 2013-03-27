@@ -43,6 +43,9 @@
         <put-attribute name="body" 		value="/WEB-INF/views/proceduricard.jsp" />
     </definition>
 
+    <definition name="explicatii"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/explicatii.jsp" />
+    </definition>
 
 
 
