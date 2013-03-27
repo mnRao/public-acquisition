@@ -14,7 +14,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
+import com.daac.pacq.domain.ref.Goods;
 import com.daac.pacq.domain.ref.TenderType;
 import com.daac.pacq.helpers.CustomDateSerializer;
 
@@ -95,8 +98,14 @@ public class IntentionAnounce {
     @Column(name = "PUBLISH_DATE")
     private Date 			publishDate;
     
-    @Column(name = "REF_GOODS_ID")
-    private Integer 		refGoodsId;
+    
+//    @Column(name = "REF_GOODS_ID")
+//    private Integer 		refGoodsId;
+    @OneToOne
+    @JoinColumn(name="REF_GOODS_ID")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Goods goods;
+    
 
     @Column(name = "FK_BULLETIN_ID")
     private Integer 		fkBulletinId;
@@ -269,17 +278,27 @@ public class IntentionAnounce {
 		this.publishDate = publishDate;
 	}
 
-	public Integer getRefGoodsId() {
-		return refGoodsId;
+//	public Integer getRefGoodsId() {
+//		return refGoodsId;
+//	}
+//
+//	public void setRefGoodsId(Integer refGoodsId) {
+//		this.refGoodsId = refGoodsId;
+//	}
+	public Goods getGoods() {
+		return goods;
 	}
 
-	public void setRefGoodsId(Integer refGoodsId) {
-		this.refGoodsId = refGoodsId;
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
 
+	
+	
 	public Integer getFkBulletinId() {
 		return fkBulletinId;
 	}
+
 
 	public void setFkBulletinId(Integer fkBulletinId) {
 		this.fkBulletinId = fkBulletinId;

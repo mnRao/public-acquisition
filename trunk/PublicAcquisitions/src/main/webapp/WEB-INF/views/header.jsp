@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="tiles" 	uri="http://tiles.apache.org/tags-tiles" %>
+
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page language="java" pageEncoding="utf-8"%>
+
+<script type="text/javascript">
+	function setMenuSelection(activateMenuItemName){
+		$("#intentii").css( "background-color", "#FF0000" )
+	}		
+	
+</script>
 
 <a href="#" id="logo">
 	<img src="resources/images/logo.png" height="46px" width="35px"/>
@@ -27,12 +35,12 @@
 	</div>
 </div>
 <div id="menu-container">
-	<a href="proceduri">			<spring:message code="label.module_name.proceduri"/></a>
-	<a href="intentii">				<spring:message code="label.module_name.intentii"/></a>
-	<a href="contracte">			<spring:message code="label.module_name.contracte"/></a>
-	<a href="contestatii">			<spring:message code="label.module_name.contestatii"/></a>
-	<a href="whiteList">			<spring:message code="label.module_name.whiteList"/></a>
-    <a href="blackList">			<spring:message code="label.module_name.blackList"/></a>
+	<a id="proceduri" 	href="proceduri" >			<spring:message code="label.module_name.proceduri"/></a>
+	<a id="intentii" 	href="intentii">				<spring:message code="label.module_name.intentii"/></a>
+	<a id="contracte" 	href="contracte">			<spring:message code="label.module_name.contracte"/></a>
+	<a id="contestatii" href="contestatii">			<spring:message code="label.module_name.contestatii"/></a>
+	<a id="whiteList" 	href="whiteList">			<spring:message code="label.module_name.whiteList"/></a>
+    <a id="blackList"	href="blackList">			<spring:message code="label.module_name.blackList"/></a>
           <div id='help'>
           	<a href='#'>
               	<img src='resources/images/help_icon.gif'/>

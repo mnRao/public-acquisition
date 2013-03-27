@@ -6,6 +6,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+	$("#currentContentPageName").val("intentii");
+	setMenuSelection("df");
+	
 	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
@@ -54,7 +57,8 @@ $(document).ready(function(){
 		   			'<spring:message code="label.summa"/>',
 		   			'<spring:message code="label.bulletinDate"/>',
 		   			'<spring:message code="label.bulletinNumber"/>',
-		   			'<spring:message code="label.currentStatus"/>'],
+		   			'<spring:message code="label.currentStatus"/>',
+		   			'test'],
 	   	colModel:[
 	   		{name:'id',						index:'id', 					width:200, hidden: true},
 	   		{name:'regNumber',				index:'regNumber', 				width:500},
@@ -67,7 +71,10 @@ $(document).ready(function(){
 	   		{name:'bulletinNumber',			index:'bulletinNumber', 		width:500},
 	   		{name:'currentStatus.intentionStatus.'+curLangRef,		
 	   										index:'currentStatus.intentionStatus.'+curLangRef, 		
-	   																		width:500}
+	   																		width:500},
+			{name:'forWhoPurchase',			index:'forWhoPurchase', 		width:500}	   																		
+	   																			   																		
+	   																		
 	   	],
 	   	rowNum:10,
 	   	rowList:[10,20,30],
@@ -101,10 +108,23 @@ $(document).ready(function(){
  /* ------------------ FILTERS FUNCTION ----------------- */	  
  	
 	$("#resetFilter").click(function(){
-		$("#pIntentionStatus").val("");
-		$("#pTenderType").val("");
+		//$("#pIntentionStatus").val("");
+		//$("#pTenderType").val("");
+		
+		$("#pIntentionStatus").data("kendoComboBox").select(-1);
+		$("#pIntentionStatus").data("kendoComboBox").value("-- // --");
+		$("#pTenderType").data("kendoComboBox").select(-1);
+		$("#pTenderType").data("kendoComboBox").value("-- // --");		
+		
 		$("#pStateOrg").val("");
 		$("#pForWhoPurchase").val("");
+		$("#pBulletinNumber").val("");
+		$("#pGoodsDescription").val("");
+		
+		$("#pBulletinDataFrom").data("kendoDatePicker").value(null);
+		$("#pBulletinDataTo").data("kendoDatePicker").value(null);
+		$("#pApproveDataFrom").data("kendoDatePicker").value(null);
+		$("#pApproveDataTo").data("kendoDatePicker").value(null);
 		
 		$("#list").trigger("reloadGrid");
 	});
@@ -310,87 +330,6 @@ $(document).ready(function(){
 </center>
 </html>
 
-
-<!-- 	<table id="prm"  -->
-<!-- 		style="width: 98%; background-color: #DBD5D6; border: solid; border-width: 1px; border-color: #000000" > -->
-<!-- 		<tr valign="middle"> -->
-<!-- 			<td align="right" style="width:120px;">Deschiderea de la:</td> -->
-<!-- 			<td style="width:100px;"><input type="text" id="pOpenFrom" style="width: 80px; text-align: center;" ></td> -->
-<!-- 			<td align="right" style="width: 5em; text-align: center;" >pina la:</td> -->
-<!-- 			<td style="width:100px;"><input type="text" id="pOpenTo" style="width: 80px; text-align: center;" ></td> -->
-			
-<!-- 			<td align="right">Statutul procedurii </td> -->
-<!-- 			<td><input type="text" id="pIntentionStatus" style="width: 98%;" ></td> -->
-			
-<!-- 			<td style="width:30px;"><input id="btApplyFilter" type="button" value="Filtreaza"></td> -->
-<!-- 		</tr> -->
-<!-- 		<tr valign="middle"> -->
-<!-- 			<td align="right">Bun sau serviciu:</td> -->
-<!-- 			<td colspan="5"><input type="text" id="pGoodsName" style="width: 99%;" ></td>						 -->
-<!-- 			<td><input id="btResetFilter" type="button" value="Curata filtru"></td> -->
-<!-- 		</tr>	 -->
-
-<!-- 	</table>  -->
-
-<!-- 		 $("#pIntentionStatus").autocomplete({ -->
-<!-- 			       source : function(request, response) { -->
-<!-- 			              $.ajax({ -->
-<!-- 			                   url : "json/intentionStatusList", -->
-<!-- 			                   dataType : "json", -->
-<!-- 			                   data : { -->
-<!-- 			                	   style: "full", -->
-<!-- 			                        maxRows: 12, -->
-<!-- 			                	   term : request.term -->
-<!-- 			                   }, -->
-<!-- 			                   success : function(data) { -->
-<!-- 			                       response($.map(data , function(item) { -->
-<!-- 			                           return { -->
-<!-- 			                               		label : getItemTranslation(item), -->
-<!-- 			                               		value : getItemTranslation(item) -->
-<!-- 			                           			}; -->
-<!-- 			                       			})); -->
-<!-- 			                   } -->
-<!-- 			               }); -->
-<!-- 			           }, -->
-<!-- 			           minLength : 0 -->
-<!-- 			       }).focus(function(e) { -->
-<!-- 			    	    if(!e.isTrigger) { -->
-<!-- 			    	    	$(this).autocomplete("search", ""); -->
-<!-- 			    	    } -->
-<!-- 			    	    e.stopPropagation(); -->
-<!-- 			       });	 -->
-	
-	
-
-	  
-	  
-<!-- 		 $("#pTenderType").autocomplete({ -->
-<!-- 			           source : function(request, response) { -->
-<!-- 			               $.ajax({ -->
-<!-- 			                   url : "json/tenderTypeList", -->
-<!-- 			                   dataType : "json", -->
-<!-- 			                   data : { -->
-<!-- 			                	   style: "full", -->
-<!-- 			                        maxRows: 12, -->
-<!-- 			                	   term : request.term -->
-<!-- 			                   }, -->
-<!-- 			                   success : function(data) { -->
-<!-- 			                       response($.map(data , function(item) { -->
-<!-- 			                           return { -->
-<!-- 			                               		label : getItemTranslation(item), -->
-<!-- 			                               		value : getItemTranslation(item) -->
-<!-- 			                           			}; -->
-<!-- 			                       			})); -->
-<!-- 			                   } -->
-<!-- 			               }); -->
-<!-- 			           }, -->
-<!-- 			           minLength : 0 -->
-<!-- 		}).focus(function(e) { -->
-<!-- 		   	    if(!e.isTrigger) { -->
-<!-- 		   	    	$(this).autocomplete("search", ""); -->
-<!-- 		   	    } -->
-<!-- 		   	    e.stopPropagation(); -->
-<!-- 		       });			 -->
 			
 		 
 

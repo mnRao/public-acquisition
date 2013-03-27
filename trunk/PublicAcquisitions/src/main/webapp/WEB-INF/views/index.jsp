@@ -38,7 +38,7 @@
 	
 	
 	<script type="text/javascript">
-
+		
 	
 	</script>
 	
@@ -56,6 +56,7 @@
 
 	<footer id="footer">
 		<tiles:insertAttribute name="footer" />
+		<input id="currentContentPageName" value="">
 	</footer><!-- #footer -->
 </body>
 </html>
