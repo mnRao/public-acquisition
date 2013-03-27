@@ -7,6 +7,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+	$("#currentContentPageName").val("proceduri");
 	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
