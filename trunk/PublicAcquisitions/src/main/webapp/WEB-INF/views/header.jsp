@@ -8,7 +8,8 @@
 
 <script type="text/javascript">
 	function setMenuSelection(activateMenuItemName){
-		$("#intentii").css( "background-color", "#FF0000" )
+		$("#intentii").css( "background-color", "#FF0000" );
+		
 	}		
 	
 </script>
