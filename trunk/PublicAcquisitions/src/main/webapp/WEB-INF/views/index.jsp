@@ -16,8 +16,8 @@
 		<script src="resources/js/jquery-1.8.2.js"></script>
 
   	
-  	<script src="resources/js/jquery-ui-1.10.2.custom.js"></script>
-  	<link 	href="resources/css/jquery-ui-1.10.2.custom.css" rel="stylesheet"  type="text/css" media="screen" />
+  	<script src="resources/js/jquery-ui-1.10.1.custom.js"></script>
+  	<link 	href="resources/css/jquery-ui-1.10.1.custom.css" rel="stylesheet"  type="text/css" media="screen" />
   	
   	<script src="resources/js/jquery.jqGrid.min.js" type="text/javascript"></script>
   	<script src="resources/js/grid.locale-en.js" 	type="text/javascript"></script>
@@ -56,7 +56,7 @@
 
 	<footer id="footer">
 		<tiles:insertAttribute name="footer" />
-		<input id="currentContentPageName" value="">
+<!-- 		<input id="currentContentPageName" value=""> -->
 	</footer><!-- #footer -->
 </body>
 </html>

@@ -6,7 +6,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-	$("#currentContentPageName").val("intentii");
+//	$("#currentContentPageName").val("intentii");
 	setMenuSelection("intentii");
 	
 	var w = screen.width*0.98;

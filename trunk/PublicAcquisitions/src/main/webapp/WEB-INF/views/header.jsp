@@ -8,7 +8,25 @@
 
 <script type="text/javascript">
 	function setMenuSelection(activateMenuItemName){
-		$("#intentii").css( "background-color", "#FF0000" );
+		if (activateMenuItemName=="intentii") {
+			$("#intentii").css( "background", "#990066" );	
+		}
+		
+		if (activateMenuItemName=="proceduri") {
+			$("#proceduri").css( "background", "#990066" );	
+		} 
+		
+		if (activateMenuItemName=="contracte") {
+			$("#contracte").css( "background", "#990066" );	
+		} 		
+		
+		if (activateMenuItemName=="whiteList") {
+			$("#whiteList").css( "background", "#990066" );	
+		}
+		
+		if (activateMenuItemName=="blackList") {
+			$("#blackList").css( "background", "#990066" );	
+		}
 		
 	}		
 	
