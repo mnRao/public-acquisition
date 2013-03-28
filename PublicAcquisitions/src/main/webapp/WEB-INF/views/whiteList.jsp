@@ -8,6 +8,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+	setMenuSelection("whiteList");
 	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
