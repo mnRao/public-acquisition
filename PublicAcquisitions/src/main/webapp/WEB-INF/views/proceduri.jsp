@@ -49,10 +49,105 @@ $(document).ready(function(){
 	    sortorder: "desc",
 	    caption:'',
 	    width: w,
-	    height: 300
+	    height: 300,
+	    postData: 	{ filters:{	
+	    	fTenderStatus:				function() { return getKendoComboBoxSelectedValue($('#pTenderStatus').data("kendoComboBox"));}, 
+	    	fProcedureOpenDataFrom:		function() { return $('#pProcedureOpenDataFrom').val(); }, 
+	    	fProcedureOpenDataTo:		function() { return $('#pProcedureOpenDataTo').val(); }, 
+	    	fpGoodsDescr:				function() { return $('#pGoodsDescr').val();} 
+				}
+			}
 	});
 	
 	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+	
+
+/*  Data FROM and TO - data pickers initialization and functionality */	
+    function startProcedureOpenDataFromChange() {
+        var startDate = startProcedureOpenDataFrom.value(),
+        endDate = endProcedureOpenDataTo.value();
+
+        if (startDate) {
+            startDate = new Date(startDate);
+            startDate.setDate(startDate.getDate());
+            endProcedureOpenDataTo.min(startDate);
+        } else if (endDate) {
+        	startProcedureOpenDataFrom.max(new Date(endDate));
+        } else {
+            endDate = new Date();
+            startProcedureOpenDataFrom.max(endDate);
+            endProcedureOpenDataTo.min(endDate);
+        }
+    }
+
+    function endProcedureOpenDataToChange() {
+        var endDate = endProcedureOpenDataTo.value(),
+        startDate = startProcedureOpenDataFrom.value();
+
+        if (endDate) {
+            endDate = new Date(endDate);
+            endDate.setDate(endDate.getDate());
+            startProcedureOpenDataFrom.max(endDate);
+        } else if (startDate) {
+        	endProcedureOpenDataTo.min(new Date(startDate));
+        } else {
+            endDate = new Date();
+            startProcedureOpenDataFrom.max(endDate);
+            endProcedureOpenDataTo.min(endDate);
+        }
+    }
+
+    var startProcedureOpenDataFrom = $("#pProcedureOpenDataFrom").kendoDatePicker({
+        change: startProcedureOpenDataFromChange,
+        format: "dd.MM.yyyy"
+    }).data("kendoDatePicker");
+
+    var endProcedureOpenDataTo = $("#pProcedureOpenDataTo").kendoDatePicker({
+        change: endProcedureOpenDataToChange,
+        format: "dd.MM.yyyy"
+    }).data("kendoDatePicker");
+
+    startProcedureOpenDataFrom.max(endProcedureOpenDataTo.value());
+    endProcedureOpenDataTo.min(startProcedureOpenDataFrom.value());
+/* ------------------------------------------------------------------------------------- */    
+    $("#pTenderStatus").width(260).kendoComboBox({
+        index: -1,
+        placeholder: "-- // --",
+        dataTextField: curLangRef,
+        dataValueField: "Id",
+        filter: "contains",
+        dataSource: {
+            type: "json",
+            serverFiltering: true,
+            serverPaging: true,
+            pageSize: 20,
+            transport: {
+                read: "json/tenderStatusList"
+            }
+        }
+    });
+
+    
+ /* ------------------ FILTERS FUNCTION ----------------- */	  
+ 	
+	$("#resetFilter").click(function(){
+
+		$("#pTenderStatus").data("kendoComboBox").select(-1);
+		$("#pTenderStatus").data("kendoComboBox").value("-- // --");
+		
+		$("#pGoodsDescr").val("");
+		
+		$("#pProcedureOpenDataFrom").data("kendoDatePicker").value(null);
+		$("#pProcedureOpenDataTo").data("kendoDatePicker").value(null);
+		
+		$("#list").trigger("reloadGrid");
+	});
+	
+	$("#submitFilter").click(function(){
+		$("#list").trigger("reloadGrid");
+	});    
+    
+	
 }); 
 
 
@@ -64,45 +159,29 @@ $(document).ready(function(){
 <html>
 <center>
 		
-<div id="filtrationPanel" style="padding: .2em .2em .2em .2em;">
-	<table id="prm" 
-		style="width: 98%; background-color: #DBD5D6; border: solid; border-width: 1px; border-color: #000000" >
-		<tr>
-			<td align="right">Tipul suportului:</td>
-			<td><input type="text" id="pSupportType" class="ui-widget"></td>
-			<td>&nbsp;</td>
-			<td align="right">Region:</td>
-			<td><input type="text" id="pRegionName" class="ui-widget" ></td>
-			<td>&nbsp;</td>
-			<td align="right">Localitate:</td>
-			<td colspan="2">
-				<input type="text" id="pLocalityName"  class="ui-widget" >
-				</td>
-<!-- 						<td>&nbsp;</td> -->
-			<td align="right">&nbsp;</td>
-			<td><input id="btApplyFilter" type="button" value="Filtreaza"></td>
-		</tr>
-		<tr>
-			<td align="right">Iluminare:</td>
-			<td><input type="checkbox" id="pLight" ></td>						
-			<td>&nbsp;</td>
-			<td align="right">Adresa:</td>
-			<td><input type="text" id="pAddresString" class="ui-widget"></td>
-			<td>&nbsp;</td>
-			<td align="right">Pret:</td>
-			<td>
-				<input type="text" id="pPriceFrom" class="ui-widget" >
-				<input type="text" id="pPriceTo"   class="ui-widget" >
-			</td>
-			<td>&nbsp;
-				
-			</td>
-			<td align="right">&nbsp;</td>
-			<td><input id="btResetFilter" type="button" value="Curata filtru"></td>
-		</tr>	
+<div id="filtrationPanel" align="left">
+	<form action="" style="width: 90%;">
+	<fieldset>
+		<label for="pProcedureOpenDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Deschiderea de la:</label>	
+			<input id="pProcedureOpenDataFrom" />
+		<label for="pProcedureOpenDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	pana la:</label>
+			<input id="pProcedureOpenDataTo" />
+		<label for="pTenderStatus" 	style="display:inline-block; width: 120px; text-align: right;">Statutul procedurii:</label>
+			<input id="pTenderStatus"/>
+		<br>
+		<label for="pGoodsDescr" 			style="display:inline-block; width: 150px; text-align: right;">Bun sau serviciu:</label>	
+			<input id="pGoodsDescr" type="text" class="k-widget" style="width: 390px;" />
 
-	</table> 
+
+		 <div class="form-buttons" style="display: inline-block;">
+		 	<label style="display:inline-block; width: 210px; text-align: right;"></label>		
+		  	<input id="submitFilter" 	type="button" value="Apply Filter" />
+		  	<input id="resetFilter" 	type="button" value="Reset Filter" />
+		 </div>		
+	</fieldset>					
+	</form>
 </div>
+
 <br>
 
 <table id="list">

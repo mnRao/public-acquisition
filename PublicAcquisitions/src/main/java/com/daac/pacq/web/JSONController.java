@@ -22,6 +22,7 @@ import com.daac.pacq.domain.entity.Tender;
 import com.daac.pacq.domain.entity.TenderPosition;
 import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
+import com.daac.pacq.domain.ref.TenderStatus;
 import com.daac.pacq.domain.ref.TenderType;
 import com.daac.pacq.helpers.FlexGridListWrapper;
 import com.daac.pacq.service.entity.ComplaintService;
@@ -35,6 +36,7 @@ import com.daac.pacq.service.entity.TenderPositionService;
 import com.daac.pacq.service.entity.TenderService;
 import com.daac.pacq.service.ref.IntentionStatusService;
 import com.daac.pacq.service.ref.PositionTypeService;
+import com.daac.pacq.service.ref.TenderStatusService;
 import com.daac.pacq.service.ref.TenderTypeService;
 
 
@@ -82,6 +84,11 @@ public class JSONController {
 	@Autowired
 	private QuestionService			questionService;
 	
+	@Autowired
+	private TenderStatusService			tenderStatusService;
+	
+	
+	
 	
 	   @RequestMapping(value="/ping",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody String test(WebRequest request) {    
@@ -116,7 +123,7 @@ public class JSONController {
 	    	return  intentionStatusService.list();
 	    }	  	 
 	   
-   
+	   
 	   
 	   @RequestMapping(value="/intentionAnounceStatusList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody List<IntentionAnounceStatus> intentionAnounceStatusList(WebRequest request) { 
@@ -133,6 +140,18 @@ public class JSONController {
 
 	    	return  intentionAnounceStatusService.get(286210);
 	    }		   
+	   
+
+	   @RequestMapping(value="/tenderStatusList",  method = { RequestMethod.GET, RequestMethod.POST })
+			public @ResponseBody List<TenderStatus> tenderStatusList(WebRequest request) { 
+			   System.out.println("JSONController - INTENTION STATUS LIST");
+		    	System.out.println(request.toString());
+
+		    	return  tenderStatusService.list();
+		    }	  	 
+		   
+	   
+	   
 	   
 	   
 	   @RequestMapping(value="/tenderList",  method = { RequestMethod.GET, RequestMethod.POST })

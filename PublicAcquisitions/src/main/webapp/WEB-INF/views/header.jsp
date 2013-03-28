@@ -8,13 +8,14 @@
 
 <script type="text/javascript">
 	function setMenuSelection(activateMenuItemName){
+
+		if (activateMenuItemName=="proceduri") {
+			$("#proceduri").css( "background", "#990066" );	
+		}
+		
 		if (activateMenuItemName=="intentii") {
 			$("#intentii").css( "background", "#990066" );	
 		}
-		
-		if (activateMenuItemName=="proceduri") {
-			$("#proceduri").css( "background", "#990066" );	
-		} 
 		
 		if (activateMenuItemName=="contracte") {
 			$("#contracte").css( "background", "#990066" );	
