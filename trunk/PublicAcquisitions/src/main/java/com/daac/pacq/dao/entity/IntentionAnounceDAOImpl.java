@@ -14,6 +14,7 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -65,14 +66,11 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 		System.out.println("IntentionAnounceDAOImpl - search");
 		Boolean vBulletinPublishDateRestricted 	= false;
 		Boolean vApproveDateRestricted 			= false;
+		
+		String vOrderByFieldName	= "id";
+		String vOrderByMode		= "asc";
+		
 		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(IntentionAnounce.class);
-
-//		filters[fIntentionStatus]5
-//		filters[fTenderType]
-//		filters[fGoodsDescription]
-//		filters[fForWhoPurchase]
-//		filters[fStateOrg]
-//		filters[fBulletinNumber]
 		
 		Date vBulletinDataFrom = null, vBulletinDataTo = null, vApproveDataFrom = null, vApproveDataTo = null;
 			try {
@@ -80,29 +78,10 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 				vBulletinDataTo = 	new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse("31.12.2999");
 				vApproveDataFrom = 	new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse("01.01.1900");
 				vApproveDataTo = 	new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse("31.12.2999");
-
 			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-		
-//		filters[fBulletinDataFrom]		
-//		filters[fBulletinDataTo]
-//		filters[fApproveDataFrom]		
-//		filters[fApproveDataTo]
 
-		
-
-//								
-//		sidx
-//		rows
-//		sord
-//		page
-//		nd
-//		_search
-		
-		
 		for (Map.Entry<String, String[]> entry : filtersMap.entrySet())
 		{
 		    System.out.println(entry.getKey() + "/" + entry.getValue()[0]);
@@ -181,15 +160,67 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 					vApproveDateRestricted 	= true;
 					} catch (ParseException e) {e.printStackTrace();}		    	
 		    }
+		    
+		    
+			 /* SORTING */		    
+		    if (entry.getKey().toLowerCase().contains("sord".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse ORDER MODE ");
+		    	vOrderByMode = entry.getValue()[0];
+		    }		    
+		    
+		    if (entry.getKey().toLowerCase().contains("sidx".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse ORDER FIELD ");
+		    	vOrderByFieldName = entry.getValue()[0];
+		    }
+		    
 		}
 	
 		if (vBulletinPublishDateRestricted) {
 			crit.add(Restrictions.between("bulletinPublishDate",vBulletinDataFrom,vBulletinDataTo));	
 		}
 		 if (vApproveDateRestricted){
-			 crit.add(Restrictions.between("publishDate",vApproveDataFrom,vApproveDataTo));	 
+			crit.add(Restrictions.between("publishDate",vApproveDataFrom,vApproveDataTo));	 
+		}
+		 
+		 
+		 if (vOrderByFieldName.contains(".")){
+			 String lCriteria= "", lFieldName= "";	
+			 lCriteria = vOrderByFieldName.substring(0, vOrderByFieldName.indexOf("."));
+			 lFieldName = vOrderByFieldName.substring( vOrderByFieldName.indexOf(".") + 1, vOrderByFieldName.length() );
+			 System.out.println(" Associated Ordering criteria = " + lCriteria );
+			 System.out.println(" Remained   Ordering field = " + lFieldName);
+			 vOrderByFieldName = lFieldName;
+			 
+			 if (vOrderByMode.equalsIgnoreCase("desc")) {
+				 crit.createCriteria(lCriteria).addOrder( Order.desc(vOrderByFieldName));
+			 } else {
+				 crit.createCriteria(lCriteria).addOrder( Order.asc(vOrderByFieldName));
+			 }
+			 
+		 } else {
+			 if (vOrderByMode.equalsIgnoreCase("desc")) {
+				 crit.addOrder( Order.desc(vOrderByFieldName));
+			 } else {
+				 crit.addOrder( Order.asc(vOrderByFieldName));
+			 } 
 		 }
+		 
 		
+		 
+		 
+
+//			sidx
+//			rows
+//			sord
+//			page
+//			nd
+//			_search
+		 
+		 
+		 
+		 
 		List<IntentionAnounce>  result = crit.list();
 		return result;
 	}

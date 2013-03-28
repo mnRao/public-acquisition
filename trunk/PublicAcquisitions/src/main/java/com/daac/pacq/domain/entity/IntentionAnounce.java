@@ -82,9 +82,9 @@ public class IntentionAnounce {
     private IntentionAnounceStatus currentStatus;
     
     
-    @OneToMany(fetch=FetchType.EAGER)
-    @JoinColumn(name="INTENTION_ANOUNCE_ID", nullable=false)
-    private List<IntentionAnounceStatus> 		intentionAnounceStatus;
+//    @OneToMany(fetch=FetchType.EAGER)
+//    @JoinColumn(name="INTENTION_ANOUNCE_ID", nullable=false)
+//    private List<IntentionAnounceStatus> 		intentionAnounceStatus;
     
     
 //    @Column(name = "FK_STATE_ORG_ID")
@@ -242,14 +242,14 @@ public class IntentionAnounce {
 		this.currentStatus = currentStatus;
 	}
 
-	public List<IntentionAnounceStatus> getIntentionAnounceStatus() {
-		return intentionAnounceStatus;
-	}
-
-	public void setIntentionAnounceStatus(
-			List<IntentionAnounceStatus> intentionAnounceStatus) {
-		this.intentionAnounceStatus = intentionAnounceStatus;
-	}
+//	public List<IntentionAnounceStatus> getIntentionAnounceStatus() {
+//		return intentionAnounceStatus;
+//	}
+//
+//	public void setIntentionAnounceStatus(
+//			List<IntentionAnounceStatus> intentionAnounceStatus) {
+//		this.intentionAnounceStatus = intentionAnounceStatus;
+//	}
 
 //	public Integer getFkStateOrgId() {
 //		return fkStateOrgId;

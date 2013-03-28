@@ -156,9 +156,17 @@ public class JSONController {
 	   
 	   @RequestMapping(value="/tenderList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody FlexGridListWrapper<Tender> tenderList(WebRequest request) { 
-		   System.out.println("JSONController - TENDER LIST");
-	    	System.out.println(request.toString());
-	    	List<Tender> result = tenderService.list(); 
+		   		System.out.println("JSONController - TENDER LIST");
+		   		System.out.println(request.toString());
+		   		System.out.println(request.getParameterMap().toString());
+			   
+			   Iterator<String> userFiltersIter = request.getParameterNames();
+			   while ( userFiltersIter.hasNext() ){
+				   String paramName = userFiltersIter.next();
+				      System.out.println(paramName + " = " + request.getParameter(paramName) );
+				    }
+	    	
+	    	List<Tender> result = tenderService.search(request.getParameterMap());
 	    	System.out.println("RECORDS RCVD = " + result.size());
 	    	FlexGridListWrapper<Tender> jdw = new FlexGridListWrapper<Tender>(1, result.size(), result);  
 	    	 return jdw;  
@@ -181,12 +189,10 @@ public class JSONController {
 			   String paramName = userFiltersIter.next();
 			      System.out.println(paramName + " = " + request.getParameter(paramName) );
 			    }
-
-		   
 		   
 	    	List<IntentionAnounce> result = intentionAnounceService.search(request.getParameterMap());
-	    	
-	    	
+		   	//List<IntentionAnounce> result = intentionAnounceService.list();
+		   
 	    	System.out.println("RECORDS RCVD = " + result.size());
 	    	FlexGridListWrapper<IntentionAnounce> jdw = new FlexGridListWrapper<IntentionAnounce>(1, result.size(), result);  
 	    	 return jdw;  
