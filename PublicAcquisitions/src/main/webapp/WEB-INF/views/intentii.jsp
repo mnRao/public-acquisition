@@ -7,7 +7,7 @@
 $(document).ready(function(){
 
 	$("#currentContentPageName").val("intentii");
-	setMenuSelection("df");
+	setMenuSelection("intentii");
 	
 	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
