@@ -1,12 +1,14 @@
 package com.daac.pacq.service.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.daac.pacq.dao.entity.TenderDAO;
+import com.daac.pacq.domain.entity.IntentionAnounce;
 import com.daac.pacq.domain.entity.Tender;
 
 @Service
@@ -33,4 +35,9 @@ public class TenderServiceImpl implements TenderService {
 		return dao.filter(filterString);
 	}
  
+	@Transactional
+	public List<Tender> 		search(Map<String, String[]> filtersMap){
+		System.out.println("TenderServiceImpl - search");
+		return dao.search(filtersMap);
+	}
 }

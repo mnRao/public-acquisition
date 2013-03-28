@@ -138,7 +138,10 @@ $(document).ready(function(){
 		$("#pGoodsDescr").val("");
 		
 		$("#pProcedureOpenDataFrom").data("kendoDatePicker").value(null);
+		$("#pProcedureOpenDataFrom").data("kendoDatePicker").max(null);
 		$("#pProcedureOpenDataTo").data("kendoDatePicker").value(null);
+		$("#pProcedureOpenDataTo").data("kendoDatePicker").min(null);
+		
 		
 		$("#list").trigger("reloadGrid");
 	});
