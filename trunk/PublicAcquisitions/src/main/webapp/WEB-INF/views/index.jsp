@@ -38,7 +38,16 @@
 	
 	
 	<script type="text/javascript">
-		
+	function getKendoComboBoxSelectedValue(item){
+		if (item != undefined) {
+			if (item.dataItem()  != undefined ) {
+				if (item.dataItem().id != undefined ) {
+					return item.dataItem().id;		
+				}
+			}
+		}
+		return "";
+	}		
 	
 	</script>
 	

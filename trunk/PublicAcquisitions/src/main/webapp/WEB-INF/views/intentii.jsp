@@ -25,17 +25,6 @@ $(document).ready(function(){
 		return item.mdValue;
 	} 
 	
-	function getKendoComboBoxSelectedValue(item){
-		if (item != undefined) {
-			if (item.dataItem()  != undefined ) {
-				if (item.dataItem().id != undefined ) {
-					return item.dataItem().id;		
-				}
-			}
-		}
-		return "";
-	}
-	
 	$("#list").jqGrid({
 		jsonReader : {
 		      root:"rows",
@@ -177,11 +166,7 @@ $(document).ready(function(){
     	});      
 		 
 
-   	 //$("#pBulletinDataFrom").kendoDatePicker();
-	 //$("#pBulletinDataTo").kendoDatePicker();
-	// $("#pApproveDataFrom").kendoDatePicker();
-	 //$("#pApproveDataTo").kendoDatePicker();
-        
+/*  Data FROM and TO - data pickers initialization and functionality */        
             function startBulletinDataFromChange() {
                 var startDate = startBulletinDataFrom.value(),
                 endDate = endBulletinDataTo.value();
@@ -276,6 +261,8 @@ $(document).ready(function(){
 
             startApproveDataFrom.max(endApproveDataTo.value());
             endApproveDataTo.min(startApproveDataFrom.value());
+/* ------------------------------------------------------------------------------------- */            
+            
       	
 }); 
 </script>
