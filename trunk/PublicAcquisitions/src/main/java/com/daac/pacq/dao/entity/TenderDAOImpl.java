@@ -5,10 +5,11 @@ package com.daac.pacq.dao.entity;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.daac.pacq.domain.entity.Tender;
 
@@ -38,8 +39,15 @@ public class TenderDAOImpl implements TenderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tender> list() {
+		
+		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(Tender.class);
 
-		return sessionFactory.getCurrentSession().createQuery("from Tender").list();
+		crit.add(Restrictions.eq("id",258629));
+
+		List<Tender>  result = crit.list();
+		
+		
+		return result;//sessionFactory.getCurrentSession().createQuery("from Tender").list();
 	}	
 	
 	/* (non-Javadoc)

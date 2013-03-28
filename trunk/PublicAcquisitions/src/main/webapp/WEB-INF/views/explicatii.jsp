@@ -12,10 +12,12 @@ $(document).ready(function(){
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
 	$("#xxx").val(pid);
-	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'>'+pid+'</a>');
+	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
 	
 	var jqxhr = $.getJSON( "json/explicatiiList", {id:pid}, function(list) {
-		$("#xxx").val(list.length);
+		$.each(list.rows, function(key, value) {
+			$("#xxx").val(value.questionText);
+			});
 	}); 
 }); 
 
@@ -27,7 +29,7 @@ $(document).ready(function(){
 <tr>
 <td width="93%" align="center" valign="middle"><div id="headerLine"></div>
 </td>
-<td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/vopros-icon.gif" /></div>
+<td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div>
 </td>
 <td width="2%" align="center"><img src="resources/images/contracte-icon.gif" />
 </td>
