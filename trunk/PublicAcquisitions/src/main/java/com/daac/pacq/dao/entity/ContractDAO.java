@@ -15,5 +15,6 @@ public interface ContractDAO {
 	
 	public Contract				get(Integer id);
 	public List<Contract> 		list();
+	public List<Contract> 		list(Integer id);
 	public List<Contract> 		filter(String filterString);
 }

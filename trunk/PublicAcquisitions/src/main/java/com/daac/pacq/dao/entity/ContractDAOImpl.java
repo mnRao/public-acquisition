@@ -35,9 +35,19 @@ public class ContractDAOImpl implements ContractDAO {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Contract> list(Integer id) {
+
+		return sessionFactory.getCurrentSession().createQuery("from Contract where FK_TENDERID="+id).list();
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.daac.pacq.dao.TenderDAO#filter()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Contract> list() {
 
-		return sessionFactory.getCurrentSession().createQuery("from Contract").list();
+		return sessionFactory.getCurrentSession().createQuery("from Contrac").list();
 	}
 	
 	/* (non-Javadoc)
