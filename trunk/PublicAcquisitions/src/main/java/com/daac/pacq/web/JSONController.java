@@ -24,7 +24,7 @@ import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
 import com.daac.pacq.domain.ref.TenderStatus;
 import com.daac.pacq.domain.ref.TenderType;
-import com.daac.pacq.helpers.FlexGridListWrapper;
+import com.daac.pacq.helpers.JQGridListWrapper;
 import com.daac.pacq.service.entity.ComplaintService;
 import com.daac.pacq.service.entity.ContractService;
 import com.daac.pacq.service.entity.IntentionAnounceService;
@@ -155,7 +155,7 @@ public class JSONController {
 	   
 	   
 	   @RequestMapping(value="/tenderList",  method = { RequestMethod.GET, RequestMethod.POST })
-		public @ResponseBody FlexGridListWrapper<Tender> tenderList(WebRequest request) { 
+		public @ResponseBody JQGridListWrapper<Tender> tenderList(WebRequest request) { 
 		   		System.out.println("JSONController - TENDER LIST");
 		   		System.out.println(request.toString());
 		   		System.out.println(request.getParameterMap().toString());
@@ -168,7 +168,7 @@ public class JSONController {
 	    	
 	    	List<Tender> result = tenderService.search(request.getParameterMap());
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	FlexGridListWrapper<Tender> jdw = new FlexGridListWrapper<Tender>(1, result.size(), result);  
+	    	JQGridListWrapper<Tender> jdw = new JQGridListWrapper<Tender>(10, 1, result.size(), result);  
 	    	 return jdw;  
 	    }		
 	   
@@ -179,22 +179,31 @@ public class JSONController {
 	 * @return JSON - serialised list of INTENTION ANOUNCE
 	 */
 	@RequestMapping(value="/intentionAnounceList",  method = { RequestMethod.GET, RequestMethod.POST })
-		public @ResponseBody FlexGridListWrapper<IntentionAnounce> intentionAnounceList(WebRequest request) { 
+		public @ResponseBody JQGridListWrapper<IntentionAnounce> intentionAnounceList(WebRequest request) { 
 		   System.out.println("JSONController - INTENTION ANOUNCE LIST");
 		   System.out.println(request.toString());
 		   System.out.println(request.getParameterMap().toString());
+		   int currentPageNumber = request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):1;
+		   int rowsPerPage 		 = request.getParameter("rows")!=null?Integer.parseInt(request.getParameter("rows")):10;
 		   
 		   Iterator<String> userFiltersIter = request.getParameterNames();
 		   while ( userFiltersIter.hasNext() ){
-			   String paramName = userFiltersIter.next();
+			   	  String paramName = userFiltersIter.next();
 			      System.out.println(paramName + " = " + request.getParameter(paramName) );
 			    }
 		   
 	    	List<IntentionAnounce> result = intentionAnounceService.search(request.getParameterMap());
-		   	//List<IntentionAnounce> result = intentionAnounceService.list();
-		   
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	FlexGridListWrapper<IntentionAnounce> jdw = new FlexGridListWrapper<IntentionAnounce>(1, result.size(), result);  
+
+	    	int totalPages = result.size()/rowsPerPage + (result.size()%rowsPerPage>0?1:0);
+	    	System.out.println("totalPages :" + totalPages);
+	    	
+	    	if (currentPageNumber > totalPages) currentPageNumber = 1;
+	    	int vFromIndex = rowsPerPage * (currentPageNumber-1);
+	    	int vToIndex = (rowsPerPage * currentPageNumber >result.size())?(result.size()):(rowsPerPage * currentPageNumber);
+	    	
+	    	JQGridListWrapper<IntentionAnounce> jdw = 
+	    			new JQGridListWrapper<IntentionAnounce>(totalPages, currentPageNumber, result.size(), result.subList(vFromIndex, vToIndex ));  
 	    	 return jdw;  
 	    }	
 	   
@@ -208,42 +217,42 @@ public class JSONController {
 	   
 	   
 	   @RequestMapping(value="/contractList",  method = { RequestMethod.GET, RequestMethod.POST })
-		public @ResponseBody FlexGridListWrapper<Contract> contractList(WebRequest request) { 
+		public @ResponseBody JQGridListWrapper<Contract> contractList(WebRequest request) { 
 		   System.out.println("JSONController - CONTRACT LIST");
 	    	System.out.println(request.toString());
 	    	List<Contract> result = contractService.list(); 
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	FlexGridListWrapper<Contract> jdw = new FlexGridListWrapper<Contract>(1, result.size(), result);  
+	    	JQGridListWrapper<Contract> jdw = new JQGridListWrapper<Contract>(10, 1, result.size(), result);  
 	    	 return jdw;  
 	    }	
 	   
 	   @RequestMapping(value="/complaintList",  method = { RequestMethod.GET, RequestMethod.POST })
-		public @ResponseBody FlexGridListWrapper<Complaint> complaintList(WebRequest request) { 
+		public @ResponseBody JQGridListWrapper<Complaint> complaintList(WebRequest request) { 
 		   System.out.println("JSONController - COMPLAINT LIST");
 	    	System.out.println(request.toString());
 	    	List<Complaint> result = сomplaintService.list(); 
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	FlexGridListWrapper<Complaint> jdw = new FlexGridListWrapper<Complaint>(1, result.size(), result);  
+	    	JQGridListWrapper<Complaint> jdw = new JQGridListWrapper<Complaint>(10, 1, result.size(), result);  
 	    	return jdw;  
 	    }	
 	   
 	   @RequestMapping(value="/whiteList",  method = { RequestMethod.GET, RequestMethod.POST })
-		public @ResponseBody FlexGridListWrapper<QualifiedEconomicOperator> whiteList(WebRequest request) { 
+		public @ResponseBody JQGridListWrapper<QualifiedEconomicOperator> whiteList(WebRequest request) { 
 		   System.out.println("JSONController - WHITE LIST");
 	    	System.out.println(request.toString());
 	    	List<QualifiedEconomicOperator> result = qualifiedEconomicOperatorService.list(); 
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	FlexGridListWrapper<QualifiedEconomicOperator> jdw = new FlexGridListWrapper<QualifiedEconomicOperator>(1, result.size(), result);  
+	    	JQGridListWrapper<QualifiedEconomicOperator> jdw = new JQGridListWrapper<QualifiedEconomicOperator>(10, 1, result.size(), result);  
 	    	return jdw;  
 	    }	
 	   
 	   @RequestMapping(value="/blackList",  method = { RequestMethod.GET, RequestMethod.POST })
-		public @ResponseBody FlexGridListWrapper<NotAllowedEconomicOperator> blackList(WebRequest request) { 
+		public @ResponseBody JQGridListWrapper<NotAllowedEconomicOperator> blackList(WebRequest request) { 
 		   System.out.println("JSONController - BLACK LIST");
 	    	System.out.println(request.toString());
 	    	List<NotAllowedEconomicOperator> result = notAllowedEconomicOperatorService.list(); 
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	FlexGridListWrapper<NotAllowedEconomicOperator> jdw = new FlexGridListWrapper<NotAllowedEconomicOperator>(1, result.size(), result);  
+	    	JQGridListWrapper<NotAllowedEconomicOperator> jdw = new JQGridListWrapper<NotAllowedEconomicOperator>(10, 1, result.size(), result);  
 	    	return jdw;  
 	    }
 	   
@@ -259,22 +268,22 @@ public class JSONController {
 	   
 	   
 	   @RequestMapping(value="/positionList",  method = { RequestMethod.GET, RequestMethod.POST })
-		public @ResponseBody FlexGridListWrapper<TenderPosition> positionList(WebRequest request) { 
+		public @ResponseBody JQGridListWrapper<TenderPosition> positionList(WebRequest request) { 
 		   System.out.println("JSONController - TENDER POSITION LIST for TenderDataId="+request.getParameter("id"));
 	    	System.out.println(request.toString());
 	    	List<TenderPosition> result = tenderPositionService.list(Integer.valueOf(request.getParameter("id"))); 
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	FlexGridListWrapper<TenderPosition> jdw = new FlexGridListWrapper<TenderPosition>(1, result.size(), result);  
+	    	JQGridListWrapper<TenderPosition> jdw = new JQGridListWrapper<TenderPosition>(10, 1, result.size(), result);  
 	    	return jdw;  
 	    }
 	   
 	   @RequestMapping(value="/explicatiiList",  method = { RequestMethod.GET, RequestMethod.POST })
-		public @ResponseBody FlexGridListWrapper<Question> explicatiiList(WebRequest request) { 
+		public @ResponseBody JQGridListWrapper<Question> explicatiiList(WebRequest request) { 
 		   System.out.println("JSONController - TENDER EXPICATION LIST for TenderId="+request.getParameter("id"));
 	    	System.out.println(request.toString());
 	    	List<Question> result = questionService.list(Integer.valueOf(request.getParameter("id"))); 
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	FlexGridListWrapper<Question> jdw = new FlexGridListWrapper<Question>(1, result.size(), result); 
+	    	JQGridListWrapper<Question> jdw = new JQGridListWrapper<Question>(10, 1, result.size(), result); 
 	    	//List<Question> jdw = new Lis<Question>(1, result.size(), result);
 	    	return jdw;  
 	    }
