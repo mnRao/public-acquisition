@@ -47,14 +47,11 @@ public class TenderDAOImpl implements TenderDAO {
 	@Override
 	public List<Tender> list() {
 		
-		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(Tender.class);
-
-		crit.add(Restrictions.eq("id",258629));
-
-		List<Tender>  result = crit.list();
+//		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(Tender.class);
+//		crit.add(Restrictions.eq("id",258629));
+//		List<Tender>  result = crit.list();
 		
-		
-		return result;//sessionFactory.getCurrentSession().createQuery("from Tender").list();
+		return sessionFactory.getCurrentSession().createQuery("from Tender").list();
 	}	
 	
 	/* (non-Javadoc)
