@@ -6,18 +6,27 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	setMenuSelection("explicatii");
 	
 	var pid = ${tenderId};
 	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
-	
+	var content='';
 	$("#xxx").val(pid);
 	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
 	
 	var jqxhr = $.getJSON( "json/explicatiiList", {id:pid}, function(list) {
 		$.each(list.rows, function(key, value) {
-			$("#xxx").val(value.questionText);
+			content=content+'<br><hr width="90%"><br><table width="90%">'
+			+'<tr><td width="20%""><spring:message code="label.numExpl"/></td><td> '+ value.questionNumb+'</td></tr>'
+			+'<tr><td><spring:message code="label.dateExpl"/></td><td> '+ value.askedDate+'</td></tr>'
+			+'<tr><td><spring:message code="label.explTxt"/></td><td> '+ value.questionText+'</td></tr>'
+			+'<tr><td colspan="2"><spring:message code="label.raspTxt"/></td></tr>'
+			+'<tr><td colspan="2">'+ value.answerText+'</td></tr>'
+			+'</table>';
+			//$("#xxx").val(value.questionText);
 			});
+		$("#pageContent").html(content);
 	}); 
 }); 
 
@@ -40,10 +49,12 @@ $(document).ready(function(){
 </tr>
 
 </table>
-
-<br>
-<spring:message code="label.explicatii"/>
-<hr width="90%"><br>
-	   <input id="xxx" type="text" style="width: 90%;" readonly="readonly">	
+<div id="titleLine">
+	<br>
+	<img src="resources/images/explic_1.png" />
+	<spring:message code="label.explicatii"/>
+</div>
+<div id=pageContent>
+</div>	   	
 </center>
 </html>
