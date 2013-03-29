@@ -74,6 +74,13 @@ public class AppController {
     	 return "explicatii";    
     }    
     
+    @RequestMapping("/contracteprocedura") 
+    public String contracteprocedura(Map<String, Object> map, WebRequest request, Principal principal) {
+    	System.out.println("AppController - contracteprocedura ");
+    	map.put("tenderId", request.getParameter("pid"));
+    	 return "contracteprocedura";    
+    }    
+    
     @RequestMapping("/index2") 
     public String index2(Map<String, Object> map, WebRequest request, Principal principal) {
     	System.out.println("AppController - index2 ");
