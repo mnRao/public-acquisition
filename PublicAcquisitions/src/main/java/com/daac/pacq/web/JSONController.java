@@ -237,6 +237,17 @@ public class JSONController {
 	    	 return jdw;  
 	    }	
 	   
+	   @RequestMapping(value="/contractCardList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody JQGridListWrapper<Contract> contractCardList(WebRequest request) { 
+		   System.out.println("JSONController - TENDER CARD CONTRACT LIST for TenderId="+request.getParameter("id"));
+	    	System.out.println(request.toString());
+	    	List<Contract> result = contractService.list(Integer.valueOf(request.getParameter("id"))); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	JQGridListWrapper<Contract> jdw = new JQGridListWrapper<Contract>(10, 1, result.size(), result); 
+	    	//List<Question> jdw = new Lis<Question>(1, result.size(), result);
+	    	return jdw;  
+	    }
+	   
 	   @RequestMapping(value="/complaintList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody JQGridListWrapper<Complaint> complaintList(WebRequest request) { 
 		   System.out.println("JSONController - COMPLAINT LIST");
