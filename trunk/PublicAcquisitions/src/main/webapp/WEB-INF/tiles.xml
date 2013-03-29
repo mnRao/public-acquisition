@@ -27,6 +27,10 @@
         <put-attribute name="body" 		value="/WEB-INF/views/contracte.jsp" />
     </definition>    
     
+    <definition name="contracteprocedura"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/contracteprocedura.jsp" />
+    </definition>    
+    
     <definition name="contestatii"  extends="baseLayout">
         <put-attribute name="body" 		value="/WEB-INF/views/contestatii.jsp" />
     </definition>    
