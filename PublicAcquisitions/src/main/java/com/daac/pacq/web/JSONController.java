@@ -159,6 +159,8 @@ public class JSONController {
 		   		System.out.println("JSONController - TENDER LIST");
 		   		System.out.println(request.toString());
 		   		System.out.println(request.getParameterMap().toString());
+		   		int currentPageNumber = request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):1;
+			   int rowsPerPage 		 = request.getParameter("rows")!=null?Integer.parseInt(request.getParameter("rows")):10;
 			   
 			   Iterator<String> userFiltersIter = request.getParameterNames();
 			   while ( userFiltersIter.hasNext() ){
@@ -168,7 +170,16 @@ public class JSONController {
 	    	
 	    	List<Tender> result = tenderService.search(request.getParameterMap());
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	JQGridListWrapper<Tender> jdw = new JQGridListWrapper<Tender>(10, 1, result.size(), result);  
+	    	
+	    	int totalPages = result.size()/rowsPerPage + (result.size()%rowsPerPage>0?1:0);
+	    	System.out.println("totalPages :" + totalPages);
+	    	
+	    	if (currentPageNumber > totalPages) currentPageNumber = 1;
+	    	int vFromIndex = rowsPerPage * (currentPageNumber-1);
+	    	int vToIndex = (rowsPerPage * currentPageNumber >result.size())?(result.size()):(rowsPerPage * currentPageNumber);
+	    
+	    	
+	    	JQGridListWrapper<Tender> jdw = new JQGridListWrapper<Tender>(totalPages, currentPageNumber, result.size(), result.subList(vFromIndex, vToIndex ));  
 	    	 return jdw;  
 	    }		
 	   
