@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	function setMenuSelection(activateMenuItemName){
 
-		if (activateMenuItemName=="proceduri") {
+		if ((activateMenuItemName=="proceduri")||(activateMenuItemName=="proceduricard")||(activateMenuItemName=="explicatii")||(activateMenuItemName=="contracteprocedura")) {
 			$("#proceduri").css( "background", "#990066" );	
 		}
 		

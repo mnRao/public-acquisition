@@ -9,6 +9,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	setMenuSelection("proceduricard");
 	
 	var pid = ${tenderId};
 	var w = screen.width*0.98;
@@ -79,6 +80,7 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
   
   $("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+card.bulletin.publDate+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
   $("#explicatiiLink").html('<a href=explicatii?pid='+card.id+'><img src="resources/images/vopros-icon.gif" /></a>');
+  $("#contracteLink").html('<a href=contracteprocedura?pid='+card.id+'><img src="resources/images/contracte-icon.gif" /></a>');
   $("#list").jqGrid('setGridParam', { postData: { id:card.tenderData.id} , datatype: 'json'}).trigger('reloadGrid');
  
   
@@ -136,7 +138,7 @@ $("#list").jqGrid({
 </td>
 <td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div>
 </td>
-<td width="2%" align="center"><img src="resources/images/contracte-icon.gif" />
+<td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
 </td>
 <td width="2%" align="center"><img src="resources/images/jaloba-icon.gif"  />
 </td>
@@ -147,6 +149,7 @@ $("#list").jqGrid({
 </table>
 
 <br>
+<img src="resources/images/datele_1.png" />
 <spring:message code="label.commonInfo"/>
 <hr width="90%"><br>
 
@@ -282,7 +285,8 @@ $("#list").jqGrid({
 </table>
 
 <br>
-<spring:message code="label.commonInfo"/>
+<img src="resources/images/procedura_1.png" />
+<spring:message code="label.detailInfo"/>
 <br><hr width="90%"><br>
 
 <table id="list">
