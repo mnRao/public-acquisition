@@ -22,6 +22,12 @@ public class ContractServiceImpl implements ContractService {
 	}
 	
 	@Transactional
+	public List<Contract> list(Integer id) {
+		System.out.println("ContractServiceImpl - list");
+		return dao.list(id);
+	}
+	
+	@Transactional
 	public List<Contract> list() {
 		System.out.println("ContractServiceImpl - list");
 		return dao.list();
