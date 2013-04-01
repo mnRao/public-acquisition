@@ -40,25 +40,29 @@
 
 	<span><spring:message code="label.title"/></span>
 </a>
-<div id="user-info-container">
-	<span style="float: right">
-	    <a href="?lang=md">Md</a>
-	    | 
-	    <a href="?lang=ru">Ru</a>
-	    |
-	    <a href="?lang=en">En</a>
-	</span>
 
-	<div>
-		Current Locale : ${pageContext.response.locale}
-		<a href="#">Înregistrarea în sistem</a>
+<form name='submitRowCard' method='POST' action=''>
+	<input type="hidden" id="lang" name="lang" value="">
+	<div id="user-info-container">
+		<span style="float: right">
+			<a href="javascript:document.getElementById('lang').value='md';this.submitRowCard.submit();">Md</a>
+		    | 
+		    <a href="javascript:document.getElementById('lang').value='ru';this.submitRowCard.submit();">Ru</a>
+		    |
+			<a href="javascript:document.getElementById('lang').value='en';this.submitRowCard.submit();">En</a>
+		</span>
+		<div>
+			Current Locale : ${pageContext.response.locale}
+			<a href="#">Înregistrarea în sistem</a>
+		</div>
 	</div>
-</div>
+</form>
+
 <div id="menu-container">
 	<a id="proceduri" 	href="proceduri" >			<spring:message code="label.module_name.proceduri"/></a>
 	<a id="intentii" 	href="intentii">				<spring:message code="label.module_name.intentii"/></a>
 	<a id="contracte" 	href="contracte">			<spring:message code="label.module_name.contracte"/></a>
-	<a id="contestatii" href="contestatii">			<spring:message code="label.module_name.contestatii"/></a>
+<%-- 	<a id="contestatii" href="contestatii">			<spring:message code="label.module_name.contestatii"/></a> --%>
 	<a id="whiteList" 	href="whiteList">			<spring:message code="label.module_name.whiteList"/></a>
     <a id="blackList"	href="blackList">			<spring:message code="label.module_name.blackList"/></a>
           <div id='help'>
