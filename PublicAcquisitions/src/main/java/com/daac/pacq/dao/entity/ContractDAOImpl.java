@@ -47,7 +47,7 @@ public class ContractDAOImpl implements ContractDAO {
 	@Override
 	public List<Contract> list() {
 
-		return sessionFactory.getCurrentSession().createQuery("from Contrac").list();
+		return sessionFactory.getCurrentSession().createQuery("from Contract").list();
 	}
 	
 	/* (non-Javadoc)
