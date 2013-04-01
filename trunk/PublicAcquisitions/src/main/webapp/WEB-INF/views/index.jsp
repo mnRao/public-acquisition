@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
+
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page language="java" pageEncoding="utf-8" %>
 
@@ -50,6 +52,9 @@
 	}		
 	
 	</script>
+	<style>
+    	.dotted {border: 2px dotted #000000; border-style: none none dotted; color: #fff; background-color: #fff; }
+	</style>
 	
 </head>
 

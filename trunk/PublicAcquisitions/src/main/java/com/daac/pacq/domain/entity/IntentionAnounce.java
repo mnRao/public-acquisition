@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.daac.pacq.domain.ref.Goods;
 import com.daac.pacq.domain.ref.TenderType;
@@ -94,7 +95,8 @@ public class IntentionAnounce {
     @JoinColumn(name="FK_STATE_ORG_ID")
     private StateOrg stateOrg;
     
-    
+
+    @JsonSerialize (using = CustomDateSerializer.class)
     @Column(name = "PUBLISH_DATE")
     private Date 			publishDate;
     
@@ -259,9 +261,6 @@ public class IntentionAnounce {
 //		this.fkStateOrgId = fkStateOrgId;
 //	}
 
-	
-	
-	@JsonSerialize (using = CustomDateSerializer.class)
 	public Date getPublishDate() {
 		return publishDate;
 	}

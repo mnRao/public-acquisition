@@ -3,13 +3,21 @@ package com.daac.pacq.web;
 import java.security.Principal;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.daac.pacq.domain.entity.IntentionAnounce;
+import com.daac.pacq.service.entity.IntentionAnounceService;
 
 @Controller
 public class AppController {
 
+	@Autowired
+	private IntentionAnounceService intentionAnounceService;	
+	
     @RequestMapping("/")
     public String home(WebRequest request) {
     	System.out.println("AppController - redirection to INDEX");
@@ -33,7 +41,19 @@ public class AppController {
     public String intentii(Map<String, Object> map, WebRequest request, Principal principal) {
     	System.out.println("AppController - intentii ");    	
     	 return "intentii";    
-    }       
+    }
+    
+    @RequestMapping("/intentiiCard") 
+    public String intentiiCard(Map<String, Object> map, WebRequest request, Principal principal) {
+    	System.out.println("AppController - intentiiCard ");
+    	IntentionAnounce item = intentionAnounceService.get(Integer.parseInt( request.getParameter("pid")));
+    	
+    	System.out.println(item.getRegNumber());
+    	 map.put("intentionItem", item);
+    	 //map.put("intentionId", request.getParameter("pid"));
+    	 
+    	 return "intentiiCard";
+    }           
     
     @RequestMapping("/contracte") 
     public String contracte(Map<String, Object> map, WebRequest request, Principal principal) {

@@ -50,7 +50,7 @@ $(document).ready(function(){
 		   			'test'],
 	   	colModel:[
 	   		{name:'id',						index:'id', 					width:200, hidden: true},
-	   		{name:'regNumber',				index:'regNumber', 				width:500},
+	   		{name:'regNumber',				index:'regNumber', 				width:500, formatter:cardLink  },
 	   		{name:'budgetPeriod.year',		index:'budgetPeriod.year', 		width:500},
 	   		{name:'purchaseQuarter',		index:'purchaseQuarter', 		width:500},
 	   		{name:'stateOrg.orgName',		index:'stateOrg.orgName', 		width:500},
@@ -91,7 +91,10 @@ $(document).ready(function(){
 			}
 	});
 	
-	
+	function cardLink(cellvalue, options, rowObject) {
+		   return '<a href="intentiiCard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a>'	;
+		   };
+		   
 //	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
 	
  /* ------------------ FILTERS FUNCTION ----------------- */	  
