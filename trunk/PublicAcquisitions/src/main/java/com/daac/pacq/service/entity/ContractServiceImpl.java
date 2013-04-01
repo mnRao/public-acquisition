@@ -1,6 +1,7 @@
 package com.daac.pacq.service.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,10 @@ public class ContractServiceImpl implements ContractService {
 		System.out.println("ContractServiceImpl - filter");
 		return dao.filter(filterString);
 	}
- 
+	
+	@Transactional 
+	public List<Contract> 		search(Map<String, String[]> filtersMap){
+		System.out.println("ContractServiceImpl - search");
+		return dao.search(filtersMap);
+	}
 }

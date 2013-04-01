@@ -20,6 +20,7 @@ import com.daac.pacq.domain.entity.QualifiedEconomicOperator;
 import com.daac.pacq.domain.entity.Question;
 import com.daac.pacq.domain.entity.Tender;
 import com.daac.pacq.domain.entity.TenderPosition;
+import com.daac.pacq.domain.ref.ContractType;
 import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
 import com.daac.pacq.domain.ref.TenderStatus;
@@ -34,6 +35,7 @@ import com.daac.pacq.service.entity.QualifiedEconomicOperatorService;
 import com.daac.pacq.service.entity.QuestionService;
 import com.daac.pacq.service.entity.TenderPositionService;
 import com.daac.pacq.service.entity.TenderService;
+import com.daac.pacq.service.ref.ContractTypeService;
 import com.daac.pacq.service.ref.IntentionStatusService;
 import com.daac.pacq.service.ref.PositionTypeService;
 import com.daac.pacq.service.ref.TenderStatusService;
@@ -87,6 +89,8 @@ public class JSONController {
 	@Autowired
 	private TenderStatusService			tenderStatusService;
 	
+	@Autowired
+	private ContractTypeService			сontractTypeService;
 	
 	
 	
@@ -123,6 +127,13 @@ public class JSONController {
 	    	return  intentionStatusService.list();
 	    }	  	 
 	   
+	   @RequestMapping(value="/contractTypeList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody List<ContractType> contractTypeList(WebRequest request) { 
+		   System.out.println("JSONController - CONTRACT TYPE LIST");
+	    	System.out.println(request.toString());
+
+	    	return  сontractTypeService.list();
+	    }	  		   
 	   
 	   
 	   @RequestMapping(value="/intentionAnounceStatusList",  method = { RequestMethod.GET, RequestMethod.POST })
@@ -229,11 +240,31 @@ public class JSONController {
 	   @RequestMapping(value="/contractList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody JQGridListWrapper<Contract> contractList(WebRequest request) { 
 		   System.out.println("JSONController - CONTRACT LIST");
-	    	System.out.println(request.toString());
-	    	List<Contract> result = contractService.list(); 
+		   System.out.println(request.toString());
+		   System.out.println(request.getParameterMap().toString());
+		   int currentPageNumber = request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):1;
+		   int rowsPerPage 		 = request.getParameter("rows")!=null?Integer.parseInt(request.getParameter("rows")):10;
+		   
+		   Iterator<String> userFiltersIter = request.getParameterNames();
+		   while ( userFiltersIter.hasNext() ){
+			   	  String paramName = userFiltersIter.next();
+			      System.out.println(paramName + " = " + request.getParameter(paramName) );
+			    }
+		   
+	    	List<Contract> result = contractService.search(request.getParameterMap());
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	JQGridListWrapper<Contract> jdw = new JQGridListWrapper<Contract>(10, 1, result.size(), result);  
+
+	    	int totalPages = result.size()/rowsPerPage + (result.size()%rowsPerPage>0?1:0);
+	    	System.out.println("totalPages :" + totalPages);
+	    	
+	    	if (currentPageNumber > totalPages) currentPageNumber = 1;
+	    	int vFromIndex = rowsPerPage * (currentPageNumber-1);
+	    	int vToIndex = (rowsPerPage * currentPageNumber >result.size())?(result.size()):(rowsPerPage * currentPageNumber);
+	    	
+	    	JQGridListWrapper<Contract> jdw = 
+	    			new JQGridListWrapper<Contract>(totalPages, currentPageNumber, result.size(), result.subList(vFromIndex, vToIndex ));  
 	    	 return jdw;  
+		
 	    }	
 	   
 	   @RequestMapping(value="/contractCardList",  method = { RequestMethod.GET, RequestMethod.POST })

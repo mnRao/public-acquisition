@@ -25,6 +25,9 @@ public class TenderShort {
     @OneToOne
     @JoinColumn(name="FK_CURRENT_DATA_ID")
     private TenderDataShort tenderData;
+    
+    @Column(name="REG_NUMBER")
+    private String regNumber;
 
 	public Integer getId() {
 		return id;
@@ -50,8 +53,13 @@ public class TenderShort {
 		this.tenderData = tenderData;
 	}
 
-    
-	
+	public String getRegNumber() {
+		return regNumber;
+	}
+
+	public void setRegNumber(String regNumber) {
+		this.regNumber = regNumber;
+	}
 	
 }
 
