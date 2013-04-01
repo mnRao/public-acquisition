@@ -177,7 +177,6 @@ public class JSONController {
 	    	if (currentPageNumber > totalPages) currentPageNumber = 1;
 	    	int vFromIndex = rowsPerPage * (currentPageNumber-1);
 	    	int vToIndex = (rowsPerPage * currentPageNumber >result.size())?(result.size()):(rowsPerPage * currentPageNumber);
-	    
 	    	
 	    	JQGridListWrapper<Tender> jdw = new JQGridListWrapper<Tender>(totalPages, currentPageNumber, result.size(), result.subList(vFromIndex, vToIndex ));  
 	    	 return jdw;  

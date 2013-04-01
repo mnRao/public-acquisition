@@ -19,9 +19,17 @@
         <put-attribute name="body" 		value="/WEB-INF/views/proceduri.jsp" />
     </definition>
     
+    <definition name="proceduricard"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/proceduricard.jsp" />
+    </definition>    
+    
     <definition name="intentii"  extends="baseLayout">
         <put-attribute name="body" 		value="/WEB-INF/views/intentii.jsp" />
     </definition>
+    
+    <definition name="intentiiCard"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/intentiiCard.jsp" />
+    </definition>    
     
     <definition name="contracte"  extends="baseLayout">
         <put-attribute name="body" 		value="/WEB-INF/views/contracte.jsp" />
@@ -42,10 +50,6 @@
     <definition name="blackList"  extends="baseLayout">
         <put-attribute name="body" 		value="/WEB-INF/views/blackList.jsp" />
     </definition>    
-
-    <definition name="proceduricard"  extends="baseLayout">
-        <put-attribute name="body" 		value="/WEB-INF/views/proceduricard.jsp" />
-    </definition>
 
     <definition name="explicatii"  extends="baseLayout">
         <put-attribute name="body" 		value="/WEB-INF/views/explicatii.jsp" />
