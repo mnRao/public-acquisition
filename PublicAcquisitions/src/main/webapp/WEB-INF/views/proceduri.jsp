@@ -34,7 +34,7 @@ $(document).ready(function(){
 	   	      	 '<spring:message code="label.goodsDescr"/>'],
 	   	colModel:[
 	   		{name:'id',								index:'id', 							width:200, hidden: true},
-	   		{name:'regNumber',						index:'regNumber', 						width:500, formatter:cardLink  },
+	   		{name:'regNumber',						index:'regNumber', 						width:150, formatter:cardLink, align:'center',  height:'auto'  },
 	   		{name:'tenderType.'+curLangRef,			index:'tenderType.'+curLangRef,			width:500},
 	   		{name:'refTendeOpenDate',				index:'refTendeOpenDate', 				width:500},
 	   		{name:'stateOrg.orgName',				index:'stateOrg.orgName', 				width:500},
@@ -58,6 +58,14 @@ $(document).ready(function(){
 				}
 			}
 	});
+
+	function cardLink(cellvalue, options, rowObject) {
+		   return '<a href="proceduricard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a><br>' +
+				   '<img alt="Explicatii" src="resources/images/explic_1.png">' +
+				   '<img alt="Explicatii" src="resources/images/jaloba-icon.gif" width="19px" height="18">' +
+				   '<img alt="Explicatii" src="resources/images/contracte_1.png">';
+		   };
+	
 	
 	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
 	
@@ -154,9 +162,7 @@ $(document).ready(function(){
 }); 
 
 
-	function cardLink(cellvalue, options, rowObject) {
-	   return '<a href="proceduricard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a>'	;
-	   };
+
 	   
 </script>
 <html>
