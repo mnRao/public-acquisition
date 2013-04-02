@@ -92,7 +92,8 @@ $(document).ready(function(){
 	});
 	
 	function cardLink(cellvalue, options, rowObject) {
-		   return '<a href="intentiiCard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a>'	;
+		   return '<a href="intentiiCard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a>' +
+				   '';
 		   };
 		   
 //	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
