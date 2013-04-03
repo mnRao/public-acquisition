@@ -11,7 +11,6 @@ $(document).ready(function(){
 
 	setMenuSelection("contracteprocedura");
 	var pid = ${tenderId};
-	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
 	$("#list").jqGrid({
@@ -25,7 +24,6 @@ $(document).ready(function(){
 		   },	
 	   	url:'json/contractCardList',
 		datatype: "json",
-		data: {id:pid},
 		mtype: 'POST',
 	   	colNames:[	'#',
 	   	          	'<spring:message code="label.contractNumber"/>',
@@ -53,10 +51,12 @@ $(document).ready(function(){
 	    sortorder: "desc",
 	    caption:'<spring:message code="label.module_name.contracte"/>',
 	    width: w,
-	    height: 300
+	    height: 300,
+	    postData: 	{ id:		pid}
 	});
 	
-	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
+	$("#explicatiiLink").html('<a href=explicatii?pid='+pid+'><img src="resources/images/vopros-icon.gif" /></a>');
 }); 
 
 </script>
@@ -70,7 +70,7 @@ $(document).ready(function(){
 </td>
 <td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div>
 </td>
-<td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
+<td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div>
 </td>
 <td width="2%" align="center"><img src="resources/images/jaloba-icon.gif"  />
 </td>

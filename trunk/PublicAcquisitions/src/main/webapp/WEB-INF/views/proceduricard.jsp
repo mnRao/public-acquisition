@@ -12,7 +12,6 @@ $(document).ready(function(){
 	setMenuSelection("proceduricard");
 	
 	var pid = ${tenderId};
-	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';	
 	var curLang = "${pageContext.response.locale}";	
 	
