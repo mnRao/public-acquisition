@@ -9,7 +9,6 @@
 $(document).ready(function(){
 
 	setMenuSelection("blackList");
-	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
 	$("#list").jqGrid({

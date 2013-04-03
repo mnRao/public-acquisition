@@ -96,7 +96,7 @@ public class AppController {
     
     @RequestMapping("/contracteprocedura") 
     public String contracteprocedura(Map<String, Object> map, WebRequest request, Principal principal) {
-    	System.out.println("AppController - contracteprocedura ");
+    	System.out.println("AppController - contracteprocedura for Id="+request.getParameter("pid"));
     	map.put("tenderId", request.getParameter("pid"));
     	 return "contracteprocedura";    
     }    

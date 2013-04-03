@@ -10,7 +10,6 @@
 $(document).ready(function(){
 
 	setMenuSelection("contracte");
-	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
 	$("#list").jqGrid({

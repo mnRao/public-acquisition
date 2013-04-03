@@ -7,7 +7,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
 	$("#list").jqGrid({

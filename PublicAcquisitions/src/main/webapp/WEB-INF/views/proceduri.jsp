@@ -10,7 +10,6 @@ $(document).ready(function(){
 //	$("#currentContentPageName").val("proceduri");
 	setMenuSelection("proceduri");
 	
-	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
 	$("#list").jqGrid({
@@ -61,9 +60,9 @@ $(document).ready(function(){
 
 	function cardLink(cellvalue, options, rowObject) {
 		   return '<a href="proceduricard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a><br>' +
-				   '<img alt="Explicatii" src="resources/images/explic_1.png">' +
+				   '<a href=explicatii?pid='+rowObject['id']+'><img alt="Explicatii" src="resources/images/explic_1.png"></a>' +
 				   '<img alt="Explicatii" src="resources/images/jaloba-icon.gif" width="19px" height="18">' +
-				   '<img alt="Explicatii" src="resources/images/contracte_1.png">';
+				   '<a href=contracteprocedura?pid='+rowObject['id']+'><img alt="Explicatii" src="resources/images/contracte_1.png"></a>';
 		   };
 	
 	

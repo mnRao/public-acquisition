@@ -9,7 +9,6 @@ $(document).ready(function(){
 //	$("#currentContentPageName").val("intentii");
 	setMenuSelection("intentii");
 	
-	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	
 	function getItemTranslation(item){

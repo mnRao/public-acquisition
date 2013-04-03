@@ -9,11 +9,11 @@ $(document).ready(function(){
 	setMenuSelection("explicatii");
 	
 	var pid = ${tenderId};
-	var w = screen.width*0.98;
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	var content='';
 	$("#xxx").val(pid);
 	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
+	$("#contracteLink").html('<a href=contracteprocedura?pid='+pid+'><img src="resources/images/contracte-icon.gif" /></a>');
 	
 	var jqxhr = $.getJSON( "json/explicatiiList", {id:pid}, function(list) {
 		$.each(list.rows, function(key, value) {
@@ -40,7 +40,7 @@ $(document).ready(function(){
 </td>
 <td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div>
 </td>
-<td width="2%" align="center"><img src="resources/images/contracte-icon.gif" />
+<td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
 </td>
 <td width="2%" align="center"><img src="resources/images/jaloba-icon.gif"  />
 </td>
