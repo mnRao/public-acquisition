@@ -60,9 +60,9 @@ $(document).ready(function(){
 
 	function cardLink(cellvalue, options, rowObject) {
 		   return '<a href="proceduricard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a><br>' +
-				   '<a href=explicatii?pid='+rowObject['id']+'><img alt="Explicatii" src="resources/images/explic_1.png"></a>' +
-				   '<img alt="Explicatii" src="resources/images/jaloba-icon.gif" width="19px" height="18">' +
-				   '<a href=contracteprocedura?pid='+rowObject['id']+'><img alt="Explicatii" src="resources/images/contracte_1.png"></a>';
+				   '<a href=explicatii?pid='+rowObject['id']+'><img alt="Explicatii" src="resources/images/vopros_small_icon.png"></a>' +
+				   '<a href=plingeri?pid='+rowObject['id']+'><img alt="Plingeri" src="resources/images/jaloba_small_icon.png"></a>' +
+				   '<a href=contracteprocedura?pid='+rowObject['id']+'><img alt="Contracte" src="resources/images/contracte_small_icon.png"></a>';
 		   };
 	
 	

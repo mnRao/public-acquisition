@@ -45,18 +45,34 @@
 	<input type="hidden" id="lang" name="lang" value="">
 	<div id="user-info-container">
 		<span style="float: right">
-			<a href="javascript:document.getElementById('lang').value='md';this.submitRowCard.submit();">Md</a>
+			<a id="langMd" href="javascript:document.getElementById('lang').value='md';this.submitRowCard.submit();">Md</a>
 		    | 
-		    <a href="javascript:document.getElementById('lang').value='ru';this.submitRowCard.submit();">Ru</a>
+		    <a id="langRu" href="javascript:document.getElementById('lang').value='ru';this.submitRowCard.submit();">Ru</a>
 		    |
-			<a href="javascript:document.getElementById('lang').value='en';this.submitRowCard.submit();">En</a>
+			<a id="langEn" href="javascript:document.getElementById('lang').value='en';this.submitRowCard.submit();">En</a>
 		</span>
 		<div>
-			Current Locale : ${pageContext.response.locale}
+<%-- 			Current Locale : ${pageContext.response.locale} --%>
 			<a href="#">Înregistrarea în sistem</a>
 		</div>
 	</div>
 </form>
+
+
+<script type="text/javascript">
+
+switch ("${pageContext.response.locale}")
+{
+  case "md": $("#langMd").css( "color", "#990066" );	
+                    break;
+  case "ru": $("#langRu").css( "color", "#990066" );	
+                    break;
+  case "en": $("#langEn").css( "color", "#990066" );	
+                    break;
+  default: $("#langRu").css( "color", "#990066" );	
+}
+	
+</script>
 
 <div id="menu-container">
 	<a id="proceduri" 	href="proceduri" >			<spring:message code="label.module_name.proceduri"/></a>

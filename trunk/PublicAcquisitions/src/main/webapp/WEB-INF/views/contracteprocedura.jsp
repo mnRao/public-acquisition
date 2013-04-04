@@ -57,6 +57,7 @@ $(document).ready(function(){
 	
 	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
 	$("#explicatiiLink").html('<a href=explicatii?pid='+pid+'><img src="resources/images/vopros-icon.gif" /></a>');
+	$("#plingeriLink").html('<a href=plingeri?pid='+card.id+'><img src="resources/images/jaloba-icon.gif" /></a>');
 }); 
 
 </script>
@@ -72,7 +73,7 @@ $(document).ready(function(){
 </td>
 <td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div>
 </td>
-<td width="2%" align="center"><img src="resources/images/jaloba-icon.gif"  />
+<td width="2%" align="center"><div id="plingerLink"><img src="resources/images/jaloba-icon.gif"  /></div>
 </td>
 <td width="1%" align="center">&nbsp;
 </td>
