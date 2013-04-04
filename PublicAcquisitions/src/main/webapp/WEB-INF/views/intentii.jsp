@@ -58,7 +58,7 @@ $(document).ready(function(){
 	   		{name:'bulletinPublishDate',	index:'bulletinPublishDate', 	width:500},
 	   		{name:'bulletinNumber',			index:'bulletinNumber', 		width:500},
 	   		{name:'currentStatus.intentionStatus.'+curLangRef,		
-	   										index:'currentStatus.intentionStatus.'+curLangRef, 		
+	   										index:'intentionStatus.'+curLangRef, 		
 	   																		width:500},
 			{name:'forWhoPurchase',			index:'forWhoPurchase', 		width:500}	   																		
 	   																			   																		
@@ -147,7 +147,7 @@ $(document).ready(function(){
               }
           });
 		  
-          $("#pTenderType").width(300).kendoComboBox({
+          $("#pTenderType").width(350).kendoComboBox({
               index: -1,
               placeholder: "-- // --",
               dataTextField: curLangRef,
@@ -275,10 +275,10 @@ $(document).ready(function(){
 <div id="filtrationPanel" align="left">
 	<form action="" style="width: 90%;">
 	<fieldset>
-		<label for="pIntentionStatus" 	style="display:inline-block; width: 150px; text-align: right;">Statut:</label>
-			<input id="pIntentionStatus"/>
-		<label for="pTenderType" 		style="display:inline-block; width: 275px; text-align: right;">Tipul procedurii:</label>			
+		<label for="pTenderType" 		style="display:inline-block; width: 150px; text-align: right;">Tipul procedurii:</label>			
 			<input id="pTenderType" 	/>
+		<label for="pIntentionStatus" 	style="display:inline-block; width: 175px; text-align: right; visibility: hidden;">Statut:</label>
+			<input id="pIntentionStatus" style="visibility: hidden;"/>
 
 		<br>
 		<label for="pStateOrg" 			style="display:inline-block; width: 150px; text-align: right;">Autoritate contractanta:</label>	

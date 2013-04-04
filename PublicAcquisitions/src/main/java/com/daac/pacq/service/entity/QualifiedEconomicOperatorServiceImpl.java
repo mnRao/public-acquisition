@@ -1,6 +1,7 @@
 package com.daac.pacq.service.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,10 @@ public class QualifiedEconomicOperatorServiceImpl implements QualifiedEconomicOp
 		System.out.println("QualifiedEconomicOperatorServiceImpl - filter");
 		return dao.filter(filterString);
 	}
- 
+ 	
+	@Transactional
+	public List<QualifiedEconomicOperator>			search(Map<String, String[]> filtersMap) {
+		System.out.println("QualifiedEconomicOperatorServiceImpl - filter");
+		return dao.search(filtersMap);
+	}
 }

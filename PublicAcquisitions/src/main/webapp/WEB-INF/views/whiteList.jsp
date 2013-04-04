@@ -53,15 +53,127 @@ $(document).ready(function(){
 	    sortorder: "desc",
 	    caption:'<spring:message code="label.module_name.whiteList"/>',
 	    width: w,
-	    height: 300
+	    height: 300,
+	    postData: 	{ filters:{	
+	    	fDecisionNumb:		function() { return $('#pDecisionNumb').val(); }, 
+	    	fDecisionDateFrom:	function() { return $('#pDecisionDateFrom').val(); }, 
+	    	fDecisionDateTo:	function() { return $('#pDecisionDateTo').val(); }, 
+	    	fCode:				function() { return $('#pCode').val();},
+	    	fName:				function() { return $('#pName').val();},
+				}
+			}
 	});
 	
 	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+	
+	/*  Data FROM and TO - data pickers initialization and functionality */	
+    function startDecisionDateFromChange() {
+        var startDate = startDecisionDateFrom.value(),
+        endDate = endDecisionDateTo.value();
+
+        if (startDate) {
+            startDate = new Date(startDate);
+            startDate.setDate(startDate.getDate());
+            endDecisionDateTo.min(startDate);
+        } else if (endDate) {
+        	startDecisionDateFrom.max(new Date(endDate));
+        } else {
+            endDate = new Date();
+            startDecisionDateFrom.max(endDate);
+            endDecisionDateTo.min(endDate);
+        }
+    }
+
+    function endDecisionDateToChange() {
+        var endDate = endDecisionDateTo.value(),
+        startDate = startDecisionDateFrom.value();
+
+        if (endDate) {
+            endDate = new Date(endDate);
+            endDate.setDate(endDate.getDate());
+            startDecisionDateFrom.max(endDate);
+        } else if (startDate) {
+        	endDecisionDateTo.min(new Date(startDate));
+        } else {
+            endDate = new Date();
+            startDecisionDateFrom.max(endDate);
+            endDecisionDateTo.min(endDate);
+        }
+    }
+
+    var startDecisionDateFrom = $("#pDecisionDateFrom").kendoDatePicker({
+        change: startDecisionDateFromChange,
+        format: "dd.MM.yyyy"
+    }).data("kendoDatePicker");
+
+    var endDecisionDateTo = $("#pDecisionDateTo").kendoDatePicker({
+        change: endDecisionDateToChange,
+        format: "dd.MM.yyyy"
+    }).data("kendoDatePicker");
+
+    startDecisionDateFrom.max(endDecisionDateTo.value());
+    endDecisionDateTo.min(startDecisionDateFrom.value());
+/* ------------------------------------------------------------------------------------- */
+ 
+/* ------------------ FILTERS FUNCTION ----------------- */	  
+ 	
+	$("#resetFilter").click(function(){
+		
+		$("#pDecisionNumb").val("");
+		$("#pCode").val("");
+		$("#pName").val("");
+		
+		$("#pDecisionDateFrom").data("kendoDatePicker").max(null);
+		$("#pDecisionDateFrom").data("kendoDatePicker").value(null);
+		$("#pDecisionDateTo").data("kendoDatePicker").max(null);
+		$("#pDecisionDateTo").data("kendoDatePicker").value(null);
+		
+		$("#list").trigger("reloadGrid");
+	});
+	
+	$("#submitFilter").click(function(){
+		$("#list").trigger("reloadGrid");
+	});    
+/* ------------------------------------------------------------------------------------- */	
+ 
 }); 
 
 </script>
 <html>
 <center>
+
+<div id="filtrationPanel" align="left">
+	<form action="" style="width: 90%;">
+	<fieldset>
+		<label for="pDecisionNumb" 			style="display:inline-block; width: 150px; text-align: right;">
+		Numarul deciziei AAP:</label>	
+			<input id="pDecisionNumb" type="text" class="k-widget" style="width: 150px;" />
+		<label for="pDecisionDateFrom" 	style="display:inline-block; width: 150px; text-align: right;">
+		Data deciziei AAP de la:</label>	
+			<input id="pDecisionDateFrom" />
+		<label for="pDecisionDateTo" 	style="display:inline-block; width: 50px; text-align: right;">
+		pana la:</label>
+			<input id="pDecisionDateTo" />
+		<br>	
+		
+		<label for="pCode" 	style="display:inline-block; width: 150px; text-align: right;">
+		IDNO(ОКПО)/IDNP:</label>
+			<input id="pCode"/>
+		<label for="pName" 			style="display:inline-block; width: 150px; text-align: right;">
+		Denumirea/Numele:</label>	
+			<input id="pName" type="text" class="k-widget" style="width: 170px;" />
+
+
+		 <div class="form-buttons" style="display: inline-block;">
+		 	<label style="display:inline-block; width: 10px; text-align: right;"></label>		
+		  	<input id="submitFilter" 	type="button" value="Apply Filter" />
+		  	<input id="resetFilter" 	type="button" value="Reset Filter" />
+		 </div>		
+	</fieldset>					
+	</form>
+</div>
+
+<br>
 
 <table id="list">
 <thead style="background-color: #7196B0"/>

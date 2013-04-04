@@ -291,21 +291,59 @@ public class JSONController {
 	   @RequestMapping(value="/whiteList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody JQGridListWrapper<QualifiedEconomicOperator> whiteList(WebRequest request) { 
 		   System.out.println("JSONController - WHITE LIST");
-	    	System.out.println(request.toString());
-	    	List<QualifiedEconomicOperator> result = qualifiedEconomicOperatorService.list(); 
+		   System.out.println(request.toString());
+		   System.out.println(request.getParameterMap().toString());
+		   int currentPageNumber = request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):1;
+		   int rowsPerPage 		 = request.getParameter("rows")!=null?Integer.parseInt(request.getParameter("rows")):10;
+		   
+		   Iterator<String> userFiltersIter = request.getParameterNames();
+		   while ( userFiltersIter.hasNext() ){
+			   	  String paramName = userFiltersIter.next();
+			      System.out.println(paramName + " = " + request.getParameter(paramName) );
+			    }
+		   
+	    	List<QualifiedEconomicOperator> result = qualifiedEconomicOperatorService.search(request.getParameterMap());
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	JQGridListWrapper<QualifiedEconomicOperator> jdw = new JQGridListWrapper<QualifiedEconomicOperator>(10, 1, result.size(), result);  
-	    	return jdw;  
+
+	    	int totalPages = result.size()/rowsPerPage + (result.size()%rowsPerPage>0?1:0);
+	    	System.out.println("totalPages :" + totalPages);
+	    	
+	    	if (currentPageNumber > totalPages) currentPageNumber = 1;
+	    	int vFromIndex = rowsPerPage * (currentPageNumber-1);
+	    	int vToIndex = (rowsPerPage * currentPageNumber >result.size())?(result.size()):(rowsPerPage * currentPageNumber);
+	    	
+	    	JQGridListWrapper<QualifiedEconomicOperator> jdw = 
+	    			new JQGridListWrapper<QualifiedEconomicOperator>(totalPages, currentPageNumber, result.size(), result.subList(vFromIndex, vToIndex ));  
+	    	 return jdw;  	    	
 	    }	
 	   
 	   @RequestMapping(value="/blackList",  method = { RequestMethod.GET, RequestMethod.POST })
 		public @ResponseBody JQGridListWrapper<NotAllowedEconomicOperator> blackList(WebRequest request) { 
 		   System.out.println("JSONController - BLACK LIST");
-	    	System.out.println(request.toString());
-	    	List<NotAllowedEconomicOperator> result = notAllowedEconomicOperatorService.list(); 
+		   System.out.println(request.toString());
+		   System.out.println(request.getParameterMap().toString());
+		   int currentPageNumber = request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):1;
+		   int rowsPerPage 		 = request.getParameter("rows")!=null?Integer.parseInt(request.getParameter("rows")):10;
+		   
+		   Iterator<String> userFiltersIter = request.getParameterNames();
+		   while ( userFiltersIter.hasNext() ){
+			   	  String paramName = userFiltersIter.next();
+			      System.out.println(paramName + " = " + request.getParameter(paramName) );
+			    }
+		   
+	    	List<NotAllowedEconomicOperator> result = notAllowedEconomicOperatorService.search(request.getParameterMap());
 	    	System.out.println("RECORDS RCVD = " + result.size());
-	    	JQGridListWrapper<NotAllowedEconomicOperator> jdw = new JQGridListWrapper<NotAllowedEconomicOperator>(10, 1, result.size(), result);  
-	    	return jdw;  
+
+	    	int totalPages = result.size()/rowsPerPage + (result.size()%rowsPerPage>0?1:0);
+	    	System.out.println("totalPages :" + totalPages);
+	    	
+	    	if (currentPageNumber > totalPages) currentPageNumber = 1;
+	    	int vFromIndex = rowsPerPage * (currentPageNumber-1);
+	    	int vToIndex = (rowsPerPage * currentPageNumber >result.size())?(result.size()):(rowsPerPage * currentPageNumber);
+	    	
+	    	JQGridListWrapper<NotAllowedEconomicOperator> jdw = 
+	    			new JQGridListWrapper<NotAllowedEconomicOperator>(totalPages, currentPageNumber, result.size(), result.subList(vFromIndex, vToIndex ));  
+	    	 return jdw;  	    	
 	    }
 	   
 	   @RequestMapping(value="/tenderCard",  method = { RequestMethod.GET, RequestMethod.POST })
