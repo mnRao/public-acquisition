@@ -54,6 +54,10 @@
     <definition name="explicatii"  extends="baseLayout">
         <put-attribute name="body" 		value="/WEB-INF/views/explicatii.jsp" />
     </definition>
+    
+    <definition name="plingeri"  extends="baseLayout">
+        <put-attribute name="body" 		value="/WEB-INF/views/plingeri.jsp" />
+    </definition>
 
 
 

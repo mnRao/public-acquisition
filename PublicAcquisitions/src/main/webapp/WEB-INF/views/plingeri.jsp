@@ -6,27 +6,17 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	setMenuSelection("explicatii");
+	setMenuSelection("proceduri");
 	
 	var pid = ${tenderId};
 	var curLangRef = "${pageContext.response.locale}" + 'Value';
 	var content='';
-	$("#xxx").val(pid);
 	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
 	$("#contracteLink").html('<a href=contracteprocedura?pid='+pid+'><img src="resources/images/contracte-icon.gif" /></a>');
-	$("#plingeriLink").html('<a href=plingeri?pid='+card.id+'><img src="resources/images/jaloba-icon.gif" /></a>');
+	$("#explicatiiLink").html('<a href=explicatii?pid='+pid+'><img src="resources/images/vopros-icon.gif" /></a>');
 	
-	var jqxhr = $.getJSON( "json/explicatiiList", {id:pid}, function(list) {
-		$.each(list.rows, function(key, value) {
-			content=content+'<br><hr width="90%"><br><table width="90%">'
-			+'<tr><td width="20%""><spring:message code="label.numExpl"/></td><td> '+ value.questionNumb+'</td></tr>'
-			+'<tr><td><spring:message code="label.dateExpl"/></td><td> '+ value.askedDate+'</td></tr>'
-			+'<tr><td><spring:message code="label.explTxt"/></td><td> '+ value.questionText+'</td></tr>'
-			+'<tr><td colspan="2"><spring:message code="label.raspTxt"/></td></tr>'
-			+'<tr><td colspan="2">'+ value.answerText+'</td></tr>'
-			+'</table>';
-			//$("#xxx").val(value.questionText);
-			});
+	var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
+		content='<br><hr width="90%"><br><spring:message code="label.plingeriCount"/>'+card.complaintCount+'<br><hr width="90%"><br>';
 		$("#pageContent").html(content);
 	}); 
 }); 
@@ -43,7 +33,7 @@ $(document).ready(function(){
 </td>
 <td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
 </td>
-<td width="2%" align="center"><div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div>
+<td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif"  /></div>
 </td>
 <td width="1%" align="center">&nbsp;
 </td>
@@ -52,8 +42,8 @@ $(document).ready(function(){
 </table>
 <div id="titleLine">
 	<br>
-	<img src="resources/images/explic_1.png" />
-	<spring:message code="label.explicatii"/>
+	<img src="resources/images/JALOBA.png" />
+	<spring:message code="label.plingeri"/>
 </div>
 <div id=pageContent>
 </div>	   	

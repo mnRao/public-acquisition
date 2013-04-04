@@ -41,8 +41,8 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
                       break;
     default: $("#tenderStatus").val(card.tenderStatus.ruValue);
   }
-  $("#bulletinNumber").val(card.bulletin.bulletinNumb);
-  $("#bulletinDate").val(card.bulletin.publDate);		
+  $("#bulletinNumber").val(card.bulletin?card.bulletin.bulletinNumb:"");
+  $("#bulletinDate").val(card.bulletin?card.bulletin.publDate:"");		
   $("#goodsDescr").val(card.tenderData.goodsDescr);		
   
   $("#pressOffersPlace").val(card.tenderData.pressOffersPlace);	
@@ -80,6 +80,7 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
   $("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+card.bulletin.publDate+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
   $("#explicatiiLink").html('<a href=explicatii?pid='+card.id+'><img src="resources/images/vopros-icon.gif" /></a>');
   $("#contracteLink").html('<a href=contracteprocedura?pid='+card.id+'><img src="resources/images/contracte-icon.gif" /></a>');
+  $("#plingeriLink").html('<a href=plingeri?pid='+card.id+'><img src="resources/images/jaloba-icon.gif" /></a>');
   $("#list").jqGrid('setGridParam', { postData: { id:card.tenderData.id} , datatype: 'json'}).trigger('reloadGrid');
  
   
@@ -139,7 +140,7 @@ $("#list").jqGrid({
 </td>
 <td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
 </td>
-<td width="2%" align="center"><img src="resources/images/jaloba-icon.gif"  />
+<td width="2%" align="center"><div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div>
 </td>
 <td width="1%" align="center">&nbsp;
 </td>

@@ -101,6 +101,13 @@ public class AppController {
     	 return "contracteprocedura";    
     }    
     
+    @RequestMapping("/plingeri") 
+    public String plingeri(Map<String, Object> map, WebRequest request, Principal principal) {
+    	System.out.println("AppController - plingeri for Id="+request.getParameter("pid"));
+    	map.put("tenderId", request.getParameter("pid"));
+    	 return "plingeri";    
+    }    
+    
     @RequestMapping("/index2") 
     public String index2(Map<String, Object> map, WebRequest request, Principal principal) {
     	System.out.println("AppController - index2 ");
