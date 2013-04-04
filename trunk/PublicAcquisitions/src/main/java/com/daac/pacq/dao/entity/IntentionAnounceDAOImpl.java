@@ -71,6 +71,11 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 		String vOrderByMode		= "asc";
 		
 		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(IntentionAnounce.class);
+		crit.createCriteria("currentStatus", "currentStatus").createCriteria("intentionStatus", "intentionStatus");
+		crit.createCriteria("tenderType","tenderType");
+		crit.createCriteria("budgetPeriod","budgetPeriod");
+		crit.createCriteria("stateOrg","stateOrg");
+		crit.add( Restrictions.in( "intentionStatus.id", new Integer[] { 3 } ) );
 		
 		Date vBulletinDataFrom = null, vBulletinDataTo = null, vApproveDataFrom = null, vApproveDataTo = null;
 			try {
@@ -88,8 +93,201 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 		    if (entry.getKey().toLowerCase().contains("filters[fIntentionStatus]".toLowerCase()) &&
 		    		entry.getValue()[0].length()>0) {
 		    	System.out.println("Parse INTENTION STATUS");
-		    	crit.createCriteria("currentStatus").createCriteria("intentionStatus").
-		    		add(Restrictions.eq("id", Integer.parseInt(entry.getValue()[0])));
+		    	//crit.createCriteria("currentStatus").createCriteria("intentionStatus");
+		    	crit.add(Restrictions.eq("intentionStatus.id", Integer.parseInt(entry.getValue()[0])));
+		    	
+		    }
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fTenderType]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse INTENTION TENDER TYPE");
+//		    	crit.createCriteria("tenderType").
+		    	crit.add(Restrictions.eq("tenderType.id", Integer.parseInt(entry.getValue()[0])));
+		    }
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fGoodsDescription]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse POSITION DESCRIPTION");
+		    	crit.add(Restrictions.like("positionDescr", entry.getValue()[0], MatchMode.ANYWHERE  ).ignoreCase());
+		    }		    
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fForWhoPurchase]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse FOR WHO PURCHASE");
+		    	crit.add(Restrictions.like("forWhoPurchase", entry.getValue()[0], MatchMode.ANYWHERE  ).ignoreCase());
+		    }		    
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fStateOrg]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse STATE ORG NAME");
+//		    	crit.createCriteria("stateOrg").
+		    	crit.add(Restrictions.like("stateOrg.orgName", entry.getValue()[0], MatchMode.ANYWHERE ).ignoreCase());
+		    }
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fBulletinNumber]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse BULLETIN NUMBER ");
+		    	crit.add(Restrictions.like("bulletinNumber", entry.getValue()[0], MatchMode.ANYWHERE ).ignoreCase());
+		    }	
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fBulletinDataFrom]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse BULLETIN FROM ");
+			    	try {
+			    	vBulletinDataFrom =  new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(entry.getValue()[0]);
+			    	vBulletinPublishDateRestricted 	= true;
+			    	} catch (ParseException e) {e.printStackTrace();}
+		    }
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fBulletinDataTo]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse BULLETIN TO ");
+			    	try {
+					vBulletinDataTo =  new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(entry.getValue()[0]);
+					vBulletinPublishDateRestricted 	= true;
+					} catch (ParseException e) {e.printStackTrace();}		    	
+		    }
+		    
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fApproveDataFrom]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse APPROVE DATA FROM ");
+			    	try {
+			    	vApproveDataFrom =  new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(entry.getValue()[0]);
+			    	vApproveDateRestricted 	= true;
+			    	} catch (ParseException e) {e.printStackTrace();}
+		    }
+		    
+		    if (entry.getKey().toLowerCase().contains("filters[fApproveDataTo]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse APPROVE DATA TO ");
+			    	try {
+					vApproveDataTo =  new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse(entry.getValue()[0]);
+					vApproveDateRestricted 	= true;
+					} catch (ParseException e) {e.printStackTrace();}		    	
+		    }
+		    
+		    
+			 /* SORTING */		    
+		    if (entry.getKey().toLowerCase().contains("sord".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse ORDER MODE ");
+		    	vOrderByMode = entry.getValue()[0];
+		    }		    
+		    
+		    if (entry.getKey().toLowerCase().contains("sidx".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse ORDER FIELD ");
+		    	vOrderByFieldName = entry.getValue()[0];
+		    }
+		    
+		}
+	
+		if (vBulletinPublishDateRestricted) {
+			crit.add(Restrictions.between("bulletinPublishDate",vBulletinDataFrom,vBulletinDataTo));	
+		}
+		 if (vApproveDateRestricted){
+			crit.add(Restrictions.between("publishDate",vApproveDataFrom,vApproveDataTo));	 
+		}
+		 
+		
+		 if (vOrderByMode.equalsIgnoreCase("desc")) {
+			 crit.addOrder( Order.desc(vOrderByFieldName));
+		 } else {
+			 crit.addOrder( Order.asc(vOrderByFieldName));
+		 } 
+		 
+//		 if (vOrderByFieldName.contains(".")){
+//			 String lCriteria= "", lFieldName= "";	
+//			 lCriteria = vOrderByFieldName.substring(0, vOrderByFieldName.indexOf("."));
+//			 lFieldName = vOrderByFieldName.substring( vOrderByFieldName.indexOf(".") + 1, vOrderByFieldName.length() );
+//			 System.out.println(" Associated Ordering criteria = " + lCriteria );
+//			 System.out.println(" Remained   Ordering field = " + lFieldName);
+//			 vOrderByFieldName = lFieldName;
+//			 
+//			 if (vOrderByMode.equalsIgnoreCase("desc")) {
+//				 if (vOrderByFieldName.contains(".")) {
+//					 String zCriteria= "", zFieldName= "";	
+//					 zCriteria = vOrderByFieldName.substring(0, vOrderByFieldName.indexOf("."));
+//					 zFieldName = vOrderByFieldName.substring( vOrderByFieldName.indexOf(".") + 1, vOrderByFieldName.length() );
+//					 System.out.println(" Associated Z Ordering criteria = " + zCriteria );
+//					 System.out.println(" Remained  Z Ordering field = " + zFieldName);
+//					 vOrderByFieldName = zFieldName;
+//					 crit.createCriteria(lCriteria).createCriteria(zCriteria).addOrder( Order.desc(vOrderByFieldName));
+//				 } else {
+//					 crit.createCriteria(lCriteria).addOrder( Order.desc(vOrderByFieldName));
+//				 }
+//			 } else {
+//				 if (vOrderByFieldName.contains(".")) {
+//					 String zCriteria= "", zFieldName= "";	
+//					 zCriteria = vOrderByFieldName.substring(0, vOrderByFieldName.indexOf("."));
+//					 zFieldName = vOrderByFieldName.substring( vOrderByFieldName.indexOf(".") + 1, vOrderByFieldName.length() );
+//					 System.out.println(" Associated Z Ordering criteria = " + zCriteria );
+//					 System.out.println(" Remained  Z Ordering field = " + zFieldName);
+//					 vOrderByFieldName = zFieldName;
+//					 crit.createCriteria(lCriteria).createCriteria(zCriteria).addOrder( Order.asc(vOrderByFieldName));
+//				 } else {
+//					 crit.createCriteria(lCriteria).addOrder( Order.asc(vOrderByFieldName));
+//				 }
+//			 }
+//			 
+//		 } else {
+//			 if (vOrderByMode.equalsIgnoreCase("desc")) {
+//				 crit.addOrder( Order.desc(vOrderByFieldName));
+//			 } else {
+//				 crit.addOrder( Order.asc(vOrderByFieldName));
+//			 } 
+//		 }
+		 
+		
+		 
+		 
+
+//			sidx
+//			rows
+//			sord
+//			page
+//			nd
+//			_search
+		 
+		 
+		 
+		 
+		List<IntentionAnounce>  result = crit.list();
+		return result;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<IntentionAnounce> 		search_backup(Map<String, String[]> filtersMap) {
+		System.out.println("IntentionAnounceDAOImpl - search");
+		Boolean vBulletinPublishDateRestricted 	= false;
+		Boolean vApproveDateRestricted 			= false;
+		
+		String vOrderByFieldName	= "id";
+		String vOrderByMode		= "asc";
+		
+		Criteria crit =  sessionFactory.getCurrentSession().createCriteria(IntentionAnounce.class);
+		crit.createCriteria("currentStatus", "currentStatus").createCriteria("intentionStatus", "intentionStatus");
+		
+		Date vBulletinDataFrom = null, vBulletinDataTo = null, vApproveDataFrom = null, vApproveDataTo = null;
+			try {
+				vBulletinDataFrom = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse("01.01.1900");
+				vBulletinDataTo = 	new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse("31.12.2999");
+				vApproveDataFrom = 	new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse("01.01.1900");
+				vApproveDataTo = 	new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).parse("31.12.2999");
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+
+		for (Map.Entry<String, String[]> entry : filtersMap.entrySet())
+		{
+		    System.out.println(entry.getKey() + "/" + entry.getValue()[0]);
+		    if (entry.getKey().toLowerCase().contains("filters[fIntentionStatus]".toLowerCase()) &&
+		    		entry.getValue()[0].length()>0) {
+		    	System.out.println("Parse INTENTION STATUS");
+		    	crit.add(Restrictions.eq("intentionStatus.id", Integer.parseInt(entry.getValue()[0])));
+		    	
 		    }
 		    
 		    if (entry.getKey().toLowerCase().contains("filters[fTenderType]".toLowerCase()) &&
@@ -194,9 +392,29 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 			 vOrderByFieldName = lFieldName;
 			 
 			 if (vOrderByMode.equalsIgnoreCase("desc")) {
-				 crit.createCriteria(lCriteria).addOrder( Order.desc(vOrderByFieldName));
+				 if (vOrderByFieldName.contains(".")) {
+					 String zCriteria= "", zFieldName= "";	
+					 zCriteria = vOrderByFieldName.substring(0, vOrderByFieldName.indexOf("."));
+					 zFieldName = vOrderByFieldName.substring( vOrderByFieldName.indexOf(".") + 1, vOrderByFieldName.length() );
+					 System.out.println(" Associated Z Ordering criteria = " + zCriteria );
+					 System.out.println(" Remained  Z Ordering field = " + zFieldName);
+					 vOrderByFieldName = zFieldName;
+					 crit.createCriteria(lCriteria).createCriteria(zCriteria).addOrder( Order.desc(vOrderByFieldName));
+				 } else {
+					 crit.createCriteria(lCriteria).addOrder( Order.desc(vOrderByFieldName));
+				 }
 			 } else {
-				 crit.createCriteria(lCriteria).addOrder( Order.asc(vOrderByFieldName));
+				 if (vOrderByFieldName.contains(".")) {
+					 String zCriteria= "", zFieldName= "";	
+					 zCriteria = vOrderByFieldName.substring(0, vOrderByFieldName.indexOf("."));
+					 zFieldName = vOrderByFieldName.substring( vOrderByFieldName.indexOf(".") + 1, vOrderByFieldName.length() );
+					 System.out.println(" Associated Z Ordering criteria = " + zCriteria );
+					 System.out.println(" Remained  Z Ordering field = " + zFieldName);
+					 vOrderByFieldName = zFieldName;
+					 crit.createCriteria(lCriteria).createCriteria(zCriteria).addOrder( Order.asc(vOrderByFieldName));
+				 } else {
+					 crit.createCriteria(lCriteria).addOrder( Order.asc(vOrderByFieldName));
+				 }
 			 }
 			 
 		 } else {
@@ -223,8 +441,7 @@ public class IntentionAnounceDAOImpl implements IntentionAnounceDAO {
 		 
 		List<IntentionAnounce>  result = crit.list();
 		return result;
-	}
-	
+	}	
 }
 
 

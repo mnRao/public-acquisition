@@ -1,6 +1,7 @@
 package com.daac.pacq.service.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,4 +34,9 @@ public class NotAllowedEconomicOperatorServiceImpl implements NotAllowedEconomic
 		return dao.filter(filterString);
 	}
  
+	@Transactional
+	public List<NotAllowedEconomicOperator>			search(Map<String, String[]> filtersMap) {
+		System.out.println("NotAllowedEconomicOperatorServiceImpl - search");
+		return dao.search(filtersMap);
+	}	
 }

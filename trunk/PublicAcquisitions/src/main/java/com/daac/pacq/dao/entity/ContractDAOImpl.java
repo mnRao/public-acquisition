@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.daac.pacq.domain.entity.Contract;
-import com.daac.pacq.domain.entity.Tender;
 
 
 /**
