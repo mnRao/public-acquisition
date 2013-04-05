@@ -24,31 +24,31 @@ label.tendeOpenDate=Data deschiderii
 label.bulletinNumber=Număr bulletin
 label.bulletinDate=Data bulletin
 label.summa=Suma
-label.pressOffersPlace=Место предоставления офферт
-label.pressOffersDate=Срок предоставления оферт
-label.openDateTime=Дата и время вскрытия оферт
-label.language=Язык документации
-label.deliveryDate=Дата доставки
-label.deliveryTerms=Условия поствки
-label.offerEstimateByPrice=Оценка оферт
-label.forResidenceOnlyReason=Только резиденты Молдовы на основнии
-label.goodsName=Наименование товара
-label.codeCPV=Код CPV
-label.quantity=Количество
-label.um=Еденица измерения
+label.pressOffersPlace=Locul depunerii ofertelor
+label.pressOffersDate=Termenul de depunere a ofertelor
+label.openDateTime=Data şi ora deschiderii ofertelor
+label.language=Limba documentaţiei
+label.deliveryDate=Data livrării
+label.deliveryTerms=Condiţiile de livrare
+label.offerEstimateByPrice=Evaluarea ofertelor după preț
+label.forResidenceOnlyReason=Doar rezidenţii Moldovei în baza 
+label.goodsName=Denumirea mărfii
+label.codeCPV=Codul CPV
+label.quantity=Cantitatea
+label.um=Unitatea de măsură
 
 #Questions
-label.explicatii=Разъяснения
-label.numExpl=Номер разъяснения
-label.dateExpl=Дата
-label.explTxt=Вопрос/Демарш
-label.raspTxt=Ответ
+label.explicatii=Explicaţii
+label.numExpl=Număr
+label.dateExpl=Data
+label.explTxt=Întrebarea/Demersul
+label.raspTxt=Răspunsul
 
 
 #Intentions
 label.intentionRegNumber=Numărul intenției
 label.budgetPeriod_year=Perioada bugetară
-label.quarter=Semestru
+label.quarter=Trimestru
 
 label.intentii.procedureType=Tipul procedurii:
 label.intentii.status=Statut:
@@ -59,6 +59,7 @@ label.intentii.approveDateFrom=Data aprobării de la:
 label.intentii.bulletinDateFrom=Data bulletinului de la:
 label.intentii.dateTo=pîna la:
 label.intentii.aquisitionObject=Obiectul de achiziție:
+
 
 label.intentionCard_regNumber=Nr. de inregistrare
 label.intentionCard_publicatInBuletin=Publicat in buletinul numarul
@@ -79,37 +80,32 @@ label.intentionCard_telefon=Telefon
 label.intentionCard_email=E-mail
 
 #Contracts
-label.contracts=Контракты
-label.contractNumber=Номер контракта
-label.contractType=Тип контракта
-label.contractDate=Дата контракта
-label.participant=Учатник
-label.zO=Закупающий орган
-label.goodsDescr=Краткое описание товара/услуги
-label.amountTVA=Стоимость контракта с НДС
+label.contracts=Contracte
+label.contractNumber=Numărul contractului
+label.contractType=Tip contractului
+label.contractDate=Data contractului
+label.participant=Participant
+label.zO=Autoritatea contractantă
+label.goodsDescr=Denumirea scurtă a obiectului de achiziţie
+label.amountTVA=Suma contractului cu TVA
 #W/B lists
-label.decisionNumb=Номер решения АГЗ
-label.decisionDate=Дата решения АГЗ
-label.juristicPerson=Признак ЮЛ/ФЛ 
+label.decisionNumb=Numărul deciziei AAP
+label.decisionDate=Data deciziei AAP
+label.juristicPerson=Marcaj PJ/PF
 label.code=IDNO (ОКПО) / IDNP
-label.legalForm=Организационно-юридическая форма
-label.name=Наименование ЮЛ/ФИО ФЛ 
-label.address=Контактный адресс
-label.phone=Телефон
+label.legalForm=Forma organizatorico-juridică
+label.name=Denumirea PJ/Numele PF 
+label.address=Adresa de contact
+label.phone=Telefon
 label.email=E-mail
 
-#Plingeri
-label.plingeri=Жалобы
-label.plingeriCount=Количество жалоб:
-label.plingeriNo=Жалоб нет
-
-label.header1=Licitație publica №
-label.header2=din
-label.header3=pentru 
- 
 #Plingeri
 label.plingeri=Plingeri
 label.plingeriCount=Numărul plingerii:
 label.plingeriNo=Plingeri nus
-  
+
+label.header1=Licitație publica №
+label.header2=din
+label.header3=pentru 
+
 label.footer=&copy; ViralPatel.net
