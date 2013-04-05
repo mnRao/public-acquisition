@@ -276,35 +276,47 @@ $(document).ready(function(){
 <div id="filtrationPanel" align="left">
 	<form action="" style="width: 90%;">
 	<fieldset>
-		<label for="pTenderType" 		style="display:inline-block; width: 150px; text-align: right;">Tipul procedurii:</label>			
+		<label for="pTenderType" 		style="display:inline-block; width: 150px; text-align: right;">
+		Tipul procedurii:</label>			
 			<input id="pTenderType" 	/>
-		<label for="pIntentionStatus" 	style="display:inline-block; width: 175px; text-align: right; visibility: hidden;">Statut:</label>
+		<label for="pIntentionStatus" 	style="display:inline-block; width: 175px; text-align: right; visibility: hidden;">
+		Statut:</label>
 			<input id="pIntentionStatus" style="visibility: hidden;"/>
 
 		<br>
-		<label for="pStateOrg" 			style="display:inline-block; width: 150px; text-align: right;">Autoritate contractanta:</label>	
+		<label for="pStateOrg" 			style="display:inline-block; width: 150px; text-align: right;">
+		Autoritate contractanta:</label>	
 			<input id="pStateOrg" type="text" class="k-widget" style="width: 350px;" />
-		<label for="pForWhoPurchase" 	style="display:inline-block; width: 126px; text-align: right;">	Destinatie achizitiei:</label>		
+		<label for="pForWhoPurchase" 	style="display:inline-block; width: 126px; text-align: right;">
+		Destinatie achizitiei:</label>		
 			<input id="pForWhoPurchase" type="text" class="k-widget" style="width: 300px;" />
 		<br>
-		<label for="pBulletinDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Data bulletinului de la:</label>	
+		<label for="pBulletinDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">
+		Data bulletinului de la:</label>	
 			<input id="pBulletinDataFrom" />
-		<label for="pBulletinDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	pana la:</label>
+		<label for="pBulletinDataTo" 	style="display:inline-block; width: 50px; text-align: right;">
+		pana la:</label>
 			<input id="pBulletinDataTo" />
-		<label for="pBulletinNumber" 	style="display:inline-block; width: 120px; text-align: right;">	Numarul bulletinului:</label>		
+		<label for="pBulletinNumber" 	style="display:inline-block; width: 120px; text-align: right;">
+		Numarul bulletinului:</label>		
 			<input id="pBulletinNumber" type="text" class="k-widget" /> 			
 		<br>        		
-		<label for="pApproveDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Data aprobarii de la:</label>		
+		<label for="pApproveDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">
+		Data aprobarii de la:</label>		
 			<input id="pApproveDataFrom" type="text" />
-		<label for="pApproveDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	pana la:</label>					
+		<label for="pApproveDataTo" 	style="display:inline-block; width: 50px; text-align: right;">
+		pana la:</label>					
 			<input id="pApproveDataTo" type="text" />
 		<br>	
-		<label for="pGoodsDescription" 	style="display:inline-block; width: 150px; text-align: right;">	Obiectul de achizitie:</label>		
+		<label for="pGoodsDescription" 	style="display:inline-block; width: 150px; text-align: right;">
+		Obiectul de achizitie:</label>		
 			<input id="pGoodsDescription" type="text" class="k-widget" style="width: 350px;" />
 		 <div class="form-buttons" style="display: inline-block;">
 		 	<label style="display:inline-block; width: 250px; text-align: right;"></label>		
-		  	<input id="submitFilter" 	type="button" value="Apply Filter" />
-		  	<input id="resetFilter" 	type="button" value="Reset Filter" />
+		  	<input id="submitFilter" 	type="button" 
+		  	value="Apply Filter" />
+		  	<input id="resetFilter" 	type="button" 
+		  	value="Reset Filter" />
 		 </div>		
 	</fieldset>					
 	</form>
