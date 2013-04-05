@@ -81,6 +81,7 @@ public class TenderDAOImpl implements TenderDAO {
 		crit.createCriteria("stateOrg","stateOrg");
 		crit.createCriteria("tenderData","tenderData");
 		crit.add( Restrictions.in( "tenderStatus.id", new Integer[] { 2,3,4,5,6,8,9,10} ) );
+		crit.add( Restrictions.isNotNull("bulletin"));
 		
 		Date vProcedureOpenDataFrom = null, vProcedureOpenDataTo = null;
 			try {
