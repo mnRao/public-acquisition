@@ -146,28 +146,30 @@ $(document).ready(function(){
 	<form action="" style="width: 90%;">
 	<fieldset>
 		<label for="pDecisionNumb" 			style="display:inline-block; width: 150px; text-align: right;">
-		Numarul deciziei AAP:</label>	
+		<spring:message code="label.bw.decisionNumb"/></label>	
 			<input id="pDecisionNumb" type="text" class="k-widget" style="width: 150px;" />
-		<label for="pDecisionDateFrom" 	style="display:inline-block; width: 150px; text-align: right;">
-		Data deciziei AAP de la:</label>	
+		<label for="pDecisionDateFrom" 	style="display:inline-block; width: 175px; text-align: right;">
+		<spring:message code="label.bw.decisionDateFrom"/></label>	
 			<input id="pDecisionDateFrom" />
 		<label for="pDecisionDateTo" 	style="display:inline-block; width: 50px; text-align: right;">
-		pana la:</label>
+		<spring:message code="label.bw.dateTo"/></label>
 			<input id="pDecisionDateTo" />
 		<br>	
 		
 		<label for="pCode" 	style="display:inline-block; width: 150px; text-align: right;">
-		IDNO(ОКПО)/IDNP:</label>
+		<spring:message code="label.bw.code"/></label>
 			<input id="pCode"/>
-		<label for="pName" 			style="display:inline-block; width: 150px; text-align: right;">
-		Denumirea/Numele:</label>	
+		<label for="pName" 			style="display:inline-block; width: 175px; text-align: right;">
+		<spring:message code="label.bw.name"/></label>	
 			<input id="pName" type="text" class="k-widget" style="width: 170px;" />
 
 
 		 <div class="form-buttons" style="display: inline-block;">
-		 	<label style="display:inline-block; width: 10px; text-align: right;"></label>		
-		  	<input id="submitFilter" 	type="button" value="Apply Filter" />
-		  	<input id="resetFilter" 	type="button" value="Reset Filter" />
+		 	<label style="display:inline-block; width: 1px; text-align: right;"></label>		
+		  	<input id="submitFilter" 	type="button" 
+		  	value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
+		  	<input id="resetFilter" 	type="button" 
+		  	value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
 		 </div>		
 	</fieldset>					
 	</form>
