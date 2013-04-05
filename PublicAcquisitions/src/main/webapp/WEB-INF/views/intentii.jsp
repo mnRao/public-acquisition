@@ -75,6 +75,7 @@ $(document).ready(function(){
 	    caption:'<spring:message code="label.module_name.intentii"/>',
 	    width: w,
 	    height: 300,
+	    hidegrid: false,
 	    postData: 	{ filters:{	
 	    	fIntentionStatus:		function() { return getKendoComboBoxSelectedValue($('#pIntentionStatus').data("kendoComboBox"));}, 
 	    	fTenderType: 			function() { return getKendoComboBoxSelectedValue($('#pTenderType').data("kendoComboBox"));}, 

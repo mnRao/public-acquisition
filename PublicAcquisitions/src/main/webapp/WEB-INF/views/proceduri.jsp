@@ -46,9 +46,10 @@ $(document).ready(function(){
 	   	sortname: 'id',
 	    viewrecords: true,
 	    sortorder: "desc",
-	    caption:'',
+	    caption:'<spring:message code="label.module_name.proceduri"/>',
 	    width: w,
 	    height: 300,
+	    hidegrid: false,
 	    postData: 	{ filters:{	
 	    	fTenderStatus:				function() { return getKendoComboBoxSelectedValue($('#pTenderStatus').data("kendoComboBox"));}, 
 	    	fProcedureOpenDataFrom:		function() { return $('#pProcedureOpenDataFrom').val(); }, 
