@@ -40,7 +40,7 @@ $(document).ready(function(){
 	   		{name:'contractDate',				index:'contractDate',					width:500},
 	   		{name:'participant.fullName',		index:'participant.fullName',			width:500},
 	   		{name:'tender.stateOrg.orgName',	index:'tender.stateOrg.orgName', 		width:500},
-	   		{name:'tender.tenderData.goodsDescr',	index:'tender.tenderData.goodsDescr', 				width:500},
+	   		{name:'tender.tenderData.goodsDescr',	index:'tender.tenderData.goodsDescr', 				width:500, sortable: false},
 	   		{name:'amount',						index:'amount', 						width:500}
 	   	],
 	   	rowNum:10,
@@ -55,9 +55,13 @@ $(document).ready(function(){
 	    postData: 	{ id:		pid}
 	});
 	
+	var jqxhrh = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
+		$("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+ (card.bulletin?card.bulletin.publDate:"")+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
+	}); 
+	
 	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
 	$("#explicatiiLink").html('<a href=explicatii?pid='+pid+'><img src="resources/images/vopros-icon.gif" /></a>');
-	$("#plingeriLink").html('<a href=plingeri?pid='+card.id+'><img src="resources/images/jaloba-icon.gif" /></a>');
+	$("#plingeriLink").html('<a href=plingeri?pid='+pid+'><img src="resources/images/jaloba-icon.gif" /></a>');
 }); 
 
 </script>
@@ -73,7 +77,7 @@ $(document).ready(function(){
 </td>
 <td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div>
 </td>
-<td width="2%" align="center"><div id="plingerLink"><img src="resources/images/jaloba-icon.gif"  /></div>
+<td width="2%" align="center"><div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div>
 </td>
 <td width="1%" align="center">&nbsp;
 </td>

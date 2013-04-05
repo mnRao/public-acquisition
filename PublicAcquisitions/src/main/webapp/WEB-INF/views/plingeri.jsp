@@ -18,6 +18,7 @@ $(document).ready(function(){
 	var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 		content='<br><hr width="90%"><br><spring:message code="label.plingeriCount"/>'+card.complaintCount+'<br><hr width="90%"><br>';
 		$("#pageContent").html(content);
+		$("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+ (card.bulletin?card.bulletin.publDate:"")+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
 	}); 
 }); 
 

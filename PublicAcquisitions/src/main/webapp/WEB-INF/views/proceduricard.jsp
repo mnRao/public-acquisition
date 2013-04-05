@@ -77,7 +77,7 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
   $("#offerEstimateByPrice").val(card.tenderData.offerEstimateByPrice);		
   $("#forResidenceOnlyReason").val(card.tenderData.forResidenceOnlyReason);
   
-  $("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+card.bulletin.publDate+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
+  $("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+ (card.bulletin?card.bulletin.publDate:"")+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
   $("#explicatiiLink").html('<a href=explicatii?pid='+card.id+'><img src="resources/images/vopros-icon.gif" /></a>');
   $("#contracteLink").html('<a href=contracteprocedura?pid='+card.id+'><img src="resources/images/contracte-icon.gif" /></a>');
   $("#plingeriLink").html('<a href=plingeri?pid='+card.id+'><img src="resources/images/jaloba-icon.gif" /></a>');

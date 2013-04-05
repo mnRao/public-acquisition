@@ -14,7 +14,7 @@ $(document).ready(function(){
 	$("#xxx").val(pid);
 	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
 	$("#contracteLink").html('<a href=contracteprocedura?pid='+pid+'><img src="resources/images/contracte-icon.gif" /></a>');
-	$("#plingeriLink").html('<a href=plingeri?pid='+card.id+'><img src="resources/images/jaloba-icon.gif" /></a>');
+	$("#plingeriLink").html('<a href=plingeri?pid='+pid+'><img src="resources/images/jaloba-icon.gif" /></a>');
 	
 	var jqxhr = $.getJSON( "json/explicatiiList", {id:pid}, function(list) {
 		$.each(list.rows, function(key, value) {
@@ -29,6 +29,11 @@ $(document).ready(function(){
 			});
 		$("#pageContent").html(content);
 	}); 
+	
+	var jqxhrh = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
+		$("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+ (card.bulletin?card.bulletin.publDate:"")+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
+	}); 
+	
 }); 
 
 </script>
