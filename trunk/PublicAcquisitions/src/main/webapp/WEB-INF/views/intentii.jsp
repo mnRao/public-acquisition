@@ -60,7 +60,7 @@ $(document).ready(function(){
 	   		{name:'currentStatus.intentionStatus.'+curLangRef,		
 	   										index:'intentionStatus.'+curLangRef, 		
 	   																		width:500},
-			{name:'forWhoPurchase',			index:'forWhoPurchase', 		width:500}	   																		
+			{name:'forWhoPurchase',			index:'forWhoPurchase', 		width:500, hidden: true}	   																		
 	   																			   																		
 	   																		
 	   	],
@@ -277,46 +277,46 @@ $(document).ready(function(){
 	<form action="" style="width: 90%;">
 	<fieldset>
 		<label for="pTenderType" 		style="display:inline-block; width: 150px; text-align: right;">
-		Tipul procedurii:</label>			
+		<spring:message code="label.intentii.procedureType"/></label>			
 			<input id="pTenderType" 	/>
 		<label for="pIntentionStatus" 	style="display:inline-block; width: 175px; text-align: right; visibility: hidden;">
-		Statut:</label>
+		<spring:message code="label.intentii.status"/></label>
 			<input id="pIntentionStatus" style="visibility: hidden;"/>
 
 		<br>
 		<label for="pStateOrg" 			style="display:inline-block; width: 150px; text-align: right;">
-		Autoritate contractanta:</label>	
+		<spring:message code="label.intentii.contractAuthority"/></label>	
 			<input id="pStateOrg" type="text" class="k-widget" style="width: 350px;" />
 		<label for="pForWhoPurchase" 	style="display:inline-block; width: 126px; text-align: right;">
-		Destinatie achizitiei:</label>		
+		<spring:message code="label.intentii.aquisitionDestination"/></label>		
 			<input id="pForWhoPurchase" type="text" class="k-widget" style="width: 300px;" />
 		<br>
 		<label for="pBulletinDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">
-		Data bulletinului de la:</label>	
+		<spring:message code="label.intentii.bulletinDateFrom"/></label>	
 			<input id="pBulletinDataFrom" />
 		<label for="pBulletinDataTo" 	style="display:inline-block; width: 50px; text-align: right;">
-		pana la:</label>
+		<spring:message code="label.intentii.dateTo"/></label>
 			<input id="pBulletinDataTo" />
 		<label for="pBulletinNumber" 	style="display:inline-block; width: 120px; text-align: right;">
-		Numarul bulletinului:</label>		
+		<spring:message code="label.intentii.bulletinNumber"/></label>		
 			<input id="pBulletinNumber" type="text" class="k-widget" /> 			
 		<br>        		
 		<label for="pApproveDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">
-		Data aprobarii de la:</label>		
+		<spring:message code="label.intentii.approveDateFrom"/></label>		
 			<input id="pApproveDataFrom" type="text" />
 		<label for="pApproveDataTo" 	style="display:inline-block; width: 50px; text-align: right;">
-		pana la:</label>					
+		<spring:message code="label.intentii.dateTo"/></label>					
 			<input id="pApproveDataTo" type="text" />
 		<br>	
 		<label for="pGoodsDescription" 	style="display:inline-block; width: 150px; text-align: right;">
-		Obiectul de achizitie:</label>		
+		<spring:message code="label.intentii.aquisitionObject"/></label>		
 			<input id="pGoodsDescription" type="text" class="k-widget" style="width: 350px;" />
 		 <div class="form-buttons" style="display: inline-block;">
 		 	<label style="display:inline-block; width: 250px; text-align: right;"></label>		
 		  	<input id="submitFilter" 	type="button" 
-		  	value="Apply Filter" />
+		  	value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
 		  	<input id="resetFilter" 	type="button" 
-		  	value="Reset Filter" />
+		  	value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
 		 </div>		
 	</fieldset>					
 	</form>
