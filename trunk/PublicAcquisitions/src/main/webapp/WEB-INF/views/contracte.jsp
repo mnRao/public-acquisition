@@ -32,7 +32,7 @@ $(document).ready(function(){
 		   			'<spring:message code="label.zO"/>',
 		   			'<spring:message code="label.goodsDescr"/>',
 		   			'<spring:message code="label.amountTVA"/>',
-		   			'№ Procedurii'],
+		   			'<spring:message code="label.procedureNumber"/>'],
 	   	colModel:[
 	   		{name:'id',							index:'id', 							width:200, hidden: true},
 	   		{name:'contractNumber',				index:'contractNumber', 				width:500},
@@ -160,24 +160,24 @@ $(document).ready(function(){
 		<form action="" style="width: 90%;">
 		<fieldset>
 			<label for="pContractDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	
-				Data contractului de la:</label>	
+				<spring:message code="label.contracte.contractDateFrom"/></label>	
 				<input id="pContractDataFrom" />
 			<label for="pContractDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	
-				pana la:</label>
+				<spring:message code="label.contracte.dateTo"/></label>
 				<input id="pContractDataTo" />
 			<label for="pProcedureNumber" 	style="display:inline-block; width: 120px; text-align: right;">
-				Numarul procedurii:</label>
+				<spring:message code="label.contracte.procedureNumber"/></label>
 				<input id="pProcedureNumber"/>
 			<br>
 			<label for="pContractType" 			style="display:inline-block; width: 150px; text-align: right;">
-				Tip contract:</label>	
+				<spring:message code="label.contracte.contractType"/></label>	
 				<input id="pContractType" type="text" class="k-widget" style="width: 390px;" />
 	
 	
 			 <div class="form-buttons" style="display: inline-block;">
 			 	<label style="display:inline-block; width: 250px; text-align: right;"></label>		
-			  	<input id="submitFilter" 	type="button" value="Apply Filter" />
-			  	<input id="resetFilter" 	type="button" value="Reset Filter" />
+			  	<input id="submitFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
+			  	<input id="resetFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
 			 </div>		
 		</fieldset>					
 		</form>
