@@ -184,8 +184,8 @@ $(document).ready(function(){
 
 		 <div class="form-buttons" style="display: inline-block;">
 		 	<label style="display:inline-block; width: 210px; text-align: right;"></label>		
-		  	<input id="submitFilter" 	type="button" value="Apply Filter" />
-		  	<input id="resetFilter" 	type="button" value="Reset Filter" />
+			  	<input id="submitFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
+			  	<input id="resetFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
 		 </div>		
 	</fieldset>					
 	</form>
