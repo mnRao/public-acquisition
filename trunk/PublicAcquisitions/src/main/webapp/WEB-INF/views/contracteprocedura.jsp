@@ -51,7 +51,7 @@ $(document).ready(function(){
 	    sortorder: "desc",
 	    caption:'<spring:message code="label.module_name.contracte"/>',
 	    width: w,
-	    height: 300,
+	    height: "100%",
 	    postData: 	{ id:		pid}
 	});
 	

@@ -52,7 +52,8 @@ $(document).ready(function(){
 	    sortorder: "desc",
 	    caption:'<spring:message code="label.module_name.contracte"/>',
 	    width: w,
-	    height: 300,
+	    height: "100%",
+	    hidegrid: false,
 	    postData: 	{ filters:{	
 		    	fContractType:		function() { return getKendoComboBoxSelectedValue($('#pContractType').data("kendoComboBox"));}, 
 		    	fContractDataFrom: 	function() { return $('#pContractDataFrom').val(); },
@@ -62,7 +63,7 @@ $(document).ready(function(){
 			}	    
 	});
 	
-	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false,search:false,refresh:false});
 	
 	/*  Data FROM and TO - data pickers initialization and functionality */        
     function startContractDataFromChange() {

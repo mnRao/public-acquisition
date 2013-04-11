@@ -35,15 +35,15 @@ $(document).ready(function(){
 		   			'<spring:message code="label.email"/>'],
 	   	colModel:[
 	   		{name:'id',							index:'id', 							width:200, hidden: true},
-	   		{name:'decisionNumb',				index:'decisionNumb', 					width:500},
-	   		{name:'decisionDate',				index:'decisionDate',			 		width:500},
-	   		{name:'personType.'+curLangRef,		index:'personType.'+curLangRef,			width:500},
-	   		{name:'code',						index:'code',							width:500},
+	   		{name:'decisionNumb',				index:'decisionNumb', 					width:250, align:'center'},
+	   		{name:'decisionDate',				index:'decisionDate',			 		width:250, align:'center'},
+	   		{name:'personType.'+curLangRef,		index:'personType.'+curLangRef,			width:250, align:'center'},
+	   		{name:'code',						index:'code',							width:250, align:'center'},
 	   		{name:'orgLegalForm.'+curLangRef,	index:'orgLegalForm.'+curLangRef,		width:500},
 	   		{name:'name',						index:'name',			 				width:500},
 	   		{name:'address',					index:'address', 						width:500},
-	   		{name:'phone',						index:'phone', 							width:500},
-	   		{name:'email',						index:'email', 							width:500}
+	   		{name:'phone',						index:'phone', 							width:200, align:'center'},
+	   		{name:'email',						index:'email', 							width:250}
 	   	],
 	   	rowNum:10,
 	   	rowList:[10,20,30],
@@ -53,7 +53,8 @@ $(document).ready(function(){
 	    sortorder: "desc",
 	    caption:'<spring:message code="label.module_name.whiteList"/>',
 	    width: w,
-	    height: 300,
+	    height: "100%",
+	    hidegrid: false,
 	    postData: 	{ filters:{	
 	    	fDecisionNumb:		function() { return $('#pDecisionNumb').val(); }, 
 	    	fDecisionDateFrom:	function() { return $('#pDecisionDateFrom').val(); }, 
@@ -64,7 +65,7 @@ $(document).ready(function(){
 			}
 	});
 	
-	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false,search:false,refresh:false});
 	
 	/*  Data FROM and TO - data pickers initialization and functionality */	
     function startDecisionDateFromChange() {

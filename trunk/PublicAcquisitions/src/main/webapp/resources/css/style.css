@@ -125,7 +125,7 @@ input {
 }
 #header #menu-container  > a:hover{
 	background:#990066;
-	border-right:1px solid #84B9C3;
+	border-right:0px solid #84B9C3;
 }
 #header #menu-container #help img {
 	    margin-right:3px;
@@ -170,6 +170,10 @@ input {
 	box-shadow:1px 0px 0px #FFF, -1px 0px 0px #FFF;
 }
 
+#table-header {
+	vertical-align: middle !important;
+}
+
 form label
 {
 	font-size:13px;
@@ -184,25 +188,35 @@ form input { border:1px solid #B3C5C9;}
 	padding-right:10px;
 }
 
+hr {
+                height: 1px;
+                border: none;
+                width: 100%;
+                border-top: 2px dotted #990066;
+}
 
 
 
 /* Footer
 -----------------------------------------------------------------------------*/
 #footer {
-	margin: -38px auto 0;
-	/*min-width: 1000px;
-	max-width: 1600px;*/
-	width: 100%;
-	height: 38px;
-	color:#FFF;
-	background: #047184;
-	position: relative;
-	font-size:11px;
+                margin: -38px auto 0;
+                min-width: 1000px;
+                max-width: 1600px;
+                height: 38px;
+                color:#FFF;
+                background: #047184;
+                position: relative;
+                font-size:11px;
+}
+#footer-main{
+                padding:10px;   
+}
+#footer-counter{
+                margin-right:5px;
+                position:absolute;
+                top: 9px;
+                right:12px;          
 }
 
-	
-#footer-info{
-	padding:10px;	
-}
 

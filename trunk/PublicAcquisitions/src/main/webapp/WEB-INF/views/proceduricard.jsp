@@ -120,7 +120,7 @@ $("#list").jqGrid({
     sortorder: "desc",
     caption:'',
     width: w,
-    height: 300
+    height: "100%"
 });
 
 	
@@ -150,7 +150,9 @@ $("#list").jqGrid({
 
 <br>
 <img src="resources/images/datele_1.png" />
+<font color="#990066" size="13px">
 <spring:message code="label.commonInfo"/>
+</font>
 <hr width="90%"><br>
 
 <table id="t1" border="1" width="98%">

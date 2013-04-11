@@ -43,7 +43,7 @@ $(document).ready(function(){
 	    sortorder: "desc",
 	    caption:'',
 	    width: w,
-	    height: 300
+	    height: "100%"
 	});
 	
 	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
