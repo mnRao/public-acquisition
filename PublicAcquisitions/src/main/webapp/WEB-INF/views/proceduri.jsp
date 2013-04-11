@@ -48,7 +48,7 @@ $(document).ready(function(){
 	    sortorder: "desc",
 	    caption:'<spring:message code="label.module_name.proceduri"/>',
 	    width: w,
-	    height: 300,
+	    height: "100%",
 	    hidegrid: false,
 	    postData: 	{ filters:{	
 	    	fTenderStatus:				function() { return getKendoComboBoxSelectedValue($('#pTenderStatus').data("kendoComboBox"));}, 
@@ -67,7 +67,7 @@ $(document).ready(function(){
 		   };
 	
 	
-	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false,search:false, refresh:false});
 	
 
 /*  Data FROM and TO - data pickers initialization and functionality */	

@@ -6,4 +6,12 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 
 
-<strong>2013</strong> Republic of Moldova. All rigtts rezerved. 
+<footer id="footer">
+                <div id="footer-main">
+    <span>2012. Moldova Republic Of. All rights reserved.
+    </span>
+    <div id="footer-counter">Счетчик посещений
+    </div>  
+    </div>  
+</footer><!-- #footer -->
+
