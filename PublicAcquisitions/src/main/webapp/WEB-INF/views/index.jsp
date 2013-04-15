@@ -36,7 +36,12 @@
 	<!-- jQuery JavaScript -->
 	<!-- 	<script src="resources/js/jquery.min.js"></script> -->
 	<!-- Kendo UI Web combined JavaScript -->
-	<script src="resources/js/kendo.web.min.js"></script>
+	<script src="resources/js/kendo.web.min.js" type="text/javascript"></script>
+	
+	<script src="resources/js/cultures/kendo.culture.ro-RO.min.js" type="text/javascript"></script>
+	<script src="resources/js/cultures/kendo.culture.ru-RU.min.js" type="text/javascript"></script>
+	<script src="resources/js/cultures/kendo.culture.en-US.min.js" type="text/javascript"></script>
+	
 	
 	
 	<script type="text/javascript">
@@ -53,7 +58,14 @@
 		}
 		return "";
 		
-	}		
+	}	
+	
+	
+	
+ 	$(document).ready(function(){
+// 		kendo.culture("fr-FR");	
+		
+ 	});
 	
 	</script>
 	<style>

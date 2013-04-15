@@ -64,12 +64,16 @@
 switch ("${pageContext.response.locale}")
 {
   case "md": $("#langMd").css( "color", "#990066" );	
+  				kendo.culture("ro-RO");
                     break;
-  case "ru": $("#langRu").css( "color", "#990066" );	
+  case "ru": $("#langRu").css( "color", "#990066" );
+  				kendo.culture("ru-RU");
                     break;
-  case "en": $("#langEn").css( "color", "#990066" );	
+  case "en": $("#langEn").css( "color", "#990066" );
+  				kendo.culture("en-US");
                     break;
-  default: $("#langRu").css( "color", "#990066" );	
+  default: $("#langRu").css( "color", "#990066" );
+  				kendo.culture("ru-RU");
 }
 	
 </script>
