@@ -107,10 +107,10 @@ $("#list").jqGrid({
    	      	 '<spring:message code="label.um"/>'],
    	colModel:[
    		{name:'id',								index:'id', 							width:200, hidden: true},
-   		{name:'goodsName',						index:'goodsName', 						width:500},
-   		{name:'goods.code',						index:'goods.code',						width:500},
-   		{name:'quantity',						index:'quantity', 						width:500},
-   		{name:'unitMeasure.'+curLangRef,		index:'unitMeasure.'+curLangRef,		width:500}
+   		{name:'goodsName',						index:'goodsName', 						width:460},
+   		{name:'goods.code',						index:'goods.code',						width:200},
+   		{name:'quantity',						index:'quantity', 						width:120},
+   		{name:'unitMeasure.'+curLangRef,		index:'unitMeasure.'+curLangRef,		width:150}
    	],
    	rowNum:10,
    	rowList:[10,20,30],
@@ -119,7 +119,6 @@ $("#list").jqGrid({
     viewrecords: true,
     sortorder: "desc",
     caption:'',
-    width: w,
     height: "100%"
 });
 
@@ -131,29 +130,47 @@ $("#list").jqGrid({
 <html>
 <center>
 
-<table id="t0" border="1" width="100%" height=14 cellspacing="0" cellpadding="0" style="background-color: #708EA7; ">
+<!-- <table id="t0" border="1" width="100%" height=14 cellspacing="0" cellpadding="0" style="background-color: #708EA7; "> -->
 
-<tr>
-<td width="93%" align="center" valign="middle"><div id="headerLine"></div>
-</td>
-<td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div>
-</td>
-<td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
-</td>
-<td width="2%" align="center"><div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div>
-</td>
-<td width="1%" align="center">&nbsp;
-</td>
-</tr>
+<!-- <tr> -->
+<!-- <td width="93%" align="center" valign="middle"><div id="headerLine" style="margin-bottom:10px"></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div> -->
+<!-- </td> -->
+<!-- <td width="1%" align="center">&nbsp; -->
+<!-- </td> -->
+<!-- </tr> -->
 
-</table>
+<!-- </table> -->
+
+<div style="background-color: #708EA7; ">
+
+
+<div id="headerLine" style="margin-bottom:10px"></div>
+
+<div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div>
+
+<div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
+
+<div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div>
+
+</div>
 
 <br>
-<img src="resources/images/datele_1.png" />
-<font color="#990066" size="13px">
-<spring:message code="label.commonInfo"/>
-</font>
-<hr width="90%"><br>
+<div id="form-div">
+<div style="text-align:center">
+<span style="white-space: nowrap; margin-bottom:10px">
+	<img src="resources/images/datele_1.png" style="margin-bottom:-5px" />
+	<span id="form-header" style="float:none">
+		<spring:message code="label.commonInfo"/>
+	</span>
+</span>
+</div>
+<hr><br>
 
 <table id="t1" border="1" width="98%">
 
@@ -180,15 +197,16 @@ $("#list").jqGrid({
 </tr>
 
 <tr>
-<td width="20%" align="right"><spring:message code="label.goodsDescr"/>
+<td width="20%"  style="vertical-align: middle;" align="right" ><spring:message code="label.goodsDescr"/>
 </td>
-<td  align="center" colspan="3"> <input id="goodsDescr" type="text" style="width: 96%;" readonly="readonly">	
+<td  align="center" colspan="3"> <textarea id="goodsDescr" style="width: 96%;" readonly="readonly" >
+</textarea>	
 </td>
 </tr>
 
 </table>
 
-<br><hr width="90%"><br>
+<br><hr id="hr1"><br>
 
 <table id="t2" border="1" width="98%">
 
@@ -225,7 +243,7 @@ $("#list").jqGrid({
 
 </table>
 
-<br><hr width="90%"><br>
+<br><hr id="hr1"><br>
 
 <table id="t3" border="1" width="98%">
 
@@ -252,7 +270,7 @@ $("#list").jqGrid({
 
 </table>
 
-<br><hr width="90%"><br>
+<br><hr id="hr1"><br>
 
 <table id="t4" border="1" width="98%">
 
@@ -286,15 +304,26 @@ $("#list").jqGrid({
 
 </table>
 
+<div style="text-align:center">
+<span style="white-space: nowrap; margin-bottom:10px">
+	<img src="resources/images/procedura_1.png" style="margin-bottom:-5px" />
+	<span id="form-header" style="float:none">
+		<spring:message code="label.detailInfo"/>
+	</span>
+</span>
+</div>
+
+<hr>
+<span style="float:left; margin-left:40px; color:#047184; size: 12px; font-weight: bold;">
+	<spring:message code="label.bunuri"/>
+</span>
 <br>
-<img src="resources/images/procedura_1.png" />
-<spring:message code="label.detailInfo"/>
-<br><hr width="90%"><br>
 
 <table id="list">
 <thead style="background-color: #7196B0"/>
 <tr><td/></tr>
 </table>
 
+</div>
 </center>
 </html>

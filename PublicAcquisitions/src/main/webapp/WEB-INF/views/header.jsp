@@ -78,6 +78,8 @@ switch ("${pageContext.response.locale}")
 	
 </script>
 
+<!--  kendo.culture("@SessionHelper.CurrentCulture"); -->
+
 <div id="menu-container">
 	<a id="proceduri" 	href="proceduri" >			<spring:message code="label.module_name.proceduri"/></a>
 	<a id="intentii" 	href="intentii">				<spring:message code="label.module_name.intentii"/></a>
