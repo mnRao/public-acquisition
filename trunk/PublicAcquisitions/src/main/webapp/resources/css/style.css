@@ -15,6 +15,16 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 	background: transparent;
 }
+
+textarea {
+	vertical-align: baseline;
+	background: white;
+	font-family: 'Tahoma';
+	color:#1C4855; 
+	font-size: 12px;   
+    border:1px solid #B3C5C9;
+}
+
 ol, ul {
 	list-style: none;
 }
@@ -182,6 +192,16 @@ form label
 }
 form input { border:1px solid #B3C5C9;}
 
+body input { 
+  font-family: 'Tahoma';
+  font-size: 12px;   
+  color: #333333;    
+  background: white; 
+  border:1px solid #B3C5C9;
+}
+
+
+
 #table-container{
 	margin:20px auto;
 	padding-left:15px;
@@ -195,14 +215,38 @@ hr {
                 border-top: 2px dotted #990066;
 }
 
+#hr1 {
+                height: 1px;
+                border: none;
+                width: 100%;
+                border-top: 2px solid #CCCCCC;
+}
 
+#form-div
+{
+	background-color: #F3F3F3;
+	width: 1000px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+}
+
+#form-header
+{
+	font-size:13px;
+	color:#990066;
+	vertical-align: middle;
+	float: right;
+	font-weight: bold;
+}
 
 /* Footer
 -----------------------------------------------------------------------------*/
 #footer {
                 margin: -38px auto 0;
                 min-width: 1000px;
-                max-width: 1600px;
+/*                 max-width: 1600px; */
                 height: 38px;
                 color:#FFF;
                 background: #047184;
@@ -220,3 +264,4 @@ hr {
 }
 
 
+th.ui-th-column  {border-right:1px solid #000}
