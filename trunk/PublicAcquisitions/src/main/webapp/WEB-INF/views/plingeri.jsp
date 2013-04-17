@@ -25,28 +25,50 @@ $(document).ready(function(){
 </script>
 <html>
 <center>
-<table id="t0" border="1" width="100%" height=14 cellspacing="0" cellpadding="0" style="background-color: #708EA7; ">
+<!-- <table id="t0" border="1" width="100%" height=14 cellspacing="0" cellpadding="0" style="background-color: #708EA7; "> -->
 
-<tr>
-<td width="93%" align="center" valign="middle"><div id="headerLine"></div>
-</td>
-<td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div>
-</td>
-<td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
-</td>
-<td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif"  /></div>
-</td>
-<td width="1%" align="center">&nbsp;
-</td>
-</tr>
+<!-- <tr> -->
+<!-- <td width="93%" align="center" valign="middle"><div id="headerLine"></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif"  /></div> -->
+<!-- </td> -->
+<!-- <td width="1%" align="center">&nbsp; -->
+<!-- </td> -->
+<!-- </tr> -->
 
-</table>
-<div id="titleLine">
-	<br>
-	<img src="resources/images/JALOBA.png" />
-	<spring:message code="label.plingeri"/>
+<!-- </table> -->
+
+<div id="headerDiv">
+<span id="headerLine" style="position:relative; top:5px"></span> <!--  style="position:relative; top:5px" -->
+<div style="float:right; margin-right:20px">
+	<div id="explicatiiLink" style="float:right;"><img src="resources/images/datele-icon.gif" /></div>
+	<div id="contracteLink" style="float:right;"><img src="resources/images/contracte-icon.gif" /></div>
+	<div id="proceduricardLink" style="float:right;"><img src="resources/images/jaloba-icon.gif"  /></div>
 </div>
+</div>
+<br>
+<div id="form-div">
+
+<!-- <div id="titleLine"> -->
+<!-- 	<img src="resources/images/JALOBA.png" /> -->
+<%-- 	<spring:message code="label.plingeri"/> --%>
+<!-- </div> -->
+
+<div style="text-align:center">
+<span style="white-space: nowrap; margin-bottom:10px">
+	<img src="resources/images/JALOBA.png" style="margin-bottom:-5px" />
+	<span id="form-header" style="float:none">
+		<spring:message code="label.plingeri"/>
+	</span>
+</span>
+</div>
+
 <div id=pageContent>
-</div>	   	
+</div>	 
+</div>  	
 </center>
 </html>

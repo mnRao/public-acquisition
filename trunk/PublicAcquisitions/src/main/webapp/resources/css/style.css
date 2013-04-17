@@ -241,6 +241,34 @@ hr {
 	font-weight: bold;
 }
 
+#headerDiv
+{
+	background-color: #708EA7; 
+	height:28px; 
+/* 	line-height:28px;  */
+/* 	vertical-align:middle;" */
+}
+
+#headerLine
+{
+	font-size:12px;
+	color:#FFFFFF;
+	vertical-align: middle;
+}
+
+#labelS
+{
+	size: 12px;
+	color:#047184;  
+}
+
+#labelB
+{
+	size: 12px;
+	color:#047184;  
+	font-weight: bold;
+}
+
 /* Footer
 -----------------------------------------------------------------------------*/
 #footer {

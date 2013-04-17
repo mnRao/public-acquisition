@@ -34,10 +34,10 @@ $(document).ready(function(){
 	   	colModel:[
 	   		{name:'id',								index:'id', 							width:100, hidden: true},
 	   		{name:'regNumber',						index:'regNumber', 						width:150, formatter:cardLink, align:'center',  height:'auto'  },
-	   		{name:'tenderType.'+curLangRef,			index:'tenderType.'+curLangRef,			width:150},
-	   		{name:'refTendeOpenDate',				index:'refTendeOpenDate', 				width:150},
+	   		{name:'tenderType.'+curLangRef,			index:'tenderType.'+curLangRef,			width:150, align:'center'},
+	   		{name:'refTendeOpenDate',				index:'refTendeOpenDate', 				width:150, align:'center'},
 	   		{name:'stateOrg.orgName',				index:'stateOrg.orgName', 				width:500},
-	   		{name:'tenderStatus.'+curLangRef,		index:'tenderStatus.'+curLangRef, 		width:150},
+	   		{name:'tenderStatus.'+curLangRef,		index:'tenderStatus.'+curLangRef, 		width:150, align:'center'},
 	   		{name:'tenderData.goodsDescr',			index:'tenderData.goodsDescr', 			width:500},
 	   	],
 	   	rowNum:10,
@@ -60,11 +60,19 @@ $(document).ready(function(){
 	});
 
 	function cardLink(cellvalue, options, rowObject) {
-		   return '<a href="proceduricard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a><br>' +
-				   '<a href=explicatii?pid='+rowObject['id']+'><img alt="Explicatii" src="resources/images/vopros_small_icon.png"></a>' +
-				   '<a href=plingeri?pid='+rowObject['id']+'><img alt="Plingeri" src="resources/images/jaloba_small_icon.png"></a>' +
-				   '<a href=contracteprocedura?pid='+rowObject['id']+'><img alt="Contracte" src="resources/images/contracte_small_icon.png"></a>';
-		   };
+		var linkStr;   
+		 linkStr='<a href="proceduricard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a><br><img src="resources/images/jaloba_small_icon.png" width="0" height="16">';
+		 if (rowObject['questionCount']>0){
+				linkStr=linkStr+'<a href=explicatii?pid='+rowObject['id']+'><img alt="Explicatii" src="resources/images/vopros_small_icon.png"></a>'; 
+		 };
+		 if (rowObject['complaintCount']>0){
+				linkStr=linkStr+'<a href=plingeri?pid='+rowObject['id']+'><img alt="Plingeri" src="resources/images/jaloba_active_small_icon.png"></a>'; 
+		 };
+		 if (rowObject['contractsCount']>0){
+				linkStr=linkStr+'<a href=contracteprocedura?pid='+rowObject['id']+'><img alt="Contracte" src="resources/images/contracte_small_icon.png"></a>'; 
+		 };
+		 return linkStr;	   
+ 	   };
 	
 	
 	$("#list").jqGrid('navGrid','#pager',{edit:false,add:false,del:false,search:false, refresh:false});
@@ -168,7 +176,7 @@ $(document).ready(function(){
 <html>
 <center>
 		
-<div id="filtrationPanel" align="left">
+<div id="form-div" >
 	<form action="" style="width: 90%;">
 	<fieldset>
 		<label for="pProcedureOpenDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Deschiderea de la:</label>	
