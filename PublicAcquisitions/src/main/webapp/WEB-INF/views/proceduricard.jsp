@@ -147,17 +147,13 @@ $("#list").jqGrid({
 
 <!-- </table> -->
 
-<div style="background-color: #708EA7; ">
-
-
-<div id="headerLine" style="margin-bottom:10px"></div>
-
-<div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div>
-
-<div id="contracteLink"><img src="resources/images/contracte-icon.gif" /></div>
-
-<div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div>
-
+<div id="headerDiv" >
+<span id="headerLine" style="position:relative; top:5px"></span> <!--  style="position:relative; top:5px" -->
+<div style="float:right; margin-right:20px">
+	<div id="explicatiiLink" style="float:right;"><img src="resources/images/vopros-icon.gif" /></div>
+	<div id="contracteLink" style="float:right;"><img src="resources/images/contracte-icon.gif" /></div>
+	<div id="plingeriLink" style="float:right;"><img src="resources/images/jaloba-icon.gif"  /></div>
+</div>
 </div>
 
 <br>

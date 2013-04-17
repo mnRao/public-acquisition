@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.Formula;
 
 import com.daac.pacq.domain.ref.TenderStatus;
 import com.daac.pacq.domain.ref.TenderType;
@@ -94,6 +95,12 @@ public class Tender {
     
     @Column(name = "FK_DATA_ID_AT_APPROV")
     private Integer fkDataIdAtApprov;
+    
+    @Formula(value="(SELECT count(*) FROM CONTRACT contr WHERE contr.FK_TENDER_ID = id)")
+    	private Integer contractsCount;
+    
+    @Formula(value="(SELECT count(*) FROM QUESTION quest WHERE quest.FK_TENDER_ID = id)")
+	private Integer questionCount;
 
 	public Integer getId() {
 		return id;
@@ -265,7 +272,22 @@ public class Tender {
 		this.bulletin = bulletin;
 	}
 
-	
+	public Integer getContractsCount() {
+		return contractsCount;
+	}
+
+	public void setContractsCount(Integer contractsCount) {
+		this.contractsCount = contractsCount;
+	}
+
+	public Integer getQuestionCount() {
+		return questionCount;
+	}
+
+	public void setQuestionCount(Integer questionCount) {
+		this.questionCount = questionCount;
+	}
+
 	
 }
 

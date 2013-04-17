@@ -50,8 +50,9 @@ $(document).ready(function(){
 	    viewrecords: true,
 	    sortorder: "desc",
 	    caption:'<spring:message code="label.module_name.contracte"/>',
-	    width: w,
+	    width: "20%",
 	    height: "100%",
+	    hidegrid: false,
 	    postData: 	{ id:		pid}
 	});
 	
@@ -68,34 +69,57 @@ $(document).ready(function(){
 <html>
 <center>
 
-<table id="t0" border="1" width="100%" height=14 cellspacing="0" cellpadding="0" style="background-color: #708EA7; ">
+<!-- <table id="t0" border="1" width="100%" height=14 cellspacing="0" cellpadding="0" style="background-color: #708EA7; "> -->
 
-<tr>
-<td width="93%" align="center" valign="middle"><div id="headerLine"></div>
-</td>
-<td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div>
-</td>
-<td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div>
-</td>
-<td width="2%" align="center"><div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div>
-</td>
-<td width="1%" align="center">&nbsp;
-</td>
-</tr>
+<!-- <tr> -->
+<!-- <td width="93%" align="center" valign="middle"><div id="headerLine"></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="explicatiiLink"><img src="resources/images/vopros-icon.gif" /></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="proceduricardLink"><img src="resources/images/datele-icon.gif" /></div> -->
+<!-- </td> -->
+<!-- <td width="2%" align="center"><div id="plingeriLink"><img src="resources/images/jaloba-icon.gif"  /></div> -->
+<!-- </td> -->
+<!-- <td width="1%" align="center">&nbsp; -->
+<!-- </td> -->
+<!-- </tr> -->
 
-</table>
+<!-- </table> -->
+
+<div id="headerDiv">
+<span id="headerLine" style="position:relative; top:5px"></span> <!--  style="position:relative; top:5px" -->
+<div style="float:right; margin-right:20px">
+	<div id="explicatiiLink" style="float:right;"><img src="resources/images/vopros-icon.gif" /></div>
+	<div id="proceduricardLink" style="float:right;"><img src="resources/images/datele-icon.gif" /></div>
+	<div id="plingeriLink" style="float:right;"><img src="resources/images/jaloba-icon.gif"  /></div>
+</div>
+</div>
+
+
+<!-- <br> -->
+<!-- <img src="resources/images/contracte_1.png" /> -->
+<%-- <spring:message code="label.contracts"/> --%>
+<!-- <hr width="90%"><br> -->
 
 <br>
-<img src="resources/images/contracte_1.png" />
-<spring:message code="label.contracts"/>
-<hr width="90%"><br>
+<div id="form-div">
+
+<div style="text-align:center">
+<span style="white-space: nowrap; margin-bottom:10px">
+	<img src="resources/images/contracte_1.png" style="margin-bottom:-5px" />
+	<span id="form-header" style="float:none">
+		<spring:message code="label.contracts"/>
+	</span>
+</span>
+</div>
+<br>
 
 <table id="list">
 <thead style="background-color: #7196B0"/>
 <tr><td/></tr>
 </table>	
 
-<div id="pager"></div>
-
+<!-- <div id="pager"></div> -->
+</div>
 </center>
 </html>
