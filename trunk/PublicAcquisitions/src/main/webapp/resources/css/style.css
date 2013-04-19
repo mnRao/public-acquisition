@@ -161,6 +161,24 @@ input {
 
 /* Middle
 -----------------------------------------------------------------------------*/
+.evenTableRow { background:red; }
+.oddTableRow { background:cyan; } 
+
+/* jqgred word wrap */
+.ui-jqgrid tr.jqgrow td {
+ white-space: normal !important;
+ height:auto;
+ vertical-align:text-top;
+ padding-top:2px;
+}
+
+/* jqgred header word wrap */
+th.ui-th-column div{
+   white-space:normal !important;
+   height:auto !important;
+   padding:2px;
+   }
+
 #content {
 	padding: 0 0 100px;
 	margin-top:10px;
