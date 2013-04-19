@@ -72,8 +72,8 @@ switch ("${pageContext.response.locale}")
   case "en": $("#langEn").css( "color", "#990066" );
   				kendo.culture("en-US");
                     break;
-  default: $("#langRu").css( "color", "#990066" );
-  				kendo.culture("ru-RU");
+  default: $("#langMD").css( "color", "#990066" );
+  				kendo.culture("ro-RO");
 }
 	
 </script>

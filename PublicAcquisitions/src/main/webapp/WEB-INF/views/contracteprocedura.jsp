@@ -35,13 +35,13 @@ $(document).ready(function(){
 		   			'<spring:message code="label.amountTVA"/>'],
 	   	colModel:[
 	   		{name:'id',							index:'id', 							width:200, hidden: true},
-	   		{name:'contractNumber',				index:'contractNumber', 				width:500},
-	   		{name:'contractType.'+curLangRef,	index:'contractType.'+curLangRef, 		width:500},
-	   		{name:'contractDate',				index:'contractDate',					width:500},
-	   		{name:'participant.fullName',		index:'participant.fullName',			width:500},
-	   		{name:'tender.stateOrg.orgName',	index:'tender.stateOrg.orgName', 		width:500},
-	   		{name:'tender.tenderData.goodsDescr',	index:'tender.tenderData.goodsDescr', 				width:500, sortable: false},
-	   		{name:'amount',						index:'amount', 						width:500}
+	   		{name:'contractNumber',				index:'contractNumber', 				width:100},
+	   		{name:'contractType.'+curLangRef,	index:'contractType.'+curLangRef, 		width:100},
+	   		{name:'contractDate',				index:'contractDate',					width:100},
+	   		{name:'participant.fullName',		index:'participant.fullName',			width:200},
+	   		{name:'tender.stateOrg.orgName',	index:'tender.stateOrg.orgName', 		width:200},
+	   		{name:'tender.tenderData.goodsDescr',	index:'tender.tenderData.goodsDescr', 				width:200, sortable: false},
+	   		{name:'amount',						index:'amount', 						width:100}
 	   	],
 	   	rowNum:10,
 	   	rowList:[10,20,30],
@@ -49,12 +49,19 @@ $(document).ready(function(){
 	   	sortname: 'id',
 	    viewrecords: true,
 	    sortorder: "desc",
-	    caption:'<spring:message code="label.module_name.contracte"/>',
-	    width: "20%",
+	    width: "1000",
 	    height: "100%",
 	    hidegrid: false,
 	    postData: 	{ id:		pid}
 	});
+	
+	$("#list").jqGrid({gridComplete: function() {
+	    $("tr.jqgrow:odd").addClass('oddTableRow');}
+	});
+	
+// 	$("#list").jqGrid({gridComplete:
+// 		applyZebra('list')
+// 	});
 	
 	var jqxhrh = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 		$("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+ (card.bulletin?card.bulletin.publDate:"")+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
@@ -63,6 +70,11 @@ $(document).ready(function(){
 	$("#proceduricardLink").html('<a href=proceduricard?pid='+pid+'><img src="resources/images/datele-icon.gif" /></a>');
 	$("#explicatiiLink").html('<a href=explicatii?pid='+pid+'><img src="resources/images/vopros-icon.gif" /></a>');
 	$("#plingeriLink").html('<a href=plingeri?pid='+pid+'><img src="resources/images/jaloba-icon.gif" /></a>');
+	
+	function applyZebra(containerId) {
+	    $('#' + containerId + ' tr:nth-child(even)').addClass("jqgrow evenTableRow");
+	    $('#' + containerId + ' tr:nth-child(odd)').addClass("jqgrow oddTableRow");
+	};
 }); 
 
 </script>

@@ -46,7 +46,6 @@ $(document).ready(function(){
 	   	sortname: 'id',
 	    viewrecords: true,
 	    sortorder: "desc",
-	    caption:'<spring:message code="label.module_name.proceduri"/>',
 	    width: w,
 	    height: "100%",
 	    hidegrid: false,
@@ -59,6 +58,8 @@ $(document).ready(function(){
 			}
 	});
 
+	$("#list").jqGrid({onRightClickRow: function(rowid){ alert(rowid); }});
+	
 	function cardLink(cellvalue, options, rowObject) {
 		var linkStr;   
 		 linkStr='<a href="proceduricard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a><br><img src="resources/images/jaloba_small_icon.png" width="0" height="16">';
@@ -177,26 +178,61 @@ $(document).ready(function(){
 <center>
 		
 <div id="form-div" >
-	<form action="" style="width: 90%;">
-	<fieldset>
-		<label for="pProcedureOpenDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Deschiderea de la:</label>	
-			<input id="pProcedureOpenDataFrom" />
-		<label for="pProcedureOpenDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	pana la:</label>
-			<input id="pProcedureOpenDataTo" />
-		<label for="pTenderStatus" 	style="display:inline-block; width: 120px; text-align: right;">Statutul procedurii:</label>
-			<input id="pTenderStatus"/>
-		<br>
-		<label for="pGoodsDescr" 			style="display:inline-block; width: 150px; text-align: right;">Bun sau serviciu:</label>	
-			<input id="pGoodsDescr" type="text" class="k-widget" style="width: 390px;" />
+<!-- 	<form action="" style="width: 90%;"> -->
+<!-- 	<fieldset> -->
+<!-- 		<label for="pProcedureOpenDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Deschiderea de la:</label>	 -->
+<!-- 			<input id="pProcedureOpenDataFrom" /> -->
+<!-- 		<label for="pProcedureOpenDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	pana la:</label> -->
+<!-- 			<input id="pProcedureOpenDataTo" /> -->
+<!-- 		<label for="pTenderStatus" 	style="display:inline-block; width: 120px; text-align: right;">Statutul procedurii:</label> -->
+<!-- 			<input id="pTenderStatus"/> -->
+<!-- 		<br> -->
+<!-- 		<label for="pGoodsDescr" 			style="display:inline-block; width: 150px; text-align: right;">Bun sau serviciu:</label>	 -->
+<!-- 			<input id="pGoodsDescr" type="text" class="k-widget" style="width: 390px;" /> -->
 
 
-		 <div class="form-buttons" style="display: inline-block;">
-		 	<label style="display:inline-block; width: 210px; text-align: right;"></label>		
-			  	<input id="submitFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
-			  	<input id="resetFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
-		 </div>		
-	</fieldset>					
-	</form>
+<!-- 		 <div class="form-buttons" style="display: inline-block;"> -->
+<!-- 		 	<label style="display:inline-block; width: 210px; text-align: right;"></label>		 -->
+<%-- 			  	<input id="submitFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" /> --%>
+<%-- 			  	<input id="resetFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ResetFilter"/>" /> --%>
+<!-- 		 </div>		 -->
+<!-- 	</fieldset>					 -->
+<!-- 	</form> -->
+	
+	<table>
+		<tr>
+			<td width="120px" align="left"><spring:message code="label.deLa"/>
+			</td>
+			<td><input id="pProcedureOpenDataFrom" />
+			</td>
+			
+			<td width="60px" align="right"><spring:message code="label.pinaLa"/>
+			</td>
+			<td><input id="pProcedureOpenDataTo" />
+			</td>
+			
+			<td width="150px" align="right"><spring:message code="label.statProc"/>
+			</td>
+			<td width="270px" align="right"><input id="pTenderStatus"/>
+			</td>
+		</tr>
+	
+		<tr>
+			<td align="left"><spring:message code="label.bunServ"/>
+			</td>
+			<td colspan="6"><input id="pGoodsDescr" type="text" class="k-widget" style="width: 100%;" />
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="6" align="right">
+				<input id="submitFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
+				<input id="resetFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
+			</td>
+		</tr>
+		
+	
+	</table>
 </div>
 
 <br>

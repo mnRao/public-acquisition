@@ -50,7 +50,6 @@ $(document).ready(function(){
 	   	sortname: 'id',
 	    viewrecords: true,
 	    sortorder: "desc",
-	    caption:'<spring:message code="label.module_name.contracte"/>',
 	    width: w,
 	    height: "100%",
 	    hidegrid: false,
