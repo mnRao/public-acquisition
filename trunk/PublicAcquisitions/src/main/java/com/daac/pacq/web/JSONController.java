@@ -1,9 +1,11 @@
 package com.daac.pacq.web;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +22,14 @@ import com.daac.pacq.domain.entity.QualifiedEconomicOperator;
 import com.daac.pacq.domain.entity.Question;
 import com.daac.pacq.domain.entity.Tender;
 import com.daac.pacq.domain.entity.TenderPosition;
+import com.daac.pacq.domain.entity.Visits;
 import com.daac.pacq.domain.ref.ContractType;
 import com.daac.pacq.domain.ref.IntentionStatus;
 import com.daac.pacq.domain.ref.PositionType;
 import com.daac.pacq.domain.ref.TenderStatus;
 import com.daac.pacq.domain.ref.TenderType;
 import com.daac.pacq.helpers.JQGridListWrapper;
+import com.daac.pacq.helpers.VisitsCounter;
 import com.daac.pacq.service.entity.ComplaintService;
 import com.daac.pacq.service.entity.ContractService;
 import com.daac.pacq.service.entity.IntentionAnounceService;
@@ -35,6 +39,7 @@ import com.daac.pacq.service.entity.QualifiedEconomicOperatorService;
 import com.daac.pacq.service.entity.QuestionService;
 import com.daac.pacq.service.entity.TenderPositionService;
 import com.daac.pacq.service.entity.TenderService;
+import com.daac.pacq.service.entity.VisitsService;
 import com.daac.pacq.service.ref.ContractTypeService;
 import com.daac.pacq.service.ref.IntentionStatusService;
 import com.daac.pacq.service.ref.PositionTypeService;
@@ -377,5 +382,73 @@ public class JSONController {
 	    	//List<Question> jdw = new Lis<Question>(1, result.size(), result);
 	    	return jdw;  
 	    }
+
+	   @Autowired
+		private VisitsCounter visitsCounter;
+	   @Autowired
+	   private VisitsService visitsService;
 	   
+	   @RequestMapping(value="/visits",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody Visits visits(WebRequest request) { 
+		   System.out.println("JSONController - VISITS COUNTER");
+	    	System.out.println(request.toString());
+	    	
+	    	int isOldSession = visitsCounter.getIsOldSession();
+	    	
+			Date currentServerDate =  DateUtils.truncate(new Date(), Calendar.DATE);
+			
+			Visits startResult = visitsService.get(currentServerDate);
+			Visits tempResult;
+			Visits finishResult;
+			
+			/* IF NO Record for currentServerDate then create it*/
+			if (startResult == null) {
+				System.out.println("RESULT IS NULL");
+				tempResult = new Visits();
+				tempResult.setVisitDate(currentServerDate);
+				tempResult.setCount(0);
+				visitsService.add(tempResult);
+				startResult = visitsService.get(currentServerDate);
+				
+			} else {
+				System.out.println("RESULT IS NOT NULL");
+			}
+			
+			System.out.println("STEP 1");
+			System.out.println(startResult.toString());
+
+			/* IF NEW VISIT increase IT it*/
+			if (isOldSession==0){
+				System.out.println("THIS IS NEW SESSION");	
+				int oldCount;
+				oldCount = startResult.getCount();
+				startResult.setCount(oldCount+1);
+				visitsService.update(startResult);
+			} else {
+				System.out.println("THIS IS OLD SESSION");	
+			}
+			
+			System.out.println("STEP 2");
+			System.out.println(startResult.toString());
+			
+			/* GET RESULT */
+			finishResult = visitsService.get(currentServerDate);
+			
+			System.out.println("STEP 3");
+			System.out.println(finishResult.toString());
+
+			return finishResult;	    	
+	    	
+	   }
+	   
+//	   @RequestMapping(value="/visits",  method = { RequestMethod.GET, RequestMethod.POST })
+//		public @ResponseBody Visits visits(WebRequest request) { 
+//		   System.out.println("JSONController - VISITS COUNTER");
+//	    	System.out.println(request.toString());
+//	    	int isOld = visitsCounter.getIsOldSession();
+//	    	System.out.println("Visits Counter Helper 'isOldSession'= " + isOld);
+//	    	Visits result = visitsService.getCurrentVisits(isOld);
+//	    	return result;
+//	   }
+	   	   
 }

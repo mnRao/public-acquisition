@@ -36,6 +36,7 @@
 		<mapping class="com.daac.pacq.domain.entity.Bulletin" />
 		<mapping class="com.daac.pacq.domain.entity.TenderPosition" />
 		<mapping class="com.daac.pacq.domain.entity.Question" />
+		<mapping class="com.daac.pacq.domain.entity.Visits" />
 		
 		
 	</session-factory>

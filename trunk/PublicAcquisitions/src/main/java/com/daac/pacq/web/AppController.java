@@ -1,22 +1,31 @@
 package com.daac.pacq.web;
 
 import java.security.Principal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.daac.pacq.domain.entity.IntentionAnounce;
+import com.daac.pacq.domain.entity.Visits;
+import com.daac.pacq.helpers.VisitsCounter;
 import com.daac.pacq.service.entity.IntentionAnounceService;
+import com.daac.pacq.service.entity.VisitsService;
 
 @Controller
 public class AppController {
 
+	
 	@Autowired
 	private IntentionAnounceService intentionAnounceService;	
+	
+	@Autowired
+	private VisitsCounter visitsCounter;
 	
     @RequestMapping("/")
     public String home(WebRequest request) {
@@ -114,6 +123,124 @@ public class AppController {
     	 return "index2";
     } 
 
+    /* TESTING PURPOSES*/
+    @Autowired
+	   private VisitsService visitsService;
+    
+    @RequestMapping("/counter") 
+    public String counter(Map<String, Object> map, WebRequest request, Principal principal) {
+    	System.out.println("AppController - COUNTER");
+    	
+		   System.out.println("JSONController - VISITS COUNTER");
+	    	System.out.println(request.toString());
+	    	
+	    	int isOldSession = visitsCounter.getIsOldSession();
+	    	
+			Date currentServerDate =  DateUtils.truncate(new Date(), Calendar.DATE);
+			
+			Visits startResult = visitsService.get(currentServerDate);
+			Visits tempResult;
+			Visits finishResult;
+			
+			/* IF NO Record for currentServerDate then create it*/
+			if (startResult == null) {
+				System.out.println("RESULT IS NULL");
+				tempResult = new Visits();
+				tempResult.setVisitDate(currentServerDate);
+				tempResult.setCount(0);
+				visitsService.add(tempResult);
+				startResult = visitsService.get(currentServerDate);
+				
+			} else {
+				System.out.println("RESULT IS NOT NULL");
+			}
+			
+			System.out.println("STEP 1");
+			System.out.println(startResult.toString());
+
+			/* IF NEW VISIT increase IT it*/
+			if (isOldSession==0){
+				System.out.println("THIS IS NEW SESSION");	
+				int oldCount;
+				oldCount = startResult.getCount();
+				startResult.setCount(oldCount+1);
+				visitsService.update(startResult);
+			} else {
+				System.out.println("THIS IS OLD SESSION");	
+			}
+			
+			System.out.println("STEP 2");
+			System.out.println(startResult.toString());
+			
+			/* GET RESULT */
+			finishResult = visitsService.get(currentServerDate);
+			
+			System.out.println("STEP 3");
+			System.out.println(finishResult.toString());
+
+			map.put("cntDay", finishResult.getCount());
+			map.put("cntTotal", finishResult.getCountTotal());
+	    	
+    	return "counter";
+    }
+    
+    @RequestMapping("/footer") 
+    public String footer(Map<String, Object> map, WebRequest request, Principal principal) {
+    	System.out.println("AppController - FOOTER");
+    	
+		   System.out.println("JSONController - VISITS COUNTER");
+	    	System.out.println(request.toString());
+	    	
+	    	int isOldSession = visitsCounter.getIsOldSession();
+	    	
+			Date currentServerDate =  DateUtils.truncate(new Date(), Calendar.DATE);
+			
+			Visits startResult = visitsService.get(currentServerDate);
+			Visits tempResult;
+			Visits finishResult;
+			
+			/* IF NO Record for currentServerDate then create it*/
+			if (startResult == null) {
+				System.out.println("RESULT IS NULL");
+				tempResult = new Visits();
+				tempResult.setVisitDate(currentServerDate);
+				tempResult.setCount(0);
+				visitsService.add(tempResult);
+				startResult = visitsService.get(currentServerDate);
+				
+			} else {
+				System.out.println("RESULT IS NOT NULL");
+			}
+			
+			System.out.println("STEP 1");
+			System.out.println(startResult.toString());
+
+			/* IF NEW VISIT increase IT it*/
+			if (isOldSession==0){
+				System.out.println("THIS IS NEW SESSION");	
+				int oldCount;
+				oldCount = startResult.getCount();
+				startResult.setCount(oldCount+1);
+				visitsService.update(startResult);
+			} else {
+				System.out.println("THIS IS OLD SESSION");	
+			}
+			
+			System.out.println("STEP 2");
+			System.out.println(startResult.toString());
+			
+			/* GET RESULT */
+			finishResult = visitsService.get(currentServerDate);
+			
+			System.out.println("STEP 3");
+			System.out.println(finishResult.toString());
+
+			map.put("cntDay", finishResult.getCount());
+			map.put("cntTotal", finishResult.getCountTotal());
+	    	
+    	return "footer";
+    }    
+    
     
     
 	

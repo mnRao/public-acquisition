@@ -64,4 +64,10 @@
 	</bean>		
 
 
+   <!-- an HTTP Session-scoped bean exposed as a proxy -->
+   <bean id="visitsCounter" class="com.daac.pacq.helpers.VisitsCounter" scope="session">
+      <!-- this next element effects the proxying of the surrounding bean -->
+      <aop:scoped-proxy/>
+   </bean>
+	
 </beans>
