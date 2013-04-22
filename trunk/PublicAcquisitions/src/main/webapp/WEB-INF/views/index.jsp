@@ -15,7 +15,7 @@
   
 <!--   	<script src="resources/js/jquery-1.9.1.js"></script> -->
 	<!-- jQuery JavaScript -->
-		<script src="resources/js/jquery-1.8.2.js"></script>
+		<script src="resources/js/jquery-1.8.3.js"></script>
 
   	
   	<script  src="resources/js/jquery-ui-1.9.2.custom.js"></script>
