@@ -6,6 +6,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+	var as = window.innerWidth*0.98;  //window.width*0.98; //Greds width
 //	$("#currentContentPageName").val("intentii");
 	setMenuSelection("intentii");
 	
@@ -88,6 +89,9 @@ $(document).ready(function(){
 				}
 			}
 	});
+	
+//	$("#list").jqGrid("setGridWidth", w, true );
+	
 	
 	function cardLink(cellvalue, options, rowObject) {
 		   return '<a href="intentiiCard?pid='+ rowObject['id'] +'">'+ rowObject['regNumber'] +'</a>' +

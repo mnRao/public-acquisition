@@ -46,7 +46,8 @@
 	
 	<script type="text/javascript">
 	
-	var w = window.innerWidth*0.98;  //window.width*0.98; //Greds width
+	//var w = window.innerWidth*0.98;  //window.width*0.98; //Greds width
+	var w = (window.innerWidth || document.documentElement.clientWidth)*0.98;
 	
 	function getKendoComboBoxSelectedValue(item){
 		if (item != undefined) {
