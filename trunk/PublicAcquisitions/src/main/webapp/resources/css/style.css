@@ -161,8 +161,9 @@ input {
 
 /* Middle
 -----------------------------------------------------------------------------*/
-.evenTableRow { background:red; }
+.evenTableRow { background:#ebf0f4; }
 .oddTableRow { background:cyan; } 
+.alternativeTableRow { background:#ebf0f4; }
 
 /* jqgred word wrap */
 .ui-jqgrid tr.jqgrow td {

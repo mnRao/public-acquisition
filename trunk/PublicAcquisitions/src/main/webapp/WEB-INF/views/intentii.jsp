@@ -49,7 +49,7 @@ $(document).ready(function(){
 		   			'<spring:message code="label.currentStatus"/>',
 		   			'test'],
 	   	colModel:[
-	   		{name:'id',						index:'id', 					width:200, hidden: true},
+	   		{name:'id',						index:'id', 					width:200, hidden: false},
 	   		{name:'regNumber',				index:'regNumber', 				width:500, formatter:cardLink  },
 	   		{name:'budgetPeriod.year',		index:'budgetPeriod.year', 		width:500},
 	   		{name:'purchaseQuarter',		index:'purchaseQuarter', 		width:500},
@@ -75,6 +75,9 @@ $(document).ready(function(){
 	    width: w,
 	    height: "100%",
 	    hidegrid: false,
+	    gridview: true,
+	    altRows: true,
+	    altclass: "evenTableRow",
 	    postData: 	{ filters:{	
 	    	fIntentionStatus:		function() { return getKendoComboBoxSelectedValue($('#pIntentionStatus').data("kendoComboBox"));}, 
 	    	fTenderType: 			function() { return getKendoComboBoxSelectedValue($('#pTenderType').data("kendoComboBox"));}, 
