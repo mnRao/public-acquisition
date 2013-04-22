@@ -171,6 +171,7 @@ input {
  height:auto;
  vertical-align:text-top;
  padding-top:2px;
+ font-size:12px;
 }
 
 /* jqgred header word wrap */
@@ -178,6 +179,7 @@ th.ui-th-column div{
    white-space:normal !important;
    height:auto !important;
    padding:2px;
+   font-weight:bold;
    }
 
 #content {
