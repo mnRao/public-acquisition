@@ -28,6 +28,7 @@ $(document).ready(function(){
 	   	colNames:[	'#',
 	   	          	'<spring:message code="label.contractNumber"/>',
 	   	       		'<spring:message code="label.contractType"/>',
+	   	       		'<spring:message code="label.contractType"/>',
 		   			'<spring:message code="label.contractDate"/>',
 		   			'<spring:message code="label.participant"/>',
 		   			'<spring:message code="label.zO"/>',
@@ -35,13 +36,14 @@ $(document).ready(function(){
 		   			'<spring:message code="label.amountTVA"/>'],
 	   	colModel:[
 	   		{name:'id',							index:'id', 							width:200, hidden: true},
-	   		{name:'contractNumber',				index:'contractNumber', 				width:100},
-	   		{name:'contractType.'+curLangRef,	index:'contractType.'+curLangRef, 		width:100},
-	   		{name:'contractDate',				index:'contractDate',					width:100},
-	   		{name:'participant.fullName',		index:'participant.fullName',			width:200},
-	   		{name:'tender.stateOrg.orgName',	index:'tender.stateOrg.orgName', 		width:200},
-	   		{name:'tender.tenderData.goodsDescr',	index:'tender.tenderData.goodsDescr', 				width:200, sortable: false},
-	   		{name:'amount',						index:'amount', 						width:100}
+	   		{name:'contractNumber',				index:'contractNumber', 				width:100, align:"center", formatter:highlight},
+	   		{name:'contractType.'+curLangRef,	index:'contractType.'+curLangRef, 		width:100, align:"center", formatter:highlight},
+ 	   		{name:'contractType.id',			index:'contractType.id',		 		width:100, hidden: true},
+	   		{name:'contractDate',				index:'contractDate',					width:100, align:"center"},
+	   		{name:'participant.fullName',		index:'participant.fullName',			width:200, align:"center", formatter:hidevalue},
+	   		{name:'tender.stateOrg.orgName',	index:'tender.stateOrg.orgName', 		width:200, hidden: true},
+	   		{name:'tender.tenderData.goodsDescr',	index:'tender.tenderData.goodsDescr', 				width:200, align:"center", formatter:hidevalue, sortable: false},
+	   		{name:'amount',						index:'amount', 						width:100, align:"right"}
 	   	],
 	   	rowNum:10,
 	   	rowList:[10,20,30],
@@ -52,12 +54,15 @@ $(document).ready(function(){
 	    width: "1000",
 	    height: "100%",
 	    hidegrid: false,
+	    gridview: true,
+	    altRows: true,
+	    altclass: "evenTableRow",
 	    postData: 	{ id:		pid}
 	});
 	
-	$("#list").jqGrid({gridComplete: function() {
-	    $("tr.jqgrow:odd").addClass('oddTableRow');}
-	});
+// 	$("#list").jqGrid({gridComplete: function() {
+// 	    $("tr.jqgrow:odd").addClass('oddTableRow');}
+// 	});
 	
 // 	$("#list").jqGrid({gridComplete:
 // 		applyZebra('list')
@@ -71,10 +76,37 @@ $(document).ready(function(){
 	$("#explicatiiLink").html('<a href=explicatii?pid='+pid+'><img src="resources/images/vopros-icon.gif" /></a>');
 	$("#plingeriLink").html('<a href=plingeri?pid='+pid+'><img src="resources/images/jaloba-icon.gif" /></a>');
 	
-	function applyZebra(containerId) {
-	    $('#' + containerId + ' tr:nth-child(even)').addClass("jqgrow evenTableRow");
-	    $('#' + containerId + ' tr:nth-child(odd)').addClass("jqgrow oddTableRow");
-	};
+// 	function applyZebra(containerId) {
+// 	    $('#' + containerId + ' tr:nth-child(even)').addClass("jqgrow evenTableRow");
+// 	    $('#' + containerId + ' tr:nth-child(odd)').addClass("jqgrow oddTableRow");
+// 	};
+
+function highlight (cellValue, options, rowObject) {
+               var weight;
+              		if (rowObject['contractType'].id==0) {
+              			weight ="bold";
+              		}
+              		else {
+              			weight ="normal";
+              		};
+               var cellHtml = "<span style='font-weight:" + weight + "' originalValue='" + cellValue + "'>" + cellValue + "</span>";
+               
+               return cellHtml;
+               //console.log(rowObject['contractType'].id);
+               //return rowObject['contractType.ruValue'];
+}
+
+function hidevalue (cellValue, options, rowObject) {
+    var v;
+   		if (rowObject['contractType'].id==0) {
+   			v = cellValue;
+   		}
+   		else {
+   			v = "-----";
+   		};
+    
+    return v;
+}
 }); 
 
 </script>
