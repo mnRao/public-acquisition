@@ -85,7 +85,7 @@ $(document).ready(function(){
 			<spring:message code="label.intentionCard_din"/></label>		
 			<input id="pBulletinPublishDate" 
 				value="<fmt:formatDate value="${intentionItem.bulletinPublishDate}" type="both" pattern="dd.MM.yyyy" />" 
-			type="text" class="k-widget" style="width: 100px;"/>	
+			type="text" class="k-widget" style="width: 100px; cornerRadius:0"/>	
 			
 
 			<br>
