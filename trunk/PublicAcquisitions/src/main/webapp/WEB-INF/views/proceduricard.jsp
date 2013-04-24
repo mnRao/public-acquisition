@@ -108,9 +108,9 @@ $("#list").jqGrid({
    	colModel:[
    		{name:'id',								index:'id', 							width:200, hidden: true},
    		{name:'goodsName',						index:'goodsName', 						width:460},
-   		{name:'goods.code',						index:'goods.code',						width:200},
-   		{name:'quantity',						index:'quantity', 						width:120},
-   		{name:'unitMeasure.'+curLangRef,		index:'unitMeasure.'+curLangRef,		width:150}
+   		{name:'goods.code',						index:'goods.code',						width:200, align:"center"},
+   		{name:'quantity',						index:'quantity', 						width:120, align:"center"},
+   		{name:'unitMeasure.'+curLangRef,		index:'unitMeasure.'+curLangRef,		width:150, align:"center"}
    	],
    	rowNum:10,
    	rowList:[10,20,30],

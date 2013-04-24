@@ -36,26 +36,35 @@ $(document).ready(function(){
 
 <html>
 <center>
-	<table id="t0" border="1" width="100%" height=14 cellspacing="0"
-		cellpadding="0" style="background-color: #708EA7; color: #FFFFFF" >
-		<tr>
-			<td width="93%" align="left" valign="middle">
-				<div id="headerLine">
+<!-- 	<table id="t0" border="1" width="100%" height=14 cellspacing="0" -->
+<!-- 		cellpadding="0" style="background-color: #708EA7; color: #FFFFFF" > -->
+<!-- 		<tr> -->
+<!-- 			<td width="93%" align="left" valign="middle"> -->
+<!-- 				<div id="headerLine"> -->
 <!-- 					<div class="form-buttons" style="display: inline-block;"> -->
 <!-- 					  	<input id="backToIntentionList" type="button" value="Back" /> -->
 <!-- 					</div> -->
 <!-- 					<input id="intentionId" readonly="readonly" disabled="disabled"> <br> -->
 <%-- 					<fmt:formatDate value="31/12/2013" pattern="dd.MM.yyyy"/> --%>
-					<div align="center">
-						<spring:message code="label.header1"/>${intentionItem.regNumber}  
-						<spring:message code="label.header2"/>&nbsp; <fmt:formatDate value="${intentionItem.bulletinPublishDate}" type="both" pattern="dd.MM.yyyy" />
-						<spring:message code="label.header3"/>&nbsp; ${intentionItem.forWhoPurchase}
-  					</div>
+<!-- 					<div align="center"> -->
+<%-- 						<spring:message code="label.header1"/>${intentionItem.regNumber}   --%>
+<%-- 						<spring:message code="label.header2"/>&nbsp; <fmt:formatDate value="${intentionItem.bulletinPublishDate}" type="both" pattern="dd.MM.yyyy" /> --%>
+<%-- 						<spring:message code="label.header3"/>&nbsp; ${intentionItem.forWhoPurchase} --%>
+<!--   					</div> -->
   
-				</div>
-			</td>
-		</tr>
-	</table>
+<!-- 				</div> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- 	</table> -->
+	
+<div id="headerDiv">
+	<span id="headerLine" style="position:relative; top:5px">
+		<spring:message code="label.header1"/>${intentionItem.regNumber}  
+		<spring:message code="label.header2"/>&nbsp; <fmt:formatDate value="${intentionItem.bulletinPublishDate}" type="both" pattern="dd.MM.yyyy" />
+		<spring:message code="label.header3"/>&nbsp; ${intentionItem.forWhoPurchase}
+	</span>
+</div>	
+<div id="form-div">
 	<form action="" style="width: 100%;">
 		<fieldset  style="background-color: #F3F3F3; width: 90%;">
 
@@ -175,7 +184,7 @@ $(document).ready(function(){
 							
 		</fieldset>
 	</form>				
-	
+</div>	
 
 <!-- 	<table id="tIntentionCard" border="1" width="95%"> -->
 

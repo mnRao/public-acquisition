@@ -35,14 +35,14 @@ $(document).ready(function(){
 		   			'<spring:message code="label.procedureNumber"/>'],
 	   	colModel:[
 	   		{name:'id',							index:'id', 							width:200, hidden: true},
-	   		{name:'contractNumber',				index:'contractNumber', 				width:500},
-	   		{name:'contractType.'+curLangRef,	index:'contractType.'+curLangRef, 		width:500},
-	   		{name:'contractDate',				index:'contractDate',					width:500},
-	   		{name:'participant.fullName',		index:'participant.fullName',			width:500},
-	   		{name:'tender.stateOrg.orgName',	index:'tender.stateOrg.orgName', 		width:500},
-	   		{name:'tender.tenderData.goodsDescr',	index:'tender.tenderData.goodsDescr', 				width:500},
-	   		{name:'amount',						index:'amount', 						width:500},
-	   		{name:'tender.regNumber',			index:'tender.regNumber', 						width:500}
+	   		{name:'contractNumber',				index:'contractNumber', 				width:100, align:'center'},
+	   		{name:'contractType.'+curLangRef,	index:'contractType.'+curLangRef, 		width:100, align:'center'},
+	   		{name:'contractDate',				index:'contractDate',					width:100, align:'center'},
+	   		{name:'participant.fullName',		index:'participant.fullName',			width:300},
+	   		{name:'tender.stateOrg.orgName',	index:'tender.stateOrg.orgName', 		width:300},
+	   		{name:'tender.tenderData.goodsDescr',	index:'tender.tenderData.goodsDescr', 				width:300},
+	   		{name:'amount',						index:'amount', 						width:100, align:'right'},
+	   		{name:'tender.regNumber',			index:'tender.regNumber', 						width:100, align:'center'}
 	   	],
 	   	rowNum:10,
 	   	rowList:[10,20,30],
@@ -53,6 +53,9 @@ $(document).ready(function(){
 	    width: w,
 	    height: "100%",
 	    hidegrid: false,
+	    gridview: true,
+	    altRows: true,
+	    altclass: "evenTableRow",
 	    postData: 	{ filters:{	
 		    	fContractType:		function() { return getKendoComboBoxSelectedValue($('#pContractType').data("kendoComboBox"));}, 
 		    	fContractDataFrom: 	function() { return $('#pContractDataFrom').val(); },
@@ -156,33 +159,68 @@ $(document).ready(function(){
 </script>
 <html>
 <center>
-	<div id="filtrationPanel" align="left">
-		<form action="" style="width: 90%;">
-		<fieldset>
-			<label for="pContractDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	
-				<spring:message code="label.contracte.contractDateFrom"/></label>	
-				<input id="pContractDataFrom" />
-			<label for="pContractDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	
-				<spring:message code="label.contracte.dateTo"/></label>
-				<input id="pContractDataTo" />
-			<label for="pProcedureNumber" 	style="display:inline-block; width: 120px; text-align: right;">
-				<spring:message code="label.contracte.procedureNumber"/></label>
-				<input id="pProcedureNumber"/>
-			<br>
-			<label for="pContractType" 			style="display:inline-block; width: 150px; text-align: right;">
-				<spring:message code="label.contracte.contractType"/></label>	
-				<input id="pContractType" type="text" class="k-widget" style="width: 390px;" />
+<!-- 	<div id="filtrationPanel" align="left"> -->
+<!-- 		<form action="" style="width: 90%;"> -->
+<!-- 		<fieldset> -->
+<!-- 			<label for="pContractDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	 -->
+<%-- 				<spring:message code="label.contracte.contractDateFrom"/></label>	 --%>
+<!-- 				<input id="pContractDataFrom" /> -->
+<!-- 			<label for="pContractDataTo" 	style="display:inline-block; width: 50px; text-align: right;">	 -->
+<%-- 				<spring:message code="label.contracte.dateTo"/></label> --%>
+<!-- 				<input id="pContractDataTo" /> -->
+<!-- 			<label for="pProcedureNumber" 	style="display:inline-block; width: 120px; text-align: right;"> -->
+<%-- 				<spring:message code="label.contracte.procedureNumber"/></label> --%>
+<!-- 				<input id="pProcedureNumber"/> -->
+<!-- 			<br> -->
+<!-- 			<label for="pContractType" 			style="display:inline-block; width: 150px; text-align: right;"> -->
+<%-- 				<spring:message code="label.contracte.contractType"/></label>	 --%>
+<!-- 				<input id="pContractType" type="text" class="k-widget" style="width: 390px;" /> -->
 	
 	
-			 <div class="form-buttons" style="display: inline-block;">
-			 	<label style="display:inline-block; width: 250px; text-align: right;"></label>		
-			  	<input id="submitFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
+<!-- 			 <div class="form-buttons" style="display: inline-block;"> -->
+<!-- 			 	<label style="display:inline-block; width: 250px; text-align: right;"></label>		 -->
+<%-- 			  	<input id="submitFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" /> --%>
+<%-- 			  	<input id="resetFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ResetFilter"/>" /> --%>
+<!-- 			 </div>		 -->
+<!-- 		</fieldset>					 -->
+<!-- 		</form> -->
+<!-- 	</div> -->
+<!-- <br> -->
+
+<div id="form-div" >	
+	<table>
+		<tr>
+			<td width="150px" align="left"><spring:message code="label.contracte.contractDateFrom"/>
+			</td>
+			<td><input id="pContractDataFrom" />
+			</td>
+			
+			<td width="60px" align="center"><spring:message code="label.contracte.dateTo"/>
+			</td>
+			<td><input id="pContractDataTo" />
+			</td>
+			
+			<td width="150px" align="center"><spring:message code="label.contracte.procedureNumber"/>
+			</td>
+			<td width="180px" align="right"><input id="pProcedureNumber" style="width: 100%;"/>
+			</td>
+		</tr>
+		<tr>
+			<td align="left"><spring:message code="label.contracte.contractType"/>
+			</td>
+			<td colspan=3 align="left"><input id="pContractType" type="text" class="k-widget" style="width: 390px;" />
+			</td>
+			
+			<td >
+			</td>
+			<td align="right">
+				<input id="submitFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
 			  	<input id="resetFilter" 	type="button" value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
-			 </div>		
-		</fieldset>					
-		</form>
-	</div>
-<br>
+			</td>
+		</tr>
+	</table>
+</div>
+		
 
 <table id="list">
 <thead style="background-color: #7196B0"/>
