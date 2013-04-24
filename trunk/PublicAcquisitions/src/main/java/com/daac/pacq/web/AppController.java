@@ -57,10 +57,7 @@ public class AppController {
     	System.out.println("AppController - intentiiCard ");
     	IntentionAnounce item = intentionAnounceService.get(Integer.parseInt( request.getParameter("pid")));
     	
-    	System.out.println(item.getRegNumber());
     	 map.put("intentionItem", item);
-    	 //map.put("intentionId", request.getParameter("pid"));
-    	 
     	 return "intentiiCard";
     }           
     
