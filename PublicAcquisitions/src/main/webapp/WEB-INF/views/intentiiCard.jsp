@@ -29,7 +29,8 @@ $(document).ready(function(){
 		return item.mdValue;
 	} 
 	/* ------------------------------------------------------------------------------------- */            
-            
+         
+	console.log( intentionItem );
       	
 }); 
 </script>
@@ -67,124 +68,149 @@ $(document).ready(function(){
 <div id="form-div">
 	<form action="" style="width: 100%;">
 		<fieldset  style="background-color: #F3F3F3; width: 90%;">
-
-<%-- 	<input id="p_intentionId" value="${intentionItem.regNumber}" readonly="readonly" disabled="disabled"> 		 --%>
-		
-	<img src="resources/images/datele_1.png" />
-	<spring:message code="label.commonInfo" />
+	
+	<div style="text-align:center">
+	<span style="white-space: nowrap; margin-bottom:10px">
+		<img src="resources/images/datele_1.png" style="margin-bottom:-5px" />
+		<span id="form-header" style="float:none">
+			<spring:message code="label.commonInfo"/>
+		</span>
+	</span>
+	</div>
+	
 	<hr width="90%" class='dotted'>
+	<div style="text-align: left;" >
 			<label for="pRegNumber" 			style="display:inline-block; width: 200px; text-align: right;">
 			<spring:message code="label.intentionCard_regNumber"/></label>
 			<input id="pRegNumber" 	value="${intentionItem.regNumber}"		
-				type="text" class="k-widget" style="width: 100px;"/>
-			<label for="pBulletinNumber" 		style="display:inline-block; width: 450px; text-align: right;">
+				type="text" class="k-widget" style="width: 80px; text-align: center;"/>
+			<label for="pBulletinNumber" 		style="display:inline-block; width: 300px; text-align: right;">
 			<spring:message code="label.intentionCard_publicatInBuletin"/></label>			
 			<input id="pBulletinNumber" value="${intentionItem.bulletinNumber}"	
-				type="text" class="k-widget" style="width: 100px;"/>
+				type="text" class="k-widget" style="width: 80px; text-align: center;"/>
 			<label for="pBulletinPublishDate" 	style="display:inline-block; width: 10px; text-align: center;"> 
 			<spring:message code="label.intentionCard_din"/></label>		
 			<input id="pBulletinPublishDate" 
 				value="<fmt:formatDate value="${intentionItem.bulletinPublishDate}" type="both" pattern="dd.MM.yyyy" />" 
-			type="text" class="k-widget" style="width: 100px; cornerRadius:0"/>	
+			type="text" class="k-widget" style="width: 80px;  text-align: center;"/>	
 			
 
 			<br>
 			<label for="pBudgetPeriod_year" 			style="display:inline-block; width: 200px; text-align: right;">
 			<spring:message code="label.intentionCard_perioadaBugetara"/></label>
 			<input id="pBudgetPeriod_year" value="${intentionItem.budgetPeriod.year}" 			
-				type="text" class="k-widget" style="width: 100px;" />
-			<label for="pPlannedSum" 		style="display:inline-block; width: 210px; text-align: right;">
+				type="text" class="k-widget" style="width: 80px;  text-align: center;" />
+			<label for="pPlannedSum" 		style="display:inline-block; width: 150px; text-align: right;">
 			<spring:message code="label.intentionCard_sumaPlanificata"/></label>			
 			<input id="pPlannedSum"  value="${intentionItem.plannedSum}"	
-				type="text" class="k-widget" style="width: 100px;" />
-			<label for="pPurchaseQuarter" 	style="display:inline-block; width: 250px; text-align: right;"> 
+				type="text" class="k-widget" style="width: 70px; text-align: center;" />
+			<label for="pPurchaseQuarter" 	style="display:inline-block; width: 190px; text-align: right;"> 
 			<spring:message code="label.intentionCard_perioadaPetrecerii"/></label>			
 			<input id="pPurchaseQuarter"  value="${intentionItem.purchaseQuarter}"
-				type="text" class="k-widget" style="width: 100px;" />
+				type="text" class="k-widget" style="width: 60px; text-align: center;" />
 			<br>
 			
-<%-- 			<form:input id="pTenderType"   path="intentionItem.tenderType.ruValue"    --%>
-<%-- 				type="text" class="k-widget" style="width: 860px;" /> --%>
-<%-- 			<spring:eval expression=""></spring:eval> --%>
 				
 			<label for="pTenderType" 	style="display:inline-block; width: 200px; text-align: right;"> 
 			<spring:message code="label.intentionCard_tipulProcedurii"/></label>		
 			<input id="pTenderType"  
 			value="${pageContext.response.locale=='ru'?intentionItem.tenderType.ruValue:
-					(pageContext.response.locale=='md'?intentionItem.tenderType.mdValue:intentionItem.tenderType.enValue)}"
-				type="text" class="k-widget" style="width: 860px;" />	
+ 					(pageContext.response.locale=='md'?intentionItem.tenderType.mdValue:intentionItem.tenderType.enValue)}" 
+				type="text" class="k-widget" style="width: 650px;" />	
 			<br>	
-			
+
 			<label for="pPositionDescr" 	style="display:inline-block; width: 200px; text-align: right; vertical-align: top;"> 
 			<spring:message code="label.intentionCard_descriereaObiectului"/></label>	
-			<textarea id="pPositionDescr"   class="k-widget" style="width: 856px;">
-				${intentionItem.positionDescr}
+			<textarea id="pPositionDescr" readonly="readonly" class="k-widget"   
+					  style="width: 646px; resize: none; " cols="1" rows="2">${intentionItem.positionDescr}
 			</textarea>
-			<br>	
+			<br>
 			
 			<label for="pForWhoPurchase" 	style="display:inline-block; width: 200px; text-align: right;"> 
 			<spring:message code="label.intentionCard_destinatarulAchizitiei"/></label>			
 			<input id="pForWhoPurchase" value="${intentionItem.forWhoPurchase}" 
-				type="text" class="k-widget" style="width: 860px;" />
+				type="text" class="k-widget" style="width: 650px;" />
 			<br>	
 			
 			<label for="pPurchaserComment" 	style="display:inline-block; width: 200px; text-align: right; vertical-align: top;"> 
 			<spring:message code="label.intentionCard_comentarii"/></label>		
-			<textarea id="pPurchaserComment" class="k-widget" style="width: 856px;" >
-				${intentionItem.purchaserComment}
-			 </textarea>
-			<br>	
-	<img src="resources/images/procedura_1.png" />
-	<spring:message code="label.contractAuthority" />
-	<hr width="90%" class='dotted'>
+ 			<textarea id="pPurchaserComment" readonly="readonly" class="k-widget"   
+					  style="width: 646px; resize: none; " cols="1" rows="2">${intentionItem.purchaserComment} 
+ 			 </textarea>
+			<br>
+			<label for="pCPVCode" 	style="display:inline-block; width: 200px; text-align: right; vertical-align: top;"> 
+			<spring:message code="label.codeCPV"/></label>		
+			<input id="pCPVCode" 	value="${intentionItem.goods.code}   ${pageContext.response.locale=='ru'?intentionItem.goods.ruValue:
+ 					(pageContext.response.locale=='md'?intentionItem.goods.mdValue:intentionItem.goods.enValue)}"
+				type="text" class="k-widget" style="width: 650px;" />
+			<br>					
+	</div>
+
+	<div style="text-align:center">
+	<span style="white-space: nowrap; margin-bottom:10px">
+		<img src="resources/images/procedura_1.png" style="margin-bottom:-5px" />
+		<span id="form-header" style="float:none">
+			<spring:message code="label.contractAuthority"/>
+		</span>
+	</span>
+	</div>
 	
+	<hr width="90%" class='dotted'>
+	<div style="text-align: left;" >
 			<label for="pCode" 			style="display:inline-block; width: 200px; text-align: right;">
 			<spring:message code="label.intentionCard_idno"/></label>
 				<input id="pCode" value="${intentionItem.stateOrg.code}" 		
-				type="text" class="k-widget" style="width: 100px;" />
-			<label for="pCutam" 		style="display:inline-block; width: 210px; text-align: right;">
+				type="text" class="k-widget" style="width: 100px; text-align: center;" />
+			<label for="pCutam" 		style="display:inline-block; width: 100px; text-align: right;">
 			<spring:message code="label.intentionCard_okpo"/></label>
 				<input id="pCutam" value="${intentionItem.stateOrg.cuatm}"  	
-				type="text" class="k-widget" style="width: 100px;" />
-			<label style="display:inline-block; width: 360px;"></label>	
+				type="text" class="k-widget" style="width: 100px; text-align: center;" />
 			<br>
 			
 			<label for="pOrgName" 		style="display:inline-block; width: 200px; text-align: right;">
 			<spring:message code="label.intentionCard_denumirea"/></label>			
 				<input id="pOrgName" value="${intentionItem.stateOrg.orgName}"  	
-				type="text" class="k-widget" style="width: 865px;" />
+				type="text" class="k-widget" style="width: 650px;" />
 			<br>
 			
 			<label for="pOrgLegalForm" 		style="display:inline-block; width: 200px; text-align: right;">
 			<spring:message code="label.intentionCard_formaJuridica"/></label>			
 				<input id="pOrgLegalForm" 
 				value="${pageContext.response.locale=='ru'?intentionItem.stateOrg.orgLegalForm.ruValue:
-					(pageContext.response.locale=='md'?intentionItem.stateOrg.orgLegalForm.mdValue:intentionItem.stateOrg.orgLegalForm.enValue)}"
-					 	
-				type="text" class="k-widget" style="width: 865px;" />
+ 					(pageContext.response.locale=='md'?intentionItem.stateOrg.orgLegalForm.mdValue:intentionItem.stateOrg.orgLegalForm.enValue)}" 
+				type="text" class="k-widget" style="width: 650px;" />
 			<br>			
 			
 			<label for="pAddress" 		style="display:inline-block; width: 200px; text-align: right;">
 			<spring:message code="label.intentionCard_adresa"/></label>
 				<input id="pAddress" value="${intentionItem.stateOrg.address}"  	
-				type="text" class="k-widget" style="width: 865px;" />
+				type="text" class="k-widget" style="width: 650px;" />
 			<br>			
 			
 			<label for="pPhone" 		style="display:inline-block; width: 200px; text-align: right;">
 			<spring:message code="label.intentionCard_telefon"/></label>			
 				<input id="pPhone" value="${intentionItem.stateOrg.phone}"  	
-				type="text" class="k-widget" style="width: 100px;" />
-			<label for="pEmail" 		style="display:inline-block; width: 200px; text-align: right;">
+				type="text" class="k-widget" style="width: 100px;  text-align: center;" />
+			<label for="pEmail" 		style="display:inline-block; width: 100px; text-align: right;">
 			<spring:message code="label.intentionCard_email"/></label>			
 				<input id="pEmail" value="${intentionItem.stateOrg.email}"  	
-				type="text" class="k-widget" style="width: 515px;" />				
+				type="text" class="k-widget" style="width: 400px;" />				
 			<br>
 			<br>			
-			<br>								
+			<br>		
+			
+		</div>	
+			
+									
 							
 		</fieldset>
 	</form>				
 </div>	
+
+<%-- 			<form:input id="pTenderType"   path="intentionItem.tenderType.ruValue"    --%>
+<%-- 				type="text" class="k-widget" style="width: 860px;" /> --%>
+<%-- 			<spring:eval expression=""></spring:eval> --%>
+
 
 <!-- 	<table id="tIntentionCard" border="1" width="95%"> -->
 
