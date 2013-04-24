@@ -49,6 +49,10 @@ $(document).ready(function(){
 	    width: w,
 	    height: "100%",
 	    hidegrid: false,
+	    gridview: true,
+	    altRows: true,
+	    altclass: "evenTableRow",
+	    onSelectRow: function(id){window.open("proceduricard?pid="+ id,"_top")},
 	    postData: 	{ filters:{	
 	    	fTenderStatus:				function() { return getKendoComboBoxSelectedValue($('#pTenderStatus').data("kendoComboBox"));}, 
 	    	fProcedureOpenDataFrom:		function() { return $('#pProcedureOpenDataFrom').val(); }, 
@@ -58,7 +62,9 @@ $(document).ready(function(){
 			}
 	});
 
-	$("#list").jqGrid({onRightClickRow: function(rowid){ alert(rowid); }});
+// 	$("#list").jqGrid({onRightClickRow: function(rowid){ alert(rowid); }});
+// 	jQuery("#list").jqGrid({
+//     	onSelectRow: function(id){ alert('Selected row ID ' + id); }  });
 	
 	function cardLink(cellvalue, options, rowObject) {
 		var linkStr;   
@@ -177,7 +183,7 @@ $(document).ready(function(){
 <html>
 <center>
 		
-<div id="form-div" >
+<!-- <div id="filtrationPanel" align="left"> -->
 <!-- 	<form action="" style="width: 90%;"> -->
 <!-- 	<fieldset> -->
 <!-- 		<label for="pProcedureOpenDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">	Deschiderea de la:</label>	 -->
@@ -198,7 +204,9 @@ $(document).ready(function(){
 <!-- 		 </div>		 -->
 <!-- 	</fieldset>					 -->
 <!-- 	</form> -->
-	
+<!--</div>		 -->
+
+<div id="form-div" >	
 	<table>
 		<tr>
 			<td width="120px" align="left"><spring:message code="label.deLa"/>

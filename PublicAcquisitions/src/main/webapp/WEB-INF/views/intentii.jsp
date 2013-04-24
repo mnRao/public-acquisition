@@ -49,19 +49,19 @@ $(document).ready(function(){
 		   			'<spring:message code="label.currentStatus"/>',
 		   			'test'],
 	   	colModel:[
-	   		{name:'id',						index:'id', 					width:200, hidden: false},
-	   		{name:'regNumber',				index:'regNumber', 				width:500, formatter:cardLink  },
-	   		{name:'budgetPeriod.year',		index:'budgetPeriod.year', 		width:500},
-	   		{name:'purchaseQuarter',		index:'purchaseQuarter', 		width:500},
-	   		{name:'stateOrg.orgName',		index:'stateOrg.orgName', 		width:500},
-	   		{name:'tenderType.'+curLangRef,	index:'tenderType.'+curLangRef,	width:500},
-	   		{name:'plannedSum',				index:'plannedSum', 			width:500},
-	   		{name:'bulletinPublishDate',	index:'bulletinPublishDate', 	width:500},
-	   		{name:'bulletinNumber',			index:'bulletinNumber', 		width:500},
+	   		{name:'id',						index:'id', 					width:200, hidden: true},
+	   		{name:'regNumber',				index:'regNumber', 				width:100, formatter:cardLink, align:'center'},
+	   		{name:'budgetPeriod.year',		index:'budgetPeriod.year', 		width:100, align:'center'},
+	   		{name:'purchaseQuarter',		index:'purchaseQuarter', 		width:100, align:'center'},
+	   		{name:'stateOrg.orgName',		index:'stateOrg.orgName', 		width:400},
+	   		{name:'tenderType.'+curLangRef,	index:'tenderType.'+curLangRef,	width:100, align:'center'},
+	   		{name:'plannedSum',				index:'plannedSum', 			width:100, align:'right'},
+	   		{name:'bulletinPublishDate',	index:'bulletinPublishDate', 	width:100, align:'center'},
+	   		{name:'bulletinNumber',			index:'bulletinNumber', 		width:100, align:'center'},
 	   		{name:'currentStatus.intentionStatus.'+curLangRef,		
 	   										index:'intentionStatus.'+curLangRef, 		
-	   																		width:500},
-			{name:'forWhoPurchase',			index:'forWhoPurchase', 		width:500, hidden: true}	   																		
+	   																		width:100, align:'center'},
+			{name:'forWhoPurchase',			index:'forWhoPurchase', 		width:400, hidden: true}	   																		
 	   																			   																		
 	   																		
 	   	],
@@ -78,6 +78,7 @@ $(document).ready(function(){
 	    gridview: true,
 	    altRows: true,
 	    altclass: "evenTableRow",
+	    onSelectRow: function(id){window.open("intentiiCard?pid="+ id,"_top")},
 	    postData: 	{ filters:{	
 	    	fIntentionStatus:		function() { return getKendoComboBoxSelectedValue($('#pIntentionStatus').data("kendoComboBox"));}, 
 	    	fTenderType: 			function() { return getKendoComboBoxSelectedValue($('#pTenderType').data("kendoComboBox"));}, 
@@ -278,53 +279,117 @@ $(document).ready(function(){
 <html>
 <center>
 <!-- <button id="zz" style="visibility: hidden;"> ZZ </button> -->
-<div id="filtrationPanel" align="left">
-	<form action="" style="width: 90%;">
-	<fieldset>
-		<label for="pTenderType" 		style="display:inline-block; width: 150px; text-align: right;">
-		<spring:message code="label.intentii.procedureType"/></label>			
-			<input id="pTenderType" 	/>
-		<label for="pIntentionStatus" 	style="display:inline-block; width: 175px; text-align: right; visibility: hidden;">
-		<spring:message code="label.intentii.status"/></label>
-			<input id="pIntentionStatus" style="visibility: hidden;"/>
+<!-- <div id="filtrationPanel" align="left"> -->
 
-		<br>
-		<label for="pStateOrg" 			style="display:inline-block; width: 150px; text-align: right;">
-		<spring:message code="label.intentii.contractAuthority"/></label>	
-			<input id="pStateOrg" type="text" class="k-widget" style="width: 350px;" />
-		<label for="pForWhoPurchase" 	style="display:inline-block; width: 126px; text-align: right;">
-		<spring:message code="label.intentii.aquisitionDestination"/></label>		
-			<input id="pForWhoPurchase" type="text" class="k-widget" style="width: 300px;" />
-		<br>
-		<label for="pBulletinDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">
-		<spring:message code="label.intentii.bulletinDateFrom"/></label>	
-			<input id="pBulletinDataFrom" />
-		<label for="pBulletinDataTo" 	style="display:inline-block; width: 50px; text-align: right;">
-		<spring:message code="label.intentii.dateTo"/></label>
-			<input id="pBulletinDataTo" />
-		<label for="pBulletinNumber" 	style="display:inline-block; width: 120px; text-align: right;">
-		<spring:message code="label.intentii.bulletinNumber"/></label>		
-			<input id="pBulletinNumber" type="text" class="k-widget" /> 			
-		<br>        		
-		<label for="pApproveDataFrom" 	style="display:inline-block; width: 150px; text-align: right;">
-		<spring:message code="label.intentii.approveDateFrom"/></label>		
-			<input id="pApproveDataFrom" type="text" />
-		<label for="pApproveDataTo" 	style="display:inline-block; width: 50px; text-align: right;">
-		<spring:message code="label.intentii.dateTo"/></label>					
-			<input id="pApproveDataTo" type="text" />
-		<br>	
-		<label for="pGoodsDescription" 	style="display:inline-block; width: 150px; text-align: right;">
-		<spring:message code="label.intentii.aquisitionObject"/></label>		
-			<input id="pGoodsDescription" type="text" class="k-widget" style="width: 350px;" />
-		 <div class="form-buttons" style="display: inline-block;">
-		 	<label style="display:inline-block; width: 250px; text-align: right;"></label>		
-		  	<input id="submitFilter" 	type="button" 
-		  	value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
-		  	<input id="resetFilter" 	type="button" 
-		  	value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
-		 </div>		
-	</fieldset>					
-	</form>
+<!-- 	<form action="" style="width: 90%;"> -->
+<!-- 	<fieldset> -->
+<!-- 		<label for="pTenderType" 		style="display:inline-block; width: 150px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.procedureType"/></label>			 --%>
+<!-- 			<input id="pTenderType" 	/> -->
+<!-- 		<label for="pIntentionStatus" 	style="display:inline-block; width: 175px; text-align: right; visibility: hidden;"> -->
+<%-- 		<spring:message code="label.intentii.status"/></label> --%>
+<!-- 			<input id="pIntentionStatus" style="visibility: hidden;"/> -->
+
+<!-- 		<br> -->
+<!-- 		<label for="pStateOrg" 			style="display:inline-block; width: 150px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.contractAuthority"/></label>	 --%>
+<!-- 			<input id="pStateOrg" type="text" class="k-widget" style="width: 350px;" /> -->
+<!-- 		<label for="pForWhoPurchase" 	style="display:inline-block; width: 126px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.aquisitionDestination"/></label>		 --%>
+<!-- 			<input id="pForWhoPurchase" type="text" class="k-widget" style="width: 300px;" /> -->
+<!-- 		<br> -->
+<!-- 		<label for="pBulletinDataFrom" 	style="display:inline-block; width: 150px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.bulletinDateFrom"/></label>	 --%>
+<!-- 			<input id="pBulletinDataFrom" /> -->
+<!-- 		<label for="pBulletinDataTo" 	style="display:inline-block; width: 50px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.dateTo"/></label> --%>
+<!-- 			<input id="pBulletinDataTo" /> -->
+<!-- 		<label for="pBulletinNumber" 	style="display:inline-block; width: 120px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.bulletinNumber"/></label>		 --%>
+<!-- 			<input id="pBulletinNumber" type="text" class="k-widget" /> 			 -->
+<!-- 		<br>        		 -->
+<!-- 		<label for="pApproveDataFrom" 	style="display:inline-block; width: 150px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.approveDateFrom"/></label>		 --%>
+<!-- 			<input id="pApproveDataFrom" type="text" /> -->
+<!-- 		<label for="pApproveDataTo" 	style="display:inline-block; width: 50px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.dateTo"/></label>					 --%>
+<!-- 			<input id="pApproveDataTo" type="text" /> -->
+<!-- 		<br>	 -->
+<!-- 		<label for="pGoodsDescription" 	style="display:inline-block; width: 150px; text-align: right;"> -->
+<%-- 		<spring:message code="label.intentii.aquisitionObject"/></label>		 --%>
+<!-- 			<input id="pGoodsDescription" type="text" class="k-widget" style="width: 350px;" /> -->
+<!-- 		 <div class="form-buttons" style="display: inline-block;"> -->
+<!-- 		 	<label style="display:inline-block; width: 250px; text-align: right;"></label>		 -->
+<!-- 		  	<input id="submitFilter" 	type="button"  -->
+<%-- 		  	value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" /> --%>
+<!-- 		  	<input id="resetFilter" 	type="button"  -->
+<%-- 		  	value="<spring:message code="label.filtrationPanel.ResetFilter"/>" /> --%>
+<!-- 		 </div>		 -->
+<!-- 	</fieldset>					 -->
+<!-- 	</form> -->
+<!-- </div> -->
+<!-- <br> -->
+<div id="form-div" >
+	<table>
+		<tr>
+			<td width="140px" align="left"><spring:message code="label.intentii.procedureType"/>
+			</td>
+			<td colspan="3"><input id="pTenderType"/>
+			</td>
+			
+			<td width="140px" align="center"><spring:message code="label.intentii.contractAuthority"/>
+			</td>
+			<td><input id="pStateOrg" type="text" class="k-widget" style="width: 350px;" />
+			</td>
+		</tr>
+		<tr>
+			<td align="left"><spring:message code="label.intentii.aquisitionDestination"/>
+			</td>
+			<td colspan="3"><input id="pForWhoPurchase" type="text" class="k-widget" style="width: 350px;" />
+			</td>
+			
+			<td align="center"><spring:message code="label.intentii.aquisitionObject"/>
+			</td>
+			<td><input id="pGoodsDescription" type="text" class="k-widget" style="width: 350px;" />
+			</td>
+		</tr>
+		<tr>
+			<td align="left"><spring:message code="label.intentii.bulletinDateFrom"/>
+			</td>
+			<td><input id="pBulletinDataFrom" />
+			</td>
+			
+			<td width="40px" align="center"><spring:message code="label.intentii.dateTo"/>
+			</td>
+			<td><input id="pBulletinDataTo" />
+			</td>
+			
+			<td align="center"><spring:message code="label.intentii.bulletinNumber"/>
+			</td>
+			<td><input id="pBulletinNumber" type="text" class="k-widget" /> 
+			</td>
+		</tr>
+		<tr>
+			<td align="left"><spring:message code="label.intentii.approveDateFrom"/>
+			</td>
+			<td><input id="pApproveDataFrom" type="text" />
+			</td>
+			
+			<td align="center"><spring:message code="label.intentii.dateTo"/>
+			</td>
+			<td><input id="pApproveDataTo" type="text" />
+			</td>
+			
+			<td  align="center"> 
+			</td>
+			<td align="right">
+				<input id="submitFilter" 	type="button" 
+			  	value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
+			  	<input id="resetFilter" 	type="button" 
+			  	value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
+			</td>
+		</tr>
+	</table>	
 </div>
 <br>
 

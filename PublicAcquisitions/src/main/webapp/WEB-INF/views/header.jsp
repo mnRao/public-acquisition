@@ -53,7 +53,7 @@
 		</span>
 		<div>
 <%-- 			Current Locale : ${pageContext.response.locale} --%>
-			<a href="#">Înregistrarea în sistem</a>
+			<a href="#"><spring:message code="label.logon"/></a>
 		</div>
 	</div>
 </form>

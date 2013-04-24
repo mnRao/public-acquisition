@@ -35,15 +35,15 @@ $(document).ready(function(){
 		   			'<spring:message code="label.email"/>'],
 	   	colModel:[
 	   		{name:'id',							index:'id', 							width:200, hidden: true},
-	   		{name:'decisionNumb',				index:'decisionNumb', 					width:250, align:'center'},
-	   		{name:'decisionDate',				index:'decisionDate',			 		width:250, align:'center'},
-	   		{name:'personType.'+curLangRef,		index:'personType.'+curLangRef,			width:250, align:'center'},
-	   		{name:'code',						index:'code',							width:250, align:'center'},
-	   		{name:'orgLegalForm.'+curLangRef,	index:'orgLegalForm.'+curLangRef,		width:500},
-	   		{name:'name',						index:'name',			 				width:500},
-	   		{name:'address',					index:'address', 						width:500},
-	   		{name:'phone',						index:'phone', 							width:200, align:'center'},
-	   		{name:'email',						index:'email', 							width:250}
+	   		{name:'decisionNumb',				index:'decisionNumb', 					width:100, align:'center'},
+	   		{name:'decisionDate',				index:'decisionDate',			 		width:100, align:'center'},
+	   		{name:'personType.'+curLangRef,		index:'personType.'+curLangRef,			width:100, align:'center'},
+	   		{name:'code',						index:'code',							width:150, align:'center'},
+	   		{name:'orgLegalForm.'+curLangRef,	index:'orgLegalForm.'+curLangRef,		width:300},
+	   		{name:'name',						index:'name',			 				width:300},
+	   		{name:'address',					index:'address', 						width:300},
+	   		{name:'phone',						index:'phone', 							width:100, align:'center'},
+	   		{name:'email',						index:'email', 							width:150}
 	   	],
 	   	rowNum:10,
 	   	rowList:[10,20,30],
@@ -54,6 +54,9 @@ $(document).ready(function(){
 	    width: w,
 	    height: "100%",
 	    hidegrid: false,
+	    gridview: true,
+	    altRows: true,
+	    altclass: "evenTableRow",
 	    postData: 	{ filters:{	
 	    	fDecisionNumb:		function() { return $('#pDecisionNumb').val(); }, 
 	    	fDecisionDateFrom:	function() { return $('#pDecisionDateFrom').val(); }, 
@@ -142,39 +145,77 @@ $(document).ready(function(){
 <html>
 <center>
 
-<div id="filtrationPanel" align="left">
-	<form action="" style="width: 90%;">
-	<fieldset>
-		<label for="pDecisionNumb" 			style="display:inline-block; width: 150px; text-align: right;">
-		<spring:message code="label.bw.decisionNumb"/></label>	
-			<input id="pDecisionNumb" type="text" class="k-widget" style="width: 150px;" />
-		<label for="pDecisionDateFrom" 	style="display:inline-block; width: 175px; text-align: right;">
-		<spring:message code="label.bw.decisionDateFrom"/></label>	
-			<input id="pDecisionDateFrom" />
-		<label for="pDecisionDateTo" 	style="display:inline-block; width: 50px; text-align: right;">
-		<spring:message code="label.bw.dateTo"/></label>
-			<input id="pDecisionDateTo" />
-		<br>	
+<!-- <div id="filtrationPanel" align="left"> -->
+<!-- 	<form action="" style="width: 90%;"> -->
+<!-- 	<fieldset> -->
+<!-- 		<label for="pDecisionNumb" 			style="display:inline-block; width: 150px; text-align: right;"> -->
+<%-- 		<spring:message code="label.bw.decisionNumb"/></label>	 --%>
+<!-- 			<input id="pDecisionNumb" type="text" class="k-widget" style="width: 150px;" /> -->
+<!-- 		<label for="pDecisionDateFrom" 	style="display:inline-block; width: 175px; text-align: right;"> -->
+<%-- 		<spring:message code="label.bw.decisionDateFrom"/></label>	 --%>
+<!-- 			<input id="pDecisionDateFrom" /> -->
+<!-- 		<label for="pDecisionDateTo" 	style="display:inline-block; width: 50px; text-align: right;"> -->
+<%-- 		<spring:message code="label.bw.dateTo"/></label> --%>
+<!-- 			<input id="pDecisionDateTo" /> -->
+<!-- 		<br>	 -->
 		
-		<label for="pCode" 	style="display:inline-block; width: 150px; text-align: right;">
-		<spring:message code="label.bw.code"/></label>
-			<input id="pCode"/>
-		<label for="pName" 			style="display:inline-block; width: 175px; text-align: right;">
-		<spring:message code="label.bw.name"/></label>	
-			<input id="pName" type="text" class="k-widget" style="width: 170px;" />
+<!-- 		<label for="pCode" 	style="display:inline-block; width: 150px; text-align: right;"> -->
+<%-- 		<spring:message code="label.bw.code"/></label> --%>
+<!-- 			<input id="pCode"/> -->
+<!-- 		<label for="pName" 			style="display:inline-block; width: 175px; text-align: right;"> -->
+<%-- 		<spring:message code="label.bw.name"/></label>	 --%>
+<!-- 			<input id="pName" type="text" class="k-widget" style="width: 170px;" /> -->
 
 
-		 <div class="form-buttons" style="display: inline-block;">
-		 	<label style="display:inline-block; width: 1px; text-align: right;"></label>		
-		  	<input id="submitFilter" 	type="button" 
-		  	value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
-		  	<input id="resetFilter" 	type="button" 
-		  	value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
-		 </div>		
-	</fieldset>					
-	</form>
+<!-- 		 <div class="form-buttons" style="display: inline-block;"> -->
+<!-- 		 	<label style="display:inline-block; width: 1px; text-align: right;"></label>		 -->
+<!-- 		  	<input id="submitFilter" 	type="button"  -->
+<%-- 		  	value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" /> --%>
+<!-- 		  	<input id="resetFilter" 	type="button"  -->
+<%-- 		  	value="<spring:message code="label.filtrationPanel.ResetFilter"/>" /> --%>
+<!-- 		 </div>		 -->
+<!-- 	</fieldset>					 -->
+<!-- 	</form> -->
+<!-- </div> -->
+
+<div id="form-div" >	
+	<table>
+		<tr>
+			<td width="150px" align="left"><spring:message code="label.bw.decisionNumb"/>
+			</td>
+			<td><input id="pDecisionNumb" type="text" class="k-widget" style="width: 170px;" />
+			</td>
+			
+			<td width="200px" align="center"><spring:message code="label.bw.decisionDateFrom"/>
+			</td>
+			<td><input id="pDecisionDateFrom" />
+			</td>
+			
+			<td width="50px" align="center"><spring:message code="label.bw.dateTo"/>
+			</td>
+			<td width="180px" align="right"><input id="pDecisionDateTo" />
+			</td>
+		</tr>
+		<tr>
+			<td align="left"><spring:message code="label.bw.code"/>
+			</td>
+			<td><input id="pCode" style="width: 170px;"/>
+			</td>
+			
+			<td align="center"><spring:message code="label.bw.name"/>
+			</td>
+			<td><input id="pName" type="text" class="k-widget" style="width: 150px;" />
+			</td>
+			
+			<td align="center">
+			</td>
+			<td align="right">
+			  	<input id="submitFilter" 	type="button"	value="<spring:message code="label.filtrationPanel.ApplyFilter"/>" />
+			  	<input id="resetFilter" 	type="button"  	value="<spring:message code="label.filtrationPanel.ResetFilter"/>" />
+			</td>
+		</tr>
+	</table>
 </div>
-
 <br>
 
 <table id="list">
