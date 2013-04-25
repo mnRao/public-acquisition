@@ -171,7 +171,7 @@ border-radius: 0 !important;
 .oddTableRow { background:cyan; } 
 .alternativeTableRow { background:#ebf0f4; }
 
-/* jqgred word wrap */
+/* jqgrid word wrap */
 .ui-jqgrid tr.jqgrow td {
  white-space: normal !important;
  height:auto;
@@ -180,7 +180,7 @@ border-radius: 0 !important;
  font-size:12px;
 }
 
-/* jqgred header word wrap */
+/* jqgrid header word wrap */
 th.ui-th-column div{
    white-space:normal !important;
    height:auto !important;
