@@ -31,13 +31,14 @@ $(document).ready(function(){
 			+'<tr><td align="left"><span id="labelS"><spring:message code="label.dateExpl"/></span></td><td align="left"><span  id="labelB"> '+ value.askedDate+'</span></td></tr>'
 			+'<tr><td align="left"><span id="labelS"><spring:message code="label.explTxt"/></span></td><td align="left"><span  id="labelB"> '+ value.questionText+'</span></td></tr>'
 			+'<tr align="left"><td colspan="2"><span id="labelS"><spring:message code="label.raspTxt"/></span></td></tr>'
-			+'<tr><td colspan="2"><textarea id="ta" style="width:100%;" readonly>'+  IsStringEmpty(value.answerText) +'</textarea></td></tr>'
+			+'<tr><td id="white-cell" colspan="2" >'+  IsStringEmpty(value.answerText) +'</td></tr>'
 			+'</table>';
 			//$("#xxx").val(value.questionText);
 			});
 		$("#pageContent").html(content);
 		
 	}); 
+// 	<textarea id="ta" style="width:100%;" readonly> </textarea>
 	
 	var jqxhrh = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 		$("#headerLine").html('<spring:message code="label.header1"/> '+card.regNumber+' <spring:message code="label.header2"/> '+ (card.bulletin?card.bulletin.publDate:"")+ ' <spring:message code="label.header3"/> ' + card.tenderData.forWhoPurchase);
