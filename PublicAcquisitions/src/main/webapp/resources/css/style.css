@@ -162,7 +162,7 @@ input {
 /* Middle
 -----------------------------------------------------------------------------*/
 #white-cell {
-	bgcolor:"#FF0000";
+	bgcolor: #FF0000 !important;
 }
 /* this remove corner radius for kendo ui components */
 * {

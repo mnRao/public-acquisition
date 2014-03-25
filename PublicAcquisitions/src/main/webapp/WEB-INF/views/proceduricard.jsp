@@ -87,6 +87,8 @@ var jqxhr = $.getJSON( "json/tenderCard", {id:pid}, function(card) {
 });
 
 
+
+
 $("#list").jqGrid({
 	jsonReader : {
 	      root:"rows",
@@ -122,9 +124,51 @@ $("#list").jqGrid({
     height: "100%"
 });
 
+
+$("#listDocs").jqGrid({
+	jsonReader : {
+	      root:"rows",
+	      page: "page",
+	      total: "total",
+	      records: "records",
+	      repeatitems: false,
+	      id: "0"
+	   },	
+   	url:'json/documentsList',
+	datatype: "json",
+	mtype: 'POST',
 	
+   	colNames:[	'#',
+   	      	 '<spring:message code="label.docName"/>',
+   	      	 '<spring:message code="label.docFile"/>',
+   	      	 '<spring:message code="label.docPages"/>',
+   	      	 '<spring:message code="label.docVersion"/>'],
+   	colModel:[
+   		{name:'id',								index:'id', 							width:200, hidden: true},
+   		{name:'docName',						index:'docName', 						width:460},
+   		{name:'fileName',						index:'fileName', formatter:docLink	,	width:200, align:"center"},
+   		{name:'numberOfPages',					index:'numberOfPages', 					width:120, align:"center"},
+   		{name:'version',						index:'version',		width:150, align:"center"}
+   	],
+   	rowNum:10,
+   	rowList:[10,20,30],
+   	//pager: '#pager',
+   	sortname: 'id',
+    viewrecords: true,
+    sortorder: "desc",
+    caption:'',
+    height: "100%",
+    postData: 	{ id:		pid}
+});	
+
+
+
 
 });
+
+function docLink(cellvalue, options, rowObject) {
+	return '<a href="f/downlodFileById?pId='+ rowObject['id'] +'">'+ rowObject['fileName'] +'</a>' 
+	   };
 
 </script>
 <html>
@@ -316,6 +360,22 @@ $("#list").jqGrid({
 <br>
 
 <table id="list">
+<thead style="background-color: #7196B0"/>
+<tr><td/></tr>
+</table>
+
+<div style="text-align:center">
+<span style="white-space: nowrap; margin-bottom:10px">
+	<img src="resources/images/procedura_1.png" style="margin-bottom:-5px" />
+	<span id="form-header" style="float:none">
+		<spring:message code="label.docsInfo"/>
+	</span>
+</span>
+</div>
+<hr>
+
+
+<table id="listDocs">
 <thead style="background-color: #7196B0"/>
 <tr><td/></tr>
 </table>
