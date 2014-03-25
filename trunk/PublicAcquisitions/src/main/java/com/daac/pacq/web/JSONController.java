@@ -21,6 +21,7 @@ import com.daac.pacq.domain.entity.NotAllowedEconomicOperator;
 import com.daac.pacq.domain.entity.QualifiedEconomicOperator;
 import com.daac.pacq.domain.entity.Question;
 import com.daac.pacq.domain.entity.Tender;
+import com.daac.pacq.domain.entity.TenderDocument;
 import com.daac.pacq.domain.entity.TenderPosition;
 import com.daac.pacq.domain.entity.Visits;
 import com.daac.pacq.domain.ref.ContractType;
@@ -37,6 +38,7 @@ import com.daac.pacq.service.entity.IntentionAnounceStatusService;
 import com.daac.pacq.service.entity.NotAllowedEconomicOperatorService;
 import com.daac.pacq.service.entity.QualifiedEconomicOperatorService;
 import com.daac.pacq.service.entity.QuestionService;
+import com.daac.pacq.service.entity.TenderDocumentService;
 import com.daac.pacq.service.entity.TenderPositionService;
 import com.daac.pacq.service.entity.TenderService;
 import com.daac.pacq.service.entity.VisitsService;
@@ -87,6 +89,9 @@ public class JSONController {
 	
 	@Autowired
 	private TenderPositionService 	tenderPositionService;
+	
+	@Autowired
+	private TenderDocumentService 	tenderDocumentService;
 	
 	@Autowired
 	private QuestionService			questionService;
@@ -369,6 +374,16 @@ public class JSONController {
 	    	List<TenderPosition> result = tenderPositionService.list(Integer.valueOf(request.getParameter("id"))); 
 	    	System.out.println("RECORDS RCVD = " + result.size());
 	    	JQGridListWrapper<TenderPosition> jdw = new JQGridListWrapper<TenderPosition>(10, 1, result.size(), result);  
+	    	return jdw;  
+	    }
+	   
+	   @RequestMapping(value="/documentsList",  method = { RequestMethod.GET, RequestMethod.POST })
+		public @ResponseBody JQGridListWrapper<TenderDocument> documentsList(WebRequest request) { 
+		   System.out.println("JSONController - TENDER DOCUMENTS LIST for TenderDataId="+request.getParameter("id"));
+	    	System.out.println(request.toString());
+	    	List<TenderDocument> result = tenderDocumentService.list(Integer.valueOf(request.getParameter("id"))); 
+	    	System.out.println("RECORDS RCVD = " + result.size());
+	    	JQGridListWrapper<TenderDocument> jdw = new JQGridListWrapper<TenderDocument>(10, 1, result.size(), result);  
 	    	return jdw;  
 	    }
 	   

@@ -53,5 +53,9 @@
 
 	<!-- Файл с настройками безопасности -->
 <!-- 	<import resource="security.xml"/> -->
+
+<!--  Файл с настройками загрузки файлов -->  
+   <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 		
 </beans>
